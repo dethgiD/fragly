@@ -1,0 +1,48 @@
+Timer unit: 1e-07 s
+
+Total time: 37.7155 s
+File: C:\Users\armin\Desktop\democs2analysis\accuracyanalysis.py
+Function: analyze_all_players at line 376
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+   376                                           def analyze_all_players(demo_path):
+   377                                               """
+   378                                               Calculate various performance metrics for multiple players and return a dataframe.
+   379                                               The metrics include:
+   380                                                 - Overall accuracy (calculate_accuracy)
+   381                                                 - Accuracy when enemy is (assumed) engaged (calculate_accuracy_by_window)
+   382                                                 - Headshot accuracy (calculate_accuracy)
+   383                                                 - Average time to damage (calculate_avg_time_to_damage)
+   384                                                 - Average crosshair placement adjustment (calculate_crosshair_placement)
+   385                                                 - Average crosshair placement error (calculate_victim_crosshair_placement)
+   386                                               """
+   387         1   24418892.0    2e+07      6.5      player_hurt_df, weapon_fire_df, df = load_demo_data(demo_path)
+   388                                           
+   389         1       6008.0   6008.0      0.0      usernames = weapon_fire_df["user_name"].unique()
+   390                                           
+   391         1          3.0      3.0      0.0      all_data = []  # List to store player results
+   392                                           
+   393        11        122.0     11.1      0.0      for username in usernames:
+   394                                                   # Calculate metrics using existing functions
+   395        10    2893699.0 289369.9      0.8          accuracy, headshot_accuracy = calculate_accuracy(username, player_hurt_df, weapon_fire_df)
+   396        10   33398809.0    3e+06      8.9          avg_ttd = calculate_avg_time_to_damage(username, player_hurt_df, df)
+   397        10    8832586.0 883258.6      2.3          accuracy_enemy_spotted = calculate_accuracy_by_window(username, player_hurt_df, weapon_fire_df)
+   398        10  307598138.0    3e+07     81.6          crosshair_placement = calculate_crosshair_placement_consecutive(username, player_hurt_df, df)
+   399                                                   # victim_crosshair_error = calculate_victim_crosshair_placement(username, player_hurt_df, df)
+   400                                           
+   401        20        163.0      8.2      0.0          all_data.append({
+   402        10         20.0      2.0      0.0              "username": username,
+   403        10        358.0     35.8      0.0              "accuracy": f"{accuracy:.2f}",
+   404        10         68.0      6.8      0.0              "accuracy_spotted": f"{accuracy_enemy_spotted:.2f}",
+   405        10         53.0      5.3      0.0              "hs_accuracy": f"{headshot_accuracy:.2f}",
+   406        10         84.0      8.4      0.0              "time_to_damage": f"{avg_ttd:.3f}" if avg_ttd is not None else "N/A",
+   407        10         49.0      4.9      0.0              "crosshair_placement": f"{crosshair_placement:.2f}" if crosshair_placement is not None else "N/A",
+   408                                                       # "crosshair_error": f"{victim_crosshair_error:.2f}" if victim_crosshair_error is not None else "N/A"
+   409                                                   })
+   410                                           
+   411                                               # Convert the collected data into a DataFrame
+   412         1       5952.0   5952.0      0.0      result_df = pd.DataFrame(all_data)
+   413         1          2.0      2.0      0.0      return result_df
+
+Execution time: 37.727059 seconds
