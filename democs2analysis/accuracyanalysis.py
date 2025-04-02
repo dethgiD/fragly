@@ -9,9 +9,12 @@ def load_demo_data(demo_path):
     parser = DemoParser(demo_path)
 
     # Parse necessary data
-    player_hurt_df = parser.parse_event("player_hurt", player=["X", "Y"], other=["pitch", "yaw"])
-    weapon_fire_df = parser.parse_event("weapon_fire", player=["X", "Y"], other=["pitch", "yaw"])
-    df = parser.parse_ticks(["pitch", "yaw", "spotted", "X", "Y", "Z"])
+    player_hurt_df = parser.parse_event("player_hurt", player=["X", "Y", "velocity", "max_speed",
+                                        "in_crouch"])
+    weapon_fire_df = parser.parse_event("weapon_fire", player=["X", "Y", "velocity", "max_speed",
+                                        "in_crouch"])
+    df = parser.parse_ticks(["pitch", "yaw", "spotted", "X", "Y", "Z", "velocity", "max_speed",
+                             "in_crouch"])
     return player_hurt_df, weapon_fire_df, df
 
 
@@ -62,7 +65,7 @@ def calculate_avg_time_to_damage(attacker_name, player_hurt_df, df, tickrate=64)
 
     # Create a lookup dictionary for all spotted changes
     # First, prepare a DataFrame with name, tick, spotted and the previous spotted value
-    search_window = 96  # 1.5 seconds at 64 tickrate
+    search_window = 128
 
     # Get unique victims from the damage data
     unique_victims = set(victim for victim, _ in damage_data)
@@ -174,62 +177,6 @@ def calculate_accuracy_by_window(attacker_name, player_hurt_df, weapon_fire_df):
     return accuracy
 
 
-def calculate_crosshair_placement(attacker_name, player_hurt_df, df):
-    """
-    Calculate an approximate crosshair placement adjustment for a given attacker.
-
-    For each hit event (excluding generic hits), this function:
-      - Uses a window of `window_ticks` (default ~20 ticks) before the damage tick.
-      - Computes the cumulative angular adjustment (the sum of angular differences between consecutive ticks).
-
-    A lower cumulative adjustment suggests that the player's crosshair was already well placed.
-    """
-    placements = []
-    window_ticks = 20
-
-    # Filter hit events for the attacker (and exclude generic hits)
-    attacker_hits = player_hurt_df[
-        (player_hurt_df["attacker_name"] == attacker_name) &
-        (player_hurt_df["hitgroup"] != "generic")
-        ]
-
-    for _, hit_event in attacker_hits.iterrows():
-        damage_tick = hit_event["tick"]
-        start_tick = max(0, damage_tick - window_ticks)
-
-        # Get tick data (pitch and yaw) for the attacker in the specified window.
-        # We assume df contains columns: 'tick', 'pitch', 'yaw', and 'name'
-        window_data = df[
-            (df["tick"].between(start_tick, damage_tick)) &
-            (df["name"] == attacker_name)
-            ][["tick", "pitch", "yaw"]].sort_values(by="tick")
-
-        # Ensure we have enough data points
-        if window_data.empty or len(window_data) < 2:
-            continue
-
-        cumulative_adjustment = 0.0
-        previous_row = window_data.iloc[0]
-        for idx in range(1, len(window_data)):
-            current_row = window_data.iloc[idx]
-            # Calculate angular change between consecutive ticks.
-            delta_pitch = current_row["pitch"] - previous_row["pitch"]
-            delta_yaw = current_row["yaw"] - previous_row["yaw"]
-
-            # If desired, you can handle angle wrap-around here.
-            angular_change = math.sqrt(delta_pitch ** 2 + delta_yaw ** 2)
-            cumulative_adjustment += angular_change
-            previous_row = current_row
-
-        placements.append(cumulative_adjustment)
-
-    if placements:
-        # Return the average adjustment over all hit events.
-        return sum(placements) / len(placements)
-    else:
-        return None
-
-
 def calculate_crosshair_placement_consecutive(attacker_name, player_hurt_df, df):
     """
     Calculate average crosshair placement adjustment for a given attacker by grouping consecutive hit events.
@@ -244,8 +191,8 @@ def calculate_crosshair_placement_consecutive(attacker_name, player_hurt_df, df)
     Returns the average crosshair placement (in degrees) over all such engagements.
     """
     placements = []
-    window_ticks = 20
-    engagement_gap = 64
+    window_ticks = 16
+    engagement_gap = 32
 
     # Pre-filter all necessary data
     # 1. Filter hit events for the attacker, excluding generic hits
@@ -289,14 +236,14 @@ def calculate_crosshair_placement_consecutive(attacker_name, player_hurt_df, df)
         if len(window_data) < 4:
             continue
 
-        # Divide the window into quarters - use numpy for faster operations
+        # Divide the window into quarters
         quarter = max(1, len(window_data) // 4)
 
         # Extract arrays directly for faster calculations
         pitches = window_data["pitch"].to_numpy()
         yaws = window_data["yaw"].to_numpy()
 
-        # Calculate averages using numpy - much faster than DataFrame operations
+        # Calculate averages
         baseline_pitch = np.mean(pitches[:quarter])
         baseline_yaw = np.mean(yaws[:quarter])
         final_pitch = np.mean(pitches[-quarter:])
@@ -315,71 +262,59 @@ def calculate_crosshair_placement_consecutive(attacker_name, player_hurt_df, df)
         return None
 
 
-def calculate_victim_crosshair_placement(victim_name, player_hurt_df, df):
-    """
-    Calculates the crosshair placement error for a victim by comparing their
-    actual pitch/yaw to the expected pitch/yaw (based on attacker's position).
+def calculate_counter_strafing_accuracy(attacker_name, weapon_fire_df, df):
+    """Calculate counter-strafing accuracy for a given player."""
 
-    Returns the average placement error over all engagements.
-    """
-    errors = []
+    rifles = ["weapon_ak47", "weapon_m4a1", "weapon_m4a1_silencer", "weapon_galilar",
+              "weapon_famas", "weapon_sg556", "weapon_aug"]
 
-    # Get all events where this player was the victim
-    victim_hits = player_hurt_df[player_hurt_df["user_name"] == victim_name].sort_values(by="tick")
+    # Get shots fired by the attacker, filtered for rifles only
+    attacker_shots = weapon_fire_df[
+        (weapon_fire_df["user_name"] == attacker_name) &
+        (weapon_fire_df["weapon"].isin(rifles))
+        ].sort_values(by="tick")
 
-    for _, hit_event in victim_hits.iterrows():
-        tick = hit_event["tick"]
-        attacker_name = hit_event["attacker_name"]
-
-        # Get victim and attacker positions at the moment of impact
-        victim_data = df[(df["tick"] == tick) & (df["name"] == victim_name)]
-        attacker_data = df[(df["tick"] == tick) & (df["name"] == attacker_name)]
-
-        if victim_data.empty or attacker_data.empty:
-            continue  # Skip if data is missing
-
-        # Extract positions and angles
-        victim_x, victim_y, victim_z = victim_data.iloc[0][["X", "Y", "Z"]]
-        attacker_x, attacker_y, attacker_z = attacker_data.iloc[0][["X", "Y", "Z"]]
-        actual_pitch, actual_yaw = victim_data.iloc[0][["pitch", "yaw"]]
-
-        # Calculate expected yaw
-        expected_yaw = math.degrees(math.atan2(attacker_y - victim_y, attacker_x - victim_x))
-
-        # Calculate expected pitch
-        d_xy = math.sqrt((attacker_x - victim_x) ** 2 + (attacker_y - victim_y) ** 2)
-        expected_pitch = -math.degrees(math.atan2(attacker_z - victim_z, d_xy))
-
-        # Compute error in pitch and yaw
-        delta_pitch = abs(actual_pitch - expected_pitch)
-        delta_yaw = abs(actual_yaw - expected_yaw)
-
-        # Ensure yaw error is within 180 degrees (to handle wraparound cases)
-        delta_yaw = min(delta_yaw, 360 - delta_yaw)
-
-        # Calculate total crosshair placement error
-        error = math.sqrt(delta_pitch ** 2 + delta_yaw ** 2)
-        errors.append(error)
-
-    if errors:
-        return sum(errors) / len(errors)  # Return average error
-    else:
+    # No shots fired, return None
+    if attacker_shots.empty:
         return None
 
+    # Extract shot ticks for filtering
+    shot_ticks = set(attacker_shots["tick"])
 
+    # Filter main df to get only rows with matching ticks
+    attacker_df = df[(df["name"] == attacker_name) & (df["tick"].isin(shot_ticks))][
+        ["tick", "velocity", "max_speed", "in_crouch"]]
 
-# def analyze_player(username):
-#     """Calculate and print accuracy, headshot accuracy, and time to damage for a player."""
-#     accuracy, headshot_accuracy = calculate_accuracy(username)
-#     avg_ttd = calculate_avg_time_to_damage(username)
-#     accuracy_enemy_spotted = calculate_accuracy_by_window(username)
-#
-#     print(f"{username}'s Performance:")
-#     print(f" - Accuracy: {accuracy:.2f}%")
-#     print(f" - Accuracy (Enemy Spotted): {accuracy_enemy_spotted:.2f}%")
-#     print(f" - Headshot Accuracy: {headshot_accuracy:.2f}%")
-#     print(f" - Average Time to Damage: {avg_ttd:.3f} seconds" if avg_ttd is not None else " - No valid time to damage data.")
-#     print("-" * 40)  # Separator for better readability
+    # Create a dictionary for fast player state lookup by tick
+    player_state_dict = {}
+    for _, row in attacker_df.iterrows():
+        player_state_dict[row["tick"]] = (row["velocity"], row["max_speed"], row["in_crouch"])
+
+    # Initialize counters
+    good_shots = 0
+    total_strafe_shots = 0
+
+    # Process each shot
+    for _, shot in attacker_shots.iterrows():
+        shot_tick = shot["tick"]
+
+        # Skip if we don't have player state for this tick
+        if shot_tick not in player_state_dict:
+            continue
+
+        # Get player state at the time of shot
+        velocity, max_speed, in_crouch = player_state_dict[shot_tick]
+
+        # Check if this is a strafing shot (moving and not crouching)
+        if not in_crouch:
+            total_strafe_shots += 1
+
+            # Check if it's a good counter-strafing shot (velocity <= 34% of max speed)
+            if velocity <= 0.34 * max_speed:
+                good_shots += 1
+
+    # Calculate accuracy, or return None if no strafing shots
+    return good_shots / total_strafe_shots if total_strafe_shots > 0 else None
 
 
 def analyze_all_players(demo_path):
@@ -405,6 +340,7 @@ def analyze_all_players(demo_path):
         avg_ttd = calculate_avg_time_to_damage(username, player_hurt_df, df)
         accuracy_enemy_spotted = calculate_accuracy_by_window(username, player_hurt_df, weapon_fire_df)
         crosshair_placement = calculate_crosshair_placement_consecutive(username, player_hurt_df, df)
+        counter_strafing = calculate_counter_strafing_accuracy(username, weapon_fire_df, df)
         # victim_crosshair_error = calculate_victim_crosshair_placement(username, player_hurt_df, df)
 
         all_data.append({
@@ -414,6 +350,7 @@ def analyze_all_players(demo_path):
             "hs_accuracy": f"{headshot_accuracy:.2f}",
             "time_to_damage": f"{avg_ttd:.3f}" if avg_ttd is not None else "N/A",
             "crosshair_placement": f"{crosshair_placement:.2f}" if crosshair_placement is not None else "N/A",
+            "counter_strafing": f"{counter_strafing:.2f}" if counter_strafing is not None else "N/A",
             # "crosshair_error": f"{victim_crosshair_error:.2f}" if victim_crosshair_error is not None else "N/A"
         })
 
