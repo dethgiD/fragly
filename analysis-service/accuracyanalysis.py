@@ -3,21 +3,6 @@ import pandas as pd
 import math
 import numpy as np
 
-
-def load_demo_data(demo_path):
-    # Load demo
-    parser = DemoParser(demo_path)
-
-    # Parse necessary data
-    player_hurt_df = parser.parse_event("player_hurt", player=["X", "Y", "velocity", "max_speed",
-                                        "in_crouch"])
-    weapon_fire_df = parser.parse_event("weapon_fire", player=["X", "Y", "velocity", "max_speed",
-                                        "in_crouch"])
-    df = parser.parse_ticks(["pitch", "yaw", "spotted", "X", "Y", "Z", "velocity", "max_speed",
-                             "in_crouch"])
-    return player_hurt_df, weapon_fire_df, df
-
-
 # List of non-shootable weapons
 NON_SHOOTABLE_PREFIXES = [
     'weapon_knife', 'weapon_molotov', 'weapon_incgrenade',
@@ -317,7 +302,7 @@ def calculate_counter_strafing_accuracy(attacker_name, weapon_fire_df, df):
     return good_shots / total_strafe_shots if total_strafe_shots > 0 else None
 
 
-def analyze_all_players(demo_path):
+def analyze_all_players(player_hurt_df, weapon_fire_df, df):
     """
     Calculate various performance metrics for multiple players and return a dataframe.
     The metrics include:
@@ -328,7 +313,6 @@ def analyze_all_players(demo_path):
       - Average crosshair placement adjustment (calculate_crosshair_placement)
       - Average crosshair placement error (calculate_victim_crosshair_placement)
     """
-    player_hurt_df, weapon_fire_df, df = load_demo_data(demo_path)
 
     usernames = weapon_fire_df["user_name"].unique()
 

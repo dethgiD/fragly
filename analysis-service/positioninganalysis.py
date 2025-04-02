@@ -2,7 +2,7 @@ import pandas as pd
 from demoparser2 import DemoParser
 
 
-def analyze_all_players(demo_path):
+def analyze_all_players(player_death_df):
     """
     Calculate various performance metrics for all players in a CS2 demo and return a dataframe.
     The metrics include:
@@ -11,14 +11,6 @@ def analyze_all_players(demo_path):
       - Traded deaths (when your death is traded by a teammate)
       - Multi kills (more than one kill in a round)
     """
-    # Initialize the parser
-    parser = DemoParser(demo_path)
-
-    # Parse player death events
-    player_death_df = parser.parse_event("player_death", player=["X", "Y"],
-                                         other=["total_rounds_played", "game_phase"])
-
-    # Filter out events with game_phase = 1 (typically knife/warmup)
     player_death_df = player_death_df[player_death_df["game_phase"] != 1]
 
     # Get all unique players
