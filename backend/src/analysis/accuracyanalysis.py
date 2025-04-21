@@ -238,8 +238,6 @@ def detect_engagements(attacker_name, weapon_fire_df, player_death_df, df, max_g
 
     # Filter out engagements that start and end on the same tick
     valid_engagements = [(start, end) for start, end in engagements if start < end]
-    print(attacker_name)
-    print(valid_engagements)
     return valid_engagements
 
 
