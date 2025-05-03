@@ -6,6 +6,9 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import { MatchModule } from './match/match.module';
 import { AuthModule } from './auth/auth.module';
+import { SteamModule } from './steam/steam.module';
+import { AnalysisModule } from './analysis/analysis.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -13,7 +16,7 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
     }),
     UploadModule, 
-    PrismaModule, MatchModule, AuthModule,
+    PrismaModule, MatchModule, AuthModule, SteamModule, AnalysisModule, UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

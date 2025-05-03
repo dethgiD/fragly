@@ -120,6 +120,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
+  displayName: 'displayName',
+  isVerified: 'isVerified',
   gameAuthCode: 'gameAuthCode',
   lastMatchCode: 'lastMatchCode',
   playerId: 'playerId',
@@ -134,9 +136,21 @@ exports.Prisma.PlayerScalarFieldEnum = {
 exports.Prisma.MatchScalarFieldEnum = {
   id: 'id',
   matchId: 'matchId',
+  mapName: 'mapName',
   team1Score: 'team1Score',
   team2Score: 'team2Score',
   playedAt: 'playedAt'
+};
+
+exports.Prisma.SteamMatchScalarFieldEnum = {
+  id: 'id',
+  mapUrl: 'mapUrl',
+  reservationId: 'reservationId'
+};
+
+exports.Prisma.UploadedMatchScalarFieldEnum = {
+  id: 'id',
+  uploadedAt: 'uploadedAt'
 };
 
 exports.Prisma.PlayerMatchStatsScalarFieldEnum = {
@@ -145,22 +159,29 @@ exports.Prisma.PlayerMatchStatsScalarFieldEnum = {
   matchId: 'matchId',
   steamId: 'steamId',
   username: 'username',
+  rank: 'rank',
   teamNumber: 'teamNumber',
-  accuracy: 'accuracy',
-  accuracySpotted: 'accuracySpotted',
-  hsAccuracy: 'hsAccuracy',
-  timeToDamage: 'timeToDamage',
-  crosshairPlacement: 'crosshairPlacement',
-  counterStrafing: 'counterStrafing',
   totalKills: 'totalKills',
   totalDeaths: 'totalDeaths',
+  totalAssists: 'totalAssists',
+  totalDamage: 'totalDamage',
+  headshotPercentage: 'headshotPercentage',
+  accuracySpotted: 'accuracySpotted',
+  timeToDamage: 'timeToDamage',
+  crosshairPlacement: 'crosshairPlacement',
+  sprayAccuracy: 'sprayAccuracy',
+  counterStrafeRatio: 'counterStrafeRatio',
+  headshotAccuracy: 'headshotAccuracy',
   openingKills: 'openingKills',
+  openingAttempts: 'openingAttempts',
   tradeKills: 'tradeKills',
-  tradeKillPercentage: 'tradeKillPercentage',
+  tradeAttempts: 'tradeAttempts',
   tradedDeaths: 'tradedDeaths',
-  tradedDeathPercentage: 'tradedDeathPercentage',
-  multiKillRounds: 'multiKillRounds',
-  multiKillPercentage: 'multiKillPercentage'
+  tradedDeathAttempts: 'tradedDeathAttempts',
+  twoKillRounds: 'twoKillRounds',
+  threeKillRounds: 'threeKillRounds',
+  fourKillRounds: 'fourKillRounds',
+  fiveKillRounds: 'fiveKillRounds'
 };
 
 exports.Prisma.SortOrder = {
@@ -183,6 +204,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Player: 'Player',
   Match: 'Match',
+  SteamMatch: 'SteamMatch',
+  UploadedMatch: 'UploadedMatch',
   PlayerMatchStats: 'PlayerMatchStats'
 };
 

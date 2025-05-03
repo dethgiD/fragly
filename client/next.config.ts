@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
         source: "/api/matches",
         destination: "http://localhost:3000/matches",
       },
+      {
+        source: "/api/auth/complete-profile", 
+        destination: "http://localhost:3000/auth/complete-profile",
+      },
+      {
+        source: "/api/users/me", 
+        destination: "http://localhost:3000/users/me",
+      },
     ];
   },
 };

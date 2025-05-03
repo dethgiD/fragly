@@ -10,7 +10,9 @@ datasource db {
 
 model User {
   id            String   @id @default(uuid())
-  email         String   @unique
+  email         String?  @unique
+  displayName   String?  @unique
+  isVerified    Boolean  @default(false)
   gameAuthCode  String?
   lastMatchCode String?
   player        Player?  @relation(fields: [playerId], references: [id])
@@ -26,38 +28,69 @@ model Player {
 }
 
 model Match {
-  id         String             @id @default(uuid())
-  matchId    String             @unique
-  team1Score Int
-  team2Score Int
-  playedAt   DateTime           @default(now())
-  stats      PlayerMatchStats[]
+  id            String             @id @default(uuid())
+  matchId       String             @unique
+  mapName       String
+  team1Score    Int
+  team2Score    Int
+  playedAt      DateTime
+  stats         PlayerMatchStats[]
+  steamMatch    SteamMatch?
+  uploadedMatch UploadedMatch?
+}
+
+model SteamMatch {
+  id            String  @id
+  match         Match   @relation(fields: [id], references: [id], onDelete: Cascade)
+  mapUrl        String
+  reservationId String?
+}
+
+model UploadedMatch {
+  id         String   @id
+  match      Match    @relation(fields: [id], references: [id], onDelete: Cascade)
+  uploadedAt DateTime @default(now())
 }
 
 model PlayerMatchStats {
-  id       String @id @default(uuid())
-  playerId String
-  matchId  String
+  id         String @id @default(uuid())
+  playerId   String
+  matchId    String
+  steamId    String
+  username   String
+  rank       Int
+  teamNumber Int
 
-  steamId               String
-  username              String
-  teamNumber            Int
-  accuracy              Float
-  accuracySpotted       Float
-  hsAccuracy            Float
-  timeToDamage          Float
-  crosshairPlacement    Float
-  counterStrafing       Float
-  totalKills            Int
-  totalDeaths           Int
-  openingKills          Int
-  tradeKills            Int
-  tradeKillPercentage   Float
-  tradedDeaths          Int
-  tradedDeathPercentage Float
-  multiKillRounds       Int
-  multiKillPercentage   Float
+  // Totals from match stats
+  totalKills         Int
+  totalDeaths        Int
+  totalAssists       Int
+  totalDamage        Int
+  headshotPercentage Float
 
+  // Metrics
+  accuracySpotted    Float
+  timeToDamage       Float
+  crosshairPlacement Float
+  sprayAccuracy      Float
+  counterStrafeRatio Float
+  headshotAccuracy   Float
+
+  // Openers & trades
+  openingKills        Int
+  openingAttempts     Int
+  tradeKills          Int
+  tradeAttempts       Int
+  tradedDeaths        Int
+  tradedDeathAttempts Int
+
+  // Multi-kill rounds
+  twoKillRounds   Int
+  threeKillRounds Int
+  fourKillRounds  Int
+  fiveKillRounds  Int
+
+  // Relations
   player Player @relation(fields: [playerId], references: [id])
   match  Match  @relation(fields: [matchId], references: [id])
 

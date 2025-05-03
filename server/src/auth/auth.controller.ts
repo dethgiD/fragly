@@ -30,4 +30,15 @@ export class AuthController {
     return this.authService.updateSteamCodes(req.user.userId, dto);
   }
 
+
+  @UseGuards(AuthGuard('jwt'))
+  @Patch('complete-profile')
+  async completeProfile(
+    @Body() body: { email: string; displayName: string },
+    @Req() req
+  ) {
+  const { email, displayName } = body;
+  return this.authService.completeProfile(req.user.userId, email, displayName);
+}
+
 }

@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateAuthCodesDto } from './dto/update-auth-codes.dto';
+import { Prisma } from 'generated/prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -24,7 +25,7 @@ export class AuthService {
           steamId,
           user: {
             create: {
-              email: `${steamId}@steam`, // Placeholder, Steam doesn't give email
+              
             },
           },
         },
@@ -33,7 +34,6 @@ export class AuthService {
     } else if(!player.user){
       const user = await this.prisma.user.create({
         data: {
-          email: `${steamId}@steam`,
           player: { connect: { id: player.id } },
         },
       });
@@ -52,15 +52,60 @@ export class AuthService {
         throw new Error("User not found for player.");
       }
 
+    const isIncomplete = !player.user.email || !player.user.displayName;
     // Generate JWT with User ID
     const payload = {
       sub: player.user.id,
       steamId: player.steamId,
+      needsSetup: isIncomplete,
     };
 
     const token = this.jwtService.sign(payload);
     return { token };
   }
+
+  async completeProfile(userId: string, email: string, displayName: string) {
+    try {
+      // Attempt to update the user profile
+      const updatedUser = await this.prisma.user.update({
+        where: { id: userId },
+        data: {
+          email: email?.toLowerCase(), // Normalize email if needed
+          displayName: displayName,
+        },
+      });
+      return updatedUser; // Or return relevant user data without sensitive info
+
+    } catch (error) {
+      // Check if the error is a Prisma unique constraint violation (P2002)
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        // Determine which field caused the conflict from the error metadata
+        const target = error.meta?.target as string[]; // e.g., ['displayName'] or ['email']
+        let conflictMessage = 'A profile conflict occurred.'; // Default message
+
+        if (target?.includes('displayName') && target?.includes('email')) {
+            conflictMessage = 'That display name and email address are already in use.';
+        } else if (target?.includes('displayName')) {
+          conflictMessage = 'That display name is already taken. Please choose another.';
+        } else if (target?.includes('email')) {
+          conflictMessage = 'That email address is already associated with another account.';
+        }
+
+        // Throw a 409 Conflict exception with the specific message
+        throw new ConflictException(conflictMessage);
+      }
+
+      // Handle other potential database errors or unexpected issues
+      console.error('Error during profile completion:', error); // Log the original error
+      throw new InternalServerErrorException(
+        'An unexpected error occurred while updating your profile.',
+      );
+    }
+  }
+  
 
   async updateSteamCodes(userId: string, dto: UpdateAuthCodesDto) {
     return this.prisma.user.update({

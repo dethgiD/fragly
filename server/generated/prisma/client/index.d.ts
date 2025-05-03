@@ -29,6 +29,16 @@ export type Player = $Result.DefaultSelection<Prisma.$PlayerPayload>
  */
 export type Match = $Result.DefaultSelection<Prisma.$MatchPayload>
 /**
+ * Model SteamMatch
+ * 
+ */
+export type SteamMatch = $Result.DefaultSelection<Prisma.$SteamMatchPayload>
+/**
+ * Model UploadedMatch
+ * 
+ */
+export type UploadedMatch = $Result.DefaultSelection<Prisma.$UploadedMatchPayload>
+/**
  * Model PlayerMatchStats
  * 
  */
@@ -188,6 +198,26 @@ export class PrismaClient<
     * ```
     */
   get match(): Prisma.MatchDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.steamMatch`: Exposes CRUD operations for the **SteamMatch** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SteamMatches
+    * const steamMatches = await prisma.steamMatch.findMany()
+    * ```
+    */
+  get steamMatch(): Prisma.SteamMatchDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.uploadedMatch`: Exposes CRUD operations for the **UploadedMatch** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UploadedMatches
+    * const uploadedMatches = await prisma.uploadedMatch.findMany()
+    * ```
+    */
+  get uploadedMatch(): Prisma.UploadedMatchDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.playerMatchStats`: Exposes CRUD operations for the **PlayerMatchStats** model.
@@ -641,6 +671,8 @@ export namespace Prisma {
     User: 'User',
     Player: 'Player',
     Match: 'Match',
+    SteamMatch: 'SteamMatch',
+    UploadedMatch: 'UploadedMatch',
     PlayerMatchStats: 'PlayerMatchStats'
   };
 
@@ -660,7 +692,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "player" | "match" | "playerMatchStats"
+      modelProps: "user" | "player" | "match" | "steamMatch" | "uploadedMatch" | "playerMatchStats"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -886,6 +918,154 @@ export namespace Prisma {
           }
         }
       }
+      SteamMatch: {
+        payload: Prisma.$SteamMatchPayload<ExtArgs>
+        fields: Prisma.SteamMatchFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SteamMatchFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SteamMatchFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload>
+          }
+          findFirst: {
+            args: Prisma.SteamMatchFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SteamMatchFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload>
+          }
+          findMany: {
+            args: Prisma.SteamMatchFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload>[]
+          }
+          create: {
+            args: Prisma.SteamMatchCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload>
+          }
+          createMany: {
+            args: Prisma.SteamMatchCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SteamMatchCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload>[]
+          }
+          delete: {
+            args: Prisma.SteamMatchDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload>
+          }
+          update: {
+            args: Prisma.SteamMatchUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload>
+          }
+          deleteMany: {
+            args: Prisma.SteamMatchDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SteamMatchUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SteamMatchUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload>[]
+          }
+          upsert: {
+            args: Prisma.SteamMatchUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SteamMatchPayload>
+          }
+          aggregate: {
+            args: Prisma.SteamMatchAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSteamMatch>
+          }
+          groupBy: {
+            args: Prisma.SteamMatchGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SteamMatchGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SteamMatchCountArgs<ExtArgs>
+            result: $Utils.Optional<SteamMatchCountAggregateOutputType> | number
+          }
+        }
+      }
+      UploadedMatch: {
+        payload: Prisma.$UploadedMatchPayload<ExtArgs>
+        fields: Prisma.UploadedMatchFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UploadedMatchFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UploadedMatchFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload>
+          }
+          findFirst: {
+            args: Prisma.UploadedMatchFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UploadedMatchFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload>
+          }
+          findMany: {
+            args: Prisma.UploadedMatchFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload>[]
+          }
+          create: {
+            args: Prisma.UploadedMatchCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload>
+          }
+          createMany: {
+            args: Prisma.UploadedMatchCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UploadedMatchCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload>[]
+          }
+          delete: {
+            args: Prisma.UploadedMatchDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload>
+          }
+          update: {
+            args: Prisma.UploadedMatchUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload>
+          }
+          deleteMany: {
+            args: Prisma.UploadedMatchDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UploadedMatchUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UploadedMatchUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload>[]
+          }
+          upsert: {
+            args: Prisma.UploadedMatchUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UploadedMatchPayload>
+          }
+          aggregate: {
+            args: Prisma.UploadedMatchAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUploadedMatch>
+          }
+          groupBy: {
+            args: Prisma.UploadedMatchGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UploadedMatchGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UploadedMatchCountArgs<ExtArgs>
+            result: $Utils.Optional<UploadedMatchCountAggregateOutputType> | number
+          }
+        }
+      }
       PlayerMatchStats: {
         payload: Prisma.$PlayerMatchStatsPayload<ExtArgs>
         fields: Prisma.PlayerMatchStatsFieldRefs
@@ -1047,6 +1227,8 @@ export namespace Prisma {
     user?: UserOmit
     player?: PlayerOmit
     match?: MatchOmit
+    steamMatch?: SteamMatchOmit
+    uploadedMatch?: UploadedMatchOmit
     playerMatchStats?: PlayerMatchStatsOmit
   }
 
@@ -1216,6 +1398,8 @@ export namespace Prisma {
   export type UserMinAggregateOutputType = {
     id: string | null
     email: string | null
+    displayName: string | null
+    isVerified: boolean | null
     gameAuthCode: string | null
     lastMatchCode: string | null
     playerId: string | null
@@ -1225,6 +1409,8 @@ export namespace Prisma {
   export type UserMaxAggregateOutputType = {
     id: string | null
     email: string | null
+    displayName: string | null
+    isVerified: boolean | null
     gameAuthCode: string | null
     lastMatchCode: string | null
     playerId: string | null
@@ -1234,6 +1420,8 @@ export namespace Prisma {
   export type UserCountAggregateOutputType = {
     id: number
     email: number
+    displayName: number
+    isVerified: number
     gameAuthCode: number
     lastMatchCode: number
     playerId: number
@@ -1245,6 +1433,8 @@ export namespace Prisma {
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
+    displayName?: true
+    isVerified?: true
     gameAuthCode?: true
     lastMatchCode?: true
     playerId?: true
@@ -1254,6 +1444,8 @@ export namespace Prisma {
   export type UserMaxAggregateInputType = {
     id?: true
     email?: true
+    displayName?: true
+    isVerified?: true
     gameAuthCode?: true
     lastMatchCode?: true
     playerId?: true
@@ -1263,6 +1455,8 @@ export namespace Prisma {
   export type UserCountAggregateInputType = {
     id?: true
     email?: true
+    displayName?: true
+    isVerified?: true
     gameAuthCode?: true
     lastMatchCode?: true
     playerId?: true
@@ -1344,7 +1538,9 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: string
-    email: string
+    email: string | null
+    displayName: string | null
+    isVerified: boolean
     gameAuthCode: string | null
     lastMatchCode: string | null
     playerId: string | null
@@ -1371,6 +1567,8 @@ export namespace Prisma {
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    displayName?: boolean
+    isVerified?: boolean
     gameAuthCode?: boolean
     lastMatchCode?: boolean
     playerId?: boolean
@@ -1381,6 +1579,8 @@ export namespace Prisma {
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    displayName?: boolean
+    isVerified?: boolean
     gameAuthCode?: boolean
     lastMatchCode?: boolean
     playerId?: boolean
@@ -1391,6 +1591,8 @@ export namespace Prisma {
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    displayName?: boolean
+    isVerified?: boolean
     gameAuthCode?: boolean
     lastMatchCode?: boolean
     playerId?: boolean
@@ -1401,13 +1603,15 @@ export namespace Prisma {
   export type UserSelectScalar = {
     id?: boolean
     email?: boolean
+    displayName?: boolean
+    isVerified?: boolean
     gameAuthCode?: boolean
     lastMatchCode?: boolean
     playerId?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "gameAuthCode" | "lastMatchCode" | "playerId" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "displayName" | "isVerified" | "gameAuthCode" | "lastMatchCode" | "playerId" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     player?: boolean | User$playerArgs<ExtArgs>
   }
@@ -1425,7 +1629,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      email: string
+      email: string | null
+      displayName: string | null
+      isVerified: boolean
       gameAuthCode: string | null
       lastMatchCode: string | null
       playerId: string | null
@@ -1856,6 +2062,8 @@ export namespace Prisma {
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
+    readonly displayName: FieldRef<"User", 'String'>
+    readonly isVerified: FieldRef<"User", 'Boolean'>
     readonly gameAuthCode: FieldRef<"User", 'String'>
     readonly lastMatchCode: FieldRef<"User", 'String'>
     readonly playerId: FieldRef<"User", 'String'>
@@ -2078,7 +2286,7 @@ export namespace Prisma {
     /**
      * The data needed to create a User.
      */
-    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+    data?: XOR<UserCreateInput, UserUncheckedCreateInput>
   }
 
   /**
@@ -3372,6 +3580,7 @@ export namespace Prisma {
   export type MatchMinAggregateOutputType = {
     id: string | null
     matchId: string | null
+    mapName: string | null
     team1Score: number | null
     team2Score: number | null
     playedAt: Date | null
@@ -3380,6 +3589,7 @@ export namespace Prisma {
   export type MatchMaxAggregateOutputType = {
     id: string | null
     matchId: string | null
+    mapName: string | null
     team1Score: number | null
     team2Score: number | null
     playedAt: Date | null
@@ -3388,6 +3598,7 @@ export namespace Prisma {
   export type MatchCountAggregateOutputType = {
     id: number
     matchId: number
+    mapName: number
     team1Score: number
     team2Score: number
     playedAt: number
@@ -3408,6 +3619,7 @@ export namespace Prisma {
   export type MatchMinAggregateInputType = {
     id?: true
     matchId?: true
+    mapName?: true
     team1Score?: true
     team2Score?: true
     playedAt?: true
@@ -3416,6 +3628,7 @@ export namespace Prisma {
   export type MatchMaxAggregateInputType = {
     id?: true
     matchId?: true
+    mapName?: true
     team1Score?: true
     team2Score?: true
     playedAt?: true
@@ -3424,6 +3637,7 @@ export namespace Prisma {
   export type MatchCountAggregateInputType = {
     id?: true
     matchId?: true
+    mapName?: true
     team1Score?: true
     team2Score?: true
     playedAt?: true
@@ -3519,6 +3733,7 @@ export namespace Prisma {
   export type MatchGroupByOutputType = {
     id: string
     matchId: string
+    mapName: string
     team1Score: number
     team2Score: number
     playedAt: Date
@@ -3546,16 +3761,20 @@ export namespace Prisma {
   export type MatchSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     matchId?: boolean
+    mapName?: boolean
     team1Score?: boolean
     team2Score?: boolean
     playedAt?: boolean
     stats?: boolean | Match$statsArgs<ExtArgs>
+    steamMatch?: boolean | Match$steamMatchArgs<ExtArgs>
+    uploadedMatch?: boolean | Match$uploadedMatchArgs<ExtArgs>
     _count?: boolean | MatchCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["match"]>
 
   export type MatchSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     matchId?: boolean
+    mapName?: boolean
     team1Score?: boolean
     team2Score?: boolean
     playedAt?: boolean
@@ -3564,6 +3783,7 @@ export namespace Prisma {
   export type MatchSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     matchId?: boolean
+    mapName?: boolean
     team1Score?: boolean
     team2Score?: boolean
     playedAt?: boolean
@@ -3572,14 +3792,17 @@ export namespace Prisma {
   export type MatchSelectScalar = {
     id?: boolean
     matchId?: boolean
+    mapName?: boolean
     team1Score?: boolean
     team2Score?: boolean
     playedAt?: boolean
   }
 
-  export type MatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "matchId" | "team1Score" | "team2Score" | "playedAt", ExtArgs["result"]["match"]>
+  export type MatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "matchId" | "mapName" | "team1Score" | "team2Score" | "playedAt", ExtArgs["result"]["match"]>
   export type MatchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     stats?: boolean | Match$statsArgs<ExtArgs>
+    steamMatch?: boolean | Match$steamMatchArgs<ExtArgs>
+    uploadedMatch?: boolean | Match$uploadedMatchArgs<ExtArgs>
     _count?: boolean | MatchCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MatchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3589,10 +3812,13 @@ export namespace Prisma {
     name: "Match"
     objects: {
       stats: Prisma.$PlayerMatchStatsPayload<ExtArgs>[]
+      steamMatch: Prisma.$SteamMatchPayload<ExtArgs> | null
+      uploadedMatch: Prisma.$UploadedMatchPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       matchId: string
+      mapName: string
       team1Score: number
       team2Score: number
       playedAt: Date
@@ -3991,6 +4217,8 @@ export namespace Prisma {
   export interface Prisma__MatchClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     stats<T extends Match$statsArgs<ExtArgs> = {}>(args?: Subset<T, Match$statsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerMatchStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    steamMatch<T extends Match$steamMatchArgs<ExtArgs> = {}>(args?: Subset<T, Match$steamMatchArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    uploadedMatch<T extends Match$uploadedMatchArgs<ExtArgs> = {}>(args?: Subset<T, Match$uploadedMatchArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4022,6 +4250,7 @@ export namespace Prisma {
   interface MatchFieldRefs {
     readonly id: FieldRef<"Match", 'String'>
     readonly matchId: FieldRef<"Match", 'String'>
+    readonly mapName: FieldRef<"Match", 'String'>
     readonly team1Score: FieldRef<"Match", 'Int'>
     readonly team2Score: FieldRef<"Match", 'Int'>
     readonly playedAt: FieldRef<"Match", 'DateTime'>
@@ -4437,6 +4666,44 @@ export namespace Prisma {
   }
 
   /**
+   * Match.steamMatch
+   */
+  export type Match$steamMatchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    where?: SteamMatchWhereInput
+  }
+
+  /**
+   * Match.uploadedMatch
+   */
+  export type Match$uploadedMatchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    where?: UploadedMatchWhereInput
+  }
+
+  /**
    * Match without action
    */
   export type MatchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4456,6 +4723,2057 @@ export namespace Prisma {
 
 
   /**
+   * Model SteamMatch
+   */
+
+  export type AggregateSteamMatch = {
+    _count: SteamMatchCountAggregateOutputType | null
+    _min: SteamMatchMinAggregateOutputType | null
+    _max: SteamMatchMaxAggregateOutputType | null
+  }
+
+  export type SteamMatchMinAggregateOutputType = {
+    id: string | null
+    mapUrl: string | null
+    reservationId: string | null
+  }
+
+  export type SteamMatchMaxAggregateOutputType = {
+    id: string | null
+    mapUrl: string | null
+    reservationId: string | null
+  }
+
+  export type SteamMatchCountAggregateOutputType = {
+    id: number
+    mapUrl: number
+    reservationId: number
+    _all: number
+  }
+
+
+  export type SteamMatchMinAggregateInputType = {
+    id?: true
+    mapUrl?: true
+    reservationId?: true
+  }
+
+  export type SteamMatchMaxAggregateInputType = {
+    id?: true
+    mapUrl?: true
+    reservationId?: true
+  }
+
+  export type SteamMatchCountAggregateInputType = {
+    id?: true
+    mapUrl?: true
+    reservationId?: true
+    _all?: true
+  }
+
+  export type SteamMatchAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SteamMatch to aggregate.
+     */
+    where?: SteamMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SteamMatches to fetch.
+     */
+    orderBy?: SteamMatchOrderByWithRelationInput | SteamMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SteamMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SteamMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SteamMatches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SteamMatches
+    **/
+    _count?: true | SteamMatchCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SteamMatchMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SteamMatchMaxAggregateInputType
+  }
+
+  export type GetSteamMatchAggregateType<T extends SteamMatchAggregateArgs> = {
+        [P in keyof T & keyof AggregateSteamMatch]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSteamMatch[P]>
+      : GetScalarType<T[P], AggregateSteamMatch[P]>
+  }
+
+
+
+
+  export type SteamMatchGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SteamMatchWhereInput
+    orderBy?: SteamMatchOrderByWithAggregationInput | SteamMatchOrderByWithAggregationInput[]
+    by: SteamMatchScalarFieldEnum[] | SteamMatchScalarFieldEnum
+    having?: SteamMatchScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SteamMatchCountAggregateInputType | true
+    _min?: SteamMatchMinAggregateInputType
+    _max?: SteamMatchMaxAggregateInputType
+  }
+
+  export type SteamMatchGroupByOutputType = {
+    id: string
+    mapUrl: string
+    reservationId: string | null
+    _count: SteamMatchCountAggregateOutputType | null
+    _min: SteamMatchMinAggregateOutputType | null
+    _max: SteamMatchMaxAggregateOutputType | null
+  }
+
+  type GetSteamMatchGroupByPayload<T extends SteamMatchGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SteamMatchGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SteamMatchGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SteamMatchGroupByOutputType[P]>
+            : GetScalarType<T[P], SteamMatchGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SteamMatchSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mapUrl?: boolean
+    reservationId?: boolean
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["steamMatch"]>
+
+  export type SteamMatchSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mapUrl?: boolean
+    reservationId?: boolean
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["steamMatch"]>
+
+  export type SteamMatchSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    mapUrl?: boolean
+    reservationId?: boolean
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["steamMatch"]>
+
+  export type SteamMatchSelectScalar = {
+    id?: boolean
+    mapUrl?: boolean
+    reservationId?: boolean
+  }
+
+  export type SteamMatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "mapUrl" | "reservationId", ExtArgs["result"]["steamMatch"]>
+  export type SteamMatchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }
+  export type SteamMatchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }
+  export type SteamMatchIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }
+
+  export type $SteamMatchPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SteamMatch"
+    objects: {
+      match: Prisma.$MatchPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      mapUrl: string
+      reservationId: string | null
+    }, ExtArgs["result"]["steamMatch"]>
+    composites: {}
+  }
+
+  type SteamMatchGetPayload<S extends boolean | null | undefined | SteamMatchDefaultArgs> = $Result.GetResult<Prisma.$SteamMatchPayload, S>
+
+  type SteamMatchCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SteamMatchFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SteamMatchCountAggregateInputType | true
+    }
+
+  export interface SteamMatchDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SteamMatch'], meta: { name: 'SteamMatch' } }
+    /**
+     * Find zero or one SteamMatch that matches the filter.
+     * @param {SteamMatchFindUniqueArgs} args - Arguments to find a SteamMatch
+     * @example
+     * // Get one SteamMatch
+     * const steamMatch = await prisma.steamMatch.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SteamMatchFindUniqueArgs>(args: SelectSubset<T, SteamMatchFindUniqueArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SteamMatch that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SteamMatchFindUniqueOrThrowArgs} args - Arguments to find a SteamMatch
+     * @example
+     * // Get one SteamMatch
+     * const steamMatch = await prisma.steamMatch.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SteamMatchFindUniqueOrThrowArgs>(args: SelectSubset<T, SteamMatchFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SteamMatch that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SteamMatchFindFirstArgs} args - Arguments to find a SteamMatch
+     * @example
+     * // Get one SteamMatch
+     * const steamMatch = await prisma.steamMatch.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SteamMatchFindFirstArgs>(args?: SelectSubset<T, SteamMatchFindFirstArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SteamMatch that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SteamMatchFindFirstOrThrowArgs} args - Arguments to find a SteamMatch
+     * @example
+     * // Get one SteamMatch
+     * const steamMatch = await prisma.steamMatch.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SteamMatchFindFirstOrThrowArgs>(args?: SelectSubset<T, SteamMatchFindFirstOrThrowArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SteamMatches that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SteamMatchFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SteamMatches
+     * const steamMatches = await prisma.steamMatch.findMany()
+     * 
+     * // Get first 10 SteamMatches
+     * const steamMatches = await prisma.steamMatch.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const steamMatchWithIdOnly = await prisma.steamMatch.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SteamMatchFindManyArgs>(args?: SelectSubset<T, SteamMatchFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SteamMatch.
+     * @param {SteamMatchCreateArgs} args - Arguments to create a SteamMatch.
+     * @example
+     * // Create one SteamMatch
+     * const SteamMatch = await prisma.steamMatch.create({
+     *   data: {
+     *     // ... data to create a SteamMatch
+     *   }
+     * })
+     * 
+     */
+    create<T extends SteamMatchCreateArgs>(args: SelectSubset<T, SteamMatchCreateArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SteamMatches.
+     * @param {SteamMatchCreateManyArgs} args - Arguments to create many SteamMatches.
+     * @example
+     * // Create many SteamMatches
+     * const steamMatch = await prisma.steamMatch.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SteamMatchCreateManyArgs>(args?: SelectSubset<T, SteamMatchCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SteamMatches and returns the data saved in the database.
+     * @param {SteamMatchCreateManyAndReturnArgs} args - Arguments to create many SteamMatches.
+     * @example
+     * // Create many SteamMatches
+     * const steamMatch = await prisma.steamMatch.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SteamMatches and only return the `id`
+     * const steamMatchWithIdOnly = await prisma.steamMatch.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SteamMatchCreateManyAndReturnArgs>(args?: SelectSubset<T, SteamMatchCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SteamMatch.
+     * @param {SteamMatchDeleteArgs} args - Arguments to delete one SteamMatch.
+     * @example
+     * // Delete one SteamMatch
+     * const SteamMatch = await prisma.steamMatch.delete({
+     *   where: {
+     *     // ... filter to delete one SteamMatch
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SteamMatchDeleteArgs>(args: SelectSubset<T, SteamMatchDeleteArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SteamMatch.
+     * @param {SteamMatchUpdateArgs} args - Arguments to update one SteamMatch.
+     * @example
+     * // Update one SteamMatch
+     * const steamMatch = await prisma.steamMatch.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SteamMatchUpdateArgs>(args: SelectSubset<T, SteamMatchUpdateArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SteamMatches.
+     * @param {SteamMatchDeleteManyArgs} args - Arguments to filter SteamMatches to delete.
+     * @example
+     * // Delete a few SteamMatches
+     * const { count } = await prisma.steamMatch.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SteamMatchDeleteManyArgs>(args?: SelectSubset<T, SteamMatchDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SteamMatches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SteamMatchUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SteamMatches
+     * const steamMatch = await prisma.steamMatch.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SteamMatchUpdateManyArgs>(args: SelectSubset<T, SteamMatchUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SteamMatches and returns the data updated in the database.
+     * @param {SteamMatchUpdateManyAndReturnArgs} args - Arguments to update many SteamMatches.
+     * @example
+     * // Update many SteamMatches
+     * const steamMatch = await prisma.steamMatch.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SteamMatches and only return the `id`
+     * const steamMatchWithIdOnly = await prisma.steamMatch.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SteamMatchUpdateManyAndReturnArgs>(args: SelectSubset<T, SteamMatchUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SteamMatch.
+     * @param {SteamMatchUpsertArgs} args - Arguments to update or create a SteamMatch.
+     * @example
+     * // Update or create a SteamMatch
+     * const steamMatch = await prisma.steamMatch.upsert({
+     *   create: {
+     *     // ... data to create a SteamMatch
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SteamMatch we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SteamMatchUpsertArgs>(args: SelectSubset<T, SteamMatchUpsertArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SteamMatches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SteamMatchCountArgs} args - Arguments to filter SteamMatches to count.
+     * @example
+     * // Count the number of SteamMatches
+     * const count = await prisma.steamMatch.count({
+     *   where: {
+     *     // ... the filter for the SteamMatches we want to count
+     *   }
+     * })
+    **/
+    count<T extends SteamMatchCountArgs>(
+      args?: Subset<T, SteamMatchCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SteamMatchCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SteamMatch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SteamMatchAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SteamMatchAggregateArgs>(args: Subset<T, SteamMatchAggregateArgs>): Prisma.PrismaPromise<GetSteamMatchAggregateType<T>>
+
+    /**
+     * Group by SteamMatch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SteamMatchGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SteamMatchGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SteamMatchGroupByArgs['orderBy'] }
+        : { orderBy?: SteamMatchGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SteamMatchGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSteamMatchGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SteamMatch model
+   */
+  readonly fields: SteamMatchFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SteamMatch.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SteamMatchClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    match<T extends MatchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MatchDefaultArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SteamMatch model
+   */
+  interface SteamMatchFieldRefs {
+    readonly id: FieldRef<"SteamMatch", 'String'>
+    readonly mapUrl: FieldRef<"SteamMatch", 'String'>
+    readonly reservationId: FieldRef<"SteamMatch", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SteamMatch findUnique
+   */
+  export type SteamMatchFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which SteamMatch to fetch.
+     */
+    where: SteamMatchWhereUniqueInput
+  }
+
+  /**
+   * SteamMatch findUniqueOrThrow
+   */
+  export type SteamMatchFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which SteamMatch to fetch.
+     */
+    where: SteamMatchWhereUniqueInput
+  }
+
+  /**
+   * SteamMatch findFirst
+   */
+  export type SteamMatchFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which SteamMatch to fetch.
+     */
+    where?: SteamMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SteamMatches to fetch.
+     */
+    orderBy?: SteamMatchOrderByWithRelationInput | SteamMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SteamMatches.
+     */
+    cursor?: SteamMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SteamMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SteamMatches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SteamMatches.
+     */
+    distinct?: SteamMatchScalarFieldEnum | SteamMatchScalarFieldEnum[]
+  }
+
+  /**
+   * SteamMatch findFirstOrThrow
+   */
+  export type SteamMatchFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which SteamMatch to fetch.
+     */
+    where?: SteamMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SteamMatches to fetch.
+     */
+    orderBy?: SteamMatchOrderByWithRelationInput | SteamMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SteamMatches.
+     */
+    cursor?: SteamMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SteamMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SteamMatches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SteamMatches.
+     */
+    distinct?: SteamMatchScalarFieldEnum | SteamMatchScalarFieldEnum[]
+  }
+
+  /**
+   * SteamMatch findMany
+   */
+  export type SteamMatchFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which SteamMatches to fetch.
+     */
+    where?: SteamMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SteamMatches to fetch.
+     */
+    orderBy?: SteamMatchOrderByWithRelationInput | SteamMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SteamMatches.
+     */
+    cursor?: SteamMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SteamMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SteamMatches.
+     */
+    skip?: number
+    distinct?: SteamMatchScalarFieldEnum | SteamMatchScalarFieldEnum[]
+  }
+
+  /**
+   * SteamMatch create
+   */
+  export type SteamMatchCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SteamMatch.
+     */
+    data: XOR<SteamMatchCreateInput, SteamMatchUncheckedCreateInput>
+  }
+
+  /**
+   * SteamMatch createMany
+   */
+  export type SteamMatchCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SteamMatches.
+     */
+    data: SteamMatchCreateManyInput | SteamMatchCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SteamMatch createManyAndReturn
+   */
+  export type SteamMatchCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * The data used to create many SteamMatches.
+     */
+    data: SteamMatchCreateManyInput | SteamMatchCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SteamMatch update
+   */
+  export type SteamMatchUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SteamMatch.
+     */
+    data: XOR<SteamMatchUpdateInput, SteamMatchUncheckedUpdateInput>
+    /**
+     * Choose, which SteamMatch to update.
+     */
+    where: SteamMatchWhereUniqueInput
+  }
+
+  /**
+   * SteamMatch updateMany
+   */
+  export type SteamMatchUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SteamMatches.
+     */
+    data: XOR<SteamMatchUpdateManyMutationInput, SteamMatchUncheckedUpdateManyInput>
+    /**
+     * Filter which SteamMatches to update
+     */
+    where?: SteamMatchWhereInput
+    /**
+     * Limit how many SteamMatches to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SteamMatch updateManyAndReturn
+   */
+  export type SteamMatchUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * The data used to update SteamMatches.
+     */
+    data: XOR<SteamMatchUpdateManyMutationInput, SteamMatchUncheckedUpdateManyInput>
+    /**
+     * Filter which SteamMatches to update
+     */
+    where?: SteamMatchWhereInput
+    /**
+     * Limit how many SteamMatches to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SteamMatch upsert
+   */
+  export type SteamMatchUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SteamMatch to update in case it exists.
+     */
+    where: SteamMatchWhereUniqueInput
+    /**
+     * In case the SteamMatch found by the `where` argument doesn't exist, create a new SteamMatch with this data.
+     */
+    create: XOR<SteamMatchCreateInput, SteamMatchUncheckedCreateInput>
+    /**
+     * In case the SteamMatch was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SteamMatchUpdateInput, SteamMatchUncheckedUpdateInput>
+  }
+
+  /**
+   * SteamMatch delete
+   */
+  export type SteamMatchDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+    /**
+     * Filter which SteamMatch to delete.
+     */
+    where: SteamMatchWhereUniqueInput
+  }
+
+  /**
+   * SteamMatch deleteMany
+   */
+  export type SteamMatchDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SteamMatches to delete
+     */
+    where?: SteamMatchWhereInput
+    /**
+     * Limit how many SteamMatches to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SteamMatch without action
+   */
+  export type SteamMatchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SteamMatch
+     */
+    select?: SteamMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SteamMatch
+     */
+    omit?: SteamMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SteamMatchInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UploadedMatch
+   */
+
+  export type AggregateUploadedMatch = {
+    _count: UploadedMatchCountAggregateOutputType | null
+    _min: UploadedMatchMinAggregateOutputType | null
+    _max: UploadedMatchMaxAggregateOutputType | null
+  }
+
+  export type UploadedMatchMinAggregateOutputType = {
+    id: string | null
+    uploadedAt: Date | null
+  }
+
+  export type UploadedMatchMaxAggregateOutputType = {
+    id: string | null
+    uploadedAt: Date | null
+  }
+
+  export type UploadedMatchCountAggregateOutputType = {
+    id: number
+    uploadedAt: number
+    _all: number
+  }
+
+
+  export type UploadedMatchMinAggregateInputType = {
+    id?: true
+    uploadedAt?: true
+  }
+
+  export type UploadedMatchMaxAggregateInputType = {
+    id?: true
+    uploadedAt?: true
+  }
+
+  export type UploadedMatchCountAggregateInputType = {
+    id?: true
+    uploadedAt?: true
+    _all?: true
+  }
+
+  export type UploadedMatchAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UploadedMatch to aggregate.
+     */
+    where?: UploadedMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UploadedMatches to fetch.
+     */
+    orderBy?: UploadedMatchOrderByWithRelationInput | UploadedMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UploadedMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UploadedMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UploadedMatches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UploadedMatches
+    **/
+    _count?: true | UploadedMatchCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UploadedMatchMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UploadedMatchMaxAggregateInputType
+  }
+
+  export type GetUploadedMatchAggregateType<T extends UploadedMatchAggregateArgs> = {
+        [P in keyof T & keyof AggregateUploadedMatch]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUploadedMatch[P]>
+      : GetScalarType<T[P], AggregateUploadedMatch[P]>
+  }
+
+
+
+
+  export type UploadedMatchGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UploadedMatchWhereInput
+    orderBy?: UploadedMatchOrderByWithAggregationInput | UploadedMatchOrderByWithAggregationInput[]
+    by: UploadedMatchScalarFieldEnum[] | UploadedMatchScalarFieldEnum
+    having?: UploadedMatchScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UploadedMatchCountAggregateInputType | true
+    _min?: UploadedMatchMinAggregateInputType
+    _max?: UploadedMatchMaxAggregateInputType
+  }
+
+  export type UploadedMatchGroupByOutputType = {
+    id: string
+    uploadedAt: Date
+    _count: UploadedMatchCountAggregateOutputType | null
+    _min: UploadedMatchMinAggregateOutputType | null
+    _max: UploadedMatchMaxAggregateOutputType | null
+  }
+
+  type GetUploadedMatchGroupByPayload<T extends UploadedMatchGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UploadedMatchGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UploadedMatchGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UploadedMatchGroupByOutputType[P]>
+            : GetScalarType<T[P], UploadedMatchGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UploadedMatchSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uploadedAt?: boolean
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["uploadedMatch"]>
+
+  export type UploadedMatchSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uploadedAt?: boolean
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["uploadedMatch"]>
+
+  export type UploadedMatchSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    uploadedAt?: boolean
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["uploadedMatch"]>
+
+  export type UploadedMatchSelectScalar = {
+    id?: boolean
+    uploadedAt?: boolean
+  }
+
+  export type UploadedMatchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uploadedAt", ExtArgs["result"]["uploadedMatch"]>
+  export type UploadedMatchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }
+  export type UploadedMatchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }
+  export type UploadedMatchIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }
+
+  export type $UploadedMatchPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UploadedMatch"
+    objects: {
+      match: Prisma.$MatchPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      uploadedAt: Date
+    }, ExtArgs["result"]["uploadedMatch"]>
+    composites: {}
+  }
+
+  type UploadedMatchGetPayload<S extends boolean | null | undefined | UploadedMatchDefaultArgs> = $Result.GetResult<Prisma.$UploadedMatchPayload, S>
+
+  type UploadedMatchCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UploadedMatchFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UploadedMatchCountAggregateInputType | true
+    }
+
+  export interface UploadedMatchDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UploadedMatch'], meta: { name: 'UploadedMatch' } }
+    /**
+     * Find zero or one UploadedMatch that matches the filter.
+     * @param {UploadedMatchFindUniqueArgs} args - Arguments to find a UploadedMatch
+     * @example
+     * // Get one UploadedMatch
+     * const uploadedMatch = await prisma.uploadedMatch.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UploadedMatchFindUniqueArgs>(args: SelectSubset<T, UploadedMatchFindUniqueArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UploadedMatch that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UploadedMatchFindUniqueOrThrowArgs} args - Arguments to find a UploadedMatch
+     * @example
+     * // Get one UploadedMatch
+     * const uploadedMatch = await prisma.uploadedMatch.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UploadedMatchFindUniqueOrThrowArgs>(args: SelectSubset<T, UploadedMatchFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UploadedMatch that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UploadedMatchFindFirstArgs} args - Arguments to find a UploadedMatch
+     * @example
+     * // Get one UploadedMatch
+     * const uploadedMatch = await prisma.uploadedMatch.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UploadedMatchFindFirstArgs>(args?: SelectSubset<T, UploadedMatchFindFirstArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UploadedMatch that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UploadedMatchFindFirstOrThrowArgs} args - Arguments to find a UploadedMatch
+     * @example
+     * // Get one UploadedMatch
+     * const uploadedMatch = await prisma.uploadedMatch.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UploadedMatchFindFirstOrThrowArgs>(args?: SelectSubset<T, UploadedMatchFindFirstOrThrowArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UploadedMatches that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UploadedMatchFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UploadedMatches
+     * const uploadedMatches = await prisma.uploadedMatch.findMany()
+     * 
+     * // Get first 10 UploadedMatches
+     * const uploadedMatches = await prisma.uploadedMatch.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const uploadedMatchWithIdOnly = await prisma.uploadedMatch.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UploadedMatchFindManyArgs>(args?: SelectSubset<T, UploadedMatchFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UploadedMatch.
+     * @param {UploadedMatchCreateArgs} args - Arguments to create a UploadedMatch.
+     * @example
+     * // Create one UploadedMatch
+     * const UploadedMatch = await prisma.uploadedMatch.create({
+     *   data: {
+     *     // ... data to create a UploadedMatch
+     *   }
+     * })
+     * 
+     */
+    create<T extends UploadedMatchCreateArgs>(args: SelectSubset<T, UploadedMatchCreateArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UploadedMatches.
+     * @param {UploadedMatchCreateManyArgs} args - Arguments to create many UploadedMatches.
+     * @example
+     * // Create many UploadedMatches
+     * const uploadedMatch = await prisma.uploadedMatch.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UploadedMatchCreateManyArgs>(args?: SelectSubset<T, UploadedMatchCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UploadedMatches and returns the data saved in the database.
+     * @param {UploadedMatchCreateManyAndReturnArgs} args - Arguments to create many UploadedMatches.
+     * @example
+     * // Create many UploadedMatches
+     * const uploadedMatch = await prisma.uploadedMatch.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UploadedMatches and only return the `id`
+     * const uploadedMatchWithIdOnly = await prisma.uploadedMatch.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UploadedMatchCreateManyAndReturnArgs>(args?: SelectSubset<T, UploadedMatchCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UploadedMatch.
+     * @param {UploadedMatchDeleteArgs} args - Arguments to delete one UploadedMatch.
+     * @example
+     * // Delete one UploadedMatch
+     * const UploadedMatch = await prisma.uploadedMatch.delete({
+     *   where: {
+     *     // ... filter to delete one UploadedMatch
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UploadedMatchDeleteArgs>(args: SelectSubset<T, UploadedMatchDeleteArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UploadedMatch.
+     * @param {UploadedMatchUpdateArgs} args - Arguments to update one UploadedMatch.
+     * @example
+     * // Update one UploadedMatch
+     * const uploadedMatch = await prisma.uploadedMatch.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UploadedMatchUpdateArgs>(args: SelectSubset<T, UploadedMatchUpdateArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UploadedMatches.
+     * @param {UploadedMatchDeleteManyArgs} args - Arguments to filter UploadedMatches to delete.
+     * @example
+     * // Delete a few UploadedMatches
+     * const { count } = await prisma.uploadedMatch.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UploadedMatchDeleteManyArgs>(args?: SelectSubset<T, UploadedMatchDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UploadedMatches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UploadedMatchUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UploadedMatches
+     * const uploadedMatch = await prisma.uploadedMatch.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UploadedMatchUpdateManyArgs>(args: SelectSubset<T, UploadedMatchUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UploadedMatches and returns the data updated in the database.
+     * @param {UploadedMatchUpdateManyAndReturnArgs} args - Arguments to update many UploadedMatches.
+     * @example
+     * // Update many UploadedMatches
+     * const uploadedMatch = await prisma.uploadedMatch.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UploadedMatches and only return the `id`
+     * const uploadedMatchWithIdOnly = await prisma.uploadedMatch.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UploadedMatchUpdateManyAndReturnArgs>(args: SelectSubset<T, UploadedMatchUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UploadedMatch.
+     * @param {UploadedMatchUpsertArgs} args - Arguments to update or create a UploadedMatch.
+     * @example
+     * // Update or create a UploadedMatch
+     * const uploadedMatch = await prisma.uploadedMatch.upsert({
+     *   create: {
+     *     // ... data to create a UploadedMatch
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UploadedMatch we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UploadedMatchUpsertArgs>(args: SelectSubset<T, UploadedMatchUpsertArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UploadedMatches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UploadedMatchCountArgs} args - Arguments to filter UploadedMatches to count.
+     * @example
+     * // Count the number of UploadedMatches
+     * const count = await prisma.uploadedMatch.count({
+     *   where: {
+     *     // ... the filter for the UploadedMatches we want to count
+     *   }
+     * })
+    **/
+    count<T extends UploadedMatchCountArgs>(
+      args?: Subset<T, UploadedMatchCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UploadedMatchCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UploadedMatch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UploadedMatchAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UploadedMatchAggregateArgs>(args: Subset<T, UploadedMatchAggregateArgs>): Prisma.PrismaPromise<GetUploadedMatchAggregateType<T>>
+
+    /**
+     * Group by UploadedMatch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UploadedMatchGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UploadedMatchGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UploadedMatchGroupByArgs['orderBy'] }
+        : { orderBy?: UploadedMatchGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UploadedMatchGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUploadedMatchGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UploadedMatch model
+   */
+  readonly fields: UploadedMatchFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UploadedMatch.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UploadedMatchClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    match<T extends MatchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MatchDefaultArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UploadedMatch model
+   */
+  interface UploadedMatchFieldRefs {
+    readonly id: FieldRef<"UploadedMatch", 'String'>
+    readonly uploadedAt: FieldRef<"UploadedMatch", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UploadedMatch findUnique
+   */
+  export type UploadedMatchFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which UploadedMatch to fetch.
+     */
+    where: UploadedMatchWhereUniqueInput
+  }
+
+  /**
+   * UploadedMatch findUniqueOrThrow
+   */
+  export type UploadedMatchFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which UploadedMatch to fetch.
+     */
+    where: UploadedMatchWhereUniqueInput
+  }
+
+  /**
+   * UploadedMatch findFirst
+   */
+  export type UploadedMatchFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which UploadedMatch to fetch.
+     */
+    where?: UploadedMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UploadedMatches to fetch.
+     */
+    orderBy?: UploadedMatchOrderByWithRelationInput | UploadedMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UploadedMatches.
+     */
+    cursor?: UploadedMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UploadedMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UploadedMatches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UploadedMatches.
+     */
+    distinct?: UploadedMatchScalarFieldEnum | UploadedMatchScalarFieldEnum[]
+  }
+
+  /**
+   * UploadedMatch findFirstOrThrow
+   */
+  export type UploadedMatchFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which UploadedMatch to fetch.
+     */
+    where?: UploadedMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UploadedMatches to fetch.
+     */
+    orderBy?: UploadedMatchOrderByWithRelationInput | UploadedMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UploadedMatches.
+     */
+    cursor?: UploadedMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UploadedMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UploadedMatches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UploadedMatches.
+     */
+    distinct?: UploadedMatchScalarFieldEnum | UploadedMatchScalarFieldEnum[]
+  }
+
+  /**
+   * UploadedMatch findMany
+   */
+  export type UploadedMatchFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    /**
+     * Filter, which UploadedMatches to fetch.
+     */
+    where?: UploadedMatchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UploadedMatches to fetch.
+     */
+    orderBy?: UploadedMatchOrderByWithRelationInput | UploadedMatchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UploadedMatches.
+     */
+    cursor?: UploadedMatchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UploadedMatches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UploadedMatches.
+     */
+    skip?: number
+    distinct?: UploadedMatchScalarFieldEnum | UploadedMatchScalarFieldEnum[]
+  }
+
+  /**
+   * UploadedMatch create
+   */
+  export type UploadedMatchCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UploadedMatch.
+     */
+    data: XOR<UploadedMatchCreateInput, UploadedMatchUncheckedCreateInput>
+  }
+
+  /**
+   * UploadedMatch createMany
+   */
+  export type UploadedMatchCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UploadedMatches.
+     */
+    data: UploadedMatchCreateManyInput | UploadedMatchCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UploadedMatch createManyAndReturn
+   */
+  export type UploadedMatchCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * The data used to create many UploadedMatches.
+     */
+    data: UploadedMatchCreateManyInput | UploadedMatchCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UploadedMatch update
+   */
+  export type UploadedMatchUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UploadedMatch.
+     */
+    data: XOR<UploadedMatchUpdateInput, UploadedMatchUncheckedUpdateInput>
+    /**
+     * Choose, which UploadedMatch to update.
+     */
+    where: UploadedMatchWhereUniqueInput
+  }
+
+  /**
+   * UploadedMatch updateMany
+   */
+  export type UploadedMatchUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UploadedMatches.
+     */
+    data: XOR<UploadedMatchUpdateManyMutationInput, UploadedMatchUncheckedUpdateManyInput>
+    /**
+     * Filter which UploadedMatches to update
+     */
+    where?: UploadedMatchWhereInput
+    /**
+     * Limit how many UploadedMatches to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UploadedMatch updateManyAndReturn
+   */
+  export type UploadedMatchUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * The data used to update UploadedMatches.
+     */
+    data: XOR<UploadedMatchUpdateManyMutationInput, UploadedMatchUncheckedUpdateManyInput>
+    /**
+     * Filter which UploadedMatches to update
+     */
+    where?: UploadedMatchWhereInput
+    /**
+     * Limit how many UploadedMatches to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UploadedMatch upsert
+   */
+  export type UploadedMatchUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UploadedMatch to update in case it exists.
+     */
+    where: UploadedMatchWhereUniqueInput
+    /**
+     * In case the UploadedMatch found by the `where` argument doesn't exist, create a new UploadedMatch with this data.
+     */
+    create: XOR<UploadedMatchCreateInput, UploadedMatchUncheckedCreateInput>
+    /**
+     * In case the UploadedMatch was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UploadedMatchUpdateInput, UploadedMatchUncheckedUpdateInput>
+  }
+
+  /**
+   * UploadedMatch delete
+   */
+  export type UploadedMatchDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+    /**
+     * Filter which UploadedMatch to delete.
+     */
+    where: UploadedMatchWhereUniqueInput
+  }
+
+  /**
+   * UploadedMatch deleteMany
+   */
+  export type UploadedMatchDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UploadedMatches to delete
+     */
+    where?: UploadedMatchWhereInput
+    /**
+     * Limit how many UploadedMatches to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UploadedMatch without action
+   */
+  export type UploadedMatchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UploadedMatch
+     */
+    select?: UploadedMatchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UploadedMatch
+     */
+    omit?: UploadedMatchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UploadedMatchInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model PlayerMatchStats
    */
 
@@ -4468,41 +6786,55 @@ export namespace Prisma {
   }
 
   export type PlayerMatchStatsAvgAggregateOutputType = {
+    rank: number | null
     teamNumber: number | null
-    accuracy: number | null
-    accuracySpotted: number | null
-    hsAccuracy: number | null
-    timeToDamage: number | null
-    crosshairPlacement: number | null
-    counterStrafing: number | null
     totalKills: number | null
     totalDeaths: number | null
+    totalAssists: number | null
+    totalDamage: number | null
+    headshotPercentage: number | null
+    accuracySpotted: number | null
+    timeToDamage: number | null
+    crosshairPlacement: number | null
+    sprayAccuracy: number | null
+    counterStrafeRatio: number | null
+    headshotAccuracy: number | null
     openingKills: number | null
+    openingAttempts: number | null
     tradeKills: number | null
-    tradeKillPercentage: number | null
+    tradeAttempts: number | null
     tradedDeaths: number | null
-    tradedDeathPercentage: number | null
-    multiKillRounds: number | null
-    multiKillPercentage: number | null
+    tradedDeathAttempts: number | null
+    twoKillRounds: number | null
+    threeKillRounds: number | null
+    fourKillRounds: number | null
+    fiveKillRounds: number | null
   }
 
   export type PlayerMatchStatsSumAggregateOutputType = {
+    rank: number | null
     teamNumber: number | null
-    accuracy: number | null
-    accuracySpotted: number | null
-    hsAccuracy: number | null
-    timeToDamage: number | null
-    crosshairPlacement: number | null
-    counterStrafing: number | null
     totalKills: number | null
     totalDeaths: number | null
+    totalAssists: number | null
+    totalDamage: number | null
+    headshotPercentage: number | null
+    accuracySpotted: number | null
+    timeToDamage: number | null
+    crosshairPlacement: number | null
+    sprayAccuracy: number | null
+    counterStrafeRatio: number | null
+    headshotAccuracy: number | null
     openingKills: number | null
+    openingAttempts: number | null
     tradeKills: number | null
-    tradeKillPercentage: number | null
+    tradeAttempts: number | null
     tradedDeaths: number | null
-    tradedDeathPercentage: number | null
-    multiKillRounds: number | null
-    multiKillPercentage: number | null
+    tradedDeathAttempts: number | null
+    twoKillRounds: number | null
+    threeKillRounds: number | null
+    fourKillRounds: number | null
+    fiveKillRounds: number | null
   }
 
   export type PlayerMatchStatsMinAggregateOutputType = {
@@ -4511,22 +6843,29 @@ export namespace Prisma {
     matchId: string | null
     steamId: string | null
     username: string | null
+    rank: number | null
     teamNumber: number | null
-    accuracy: number | null
-    accuracySpotted: number | null
-    hsAccuracy: number | null
-    timeToDamage: number | null
-    crosshairPlacement: number | null
-    counterStrafing: number | null
     totalKills: number | null
     totalDeaths: number | null
+    totalAssists: number | null
+    totalDamage: number | null
+    headshotPercentage: number | null
+    accuracySpotted: number | null
+    timeToDamage: number | null
+    crosshairPlacement: number | null
+    sprayAccuracy: number | null
+    counterStrafeRatio: number | null
+    headshotAccuracy: number | null
     openingKills: number | null
+    openingAttempts: number | null
     tradeKills: number | null
-    tradeKillPercentage: number | null
+    tradeAttempts: number | null
     tradedDeaths: number | null
-    tradedDeathPercentage: number | null
-    multiKillRounds: number | null
-    multiKillPercentage: number | null
+    tradedDeathAttempts: number | null
+    twoKillRounds: number | null
+    threeKillRounds: number | null
+    fourKillRounds: number | null
+    fiveKillRounds: number | null
   }
 
   export type PlayerMatchStatsMaxAggregateOutputType = {
@@ -4535,22 +6874,29 @@ export namespace Prisma {
     matchId: string | null
     steamId: string | null
     username: string | null
+    rank: number | null
     teamNumber: number | null
-    accuracy: number | null
-    accuracySpotted: number | null
-    hsAccuracy: number | null
-    timeToDamage: number | null
-    crosshairPlacement: number | null
-    counterStrafing: number | null
     totalKills: number | null
     totalDeaths: number | null
+    totalAssists: number | null
+    totalDamage: number | null
+    headshotPercentage: number | null
+    accuracySpotted: number | null
+    timeToDamage: number | null
+    crosshairPlacement: number | null
+    sprayAccuracy: number | null
+    counterStrafeRatio: number | null
+    headshotAccuracy: number | null
     openingKills: number | null
+    openingAttempts: number | null
     tradeKills: number | null
-    tradeKillPercentage: number | null
+    tradeAttempts: number | null
     tradedDeaths: number | null
-    tradedDeathPercentage: number | null
-    multiKillRounds: number | null
-    multiKillPercentage: number | null
+    tradedDeathAttempts: number | null
+    twoKillRounds: number | null
+    threeKillRounds: number | null
+    fourKillRounds: number | null
+    fiveKillRounds: number | null
   }
 
   export type PlayerMatchStatsCountAggregateOutputType = {
@@ -4559,62 +6905,83 @@ export namespace Prisma {
     matchId: number
     steamId: number
     username: number
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
     _all: number
   }
 
 
   export type PlayerMatchStatsAvgAggregateInputType = {
+    rank?: true
     teamNumber?: true
-    accuracy?: true
-    accuracySpotted?: true
-    hsAccuracy?: true
-    timeToDamage?: true
-    crosshairPlacement?: true
-    counterStrafing?: true
     totalKills?: true
     totalDeaths?: true
+    totalAssists?: true
+    totalDamage?: true
+    headshotPercentage?: true
+    accuracySpotted?: true
+    timeToDamage?: true
+    crosshairPlacement?: true
+    sprayAccuracy?: true
+    counterStrafeRatio?: true
+    headshotAccuracy?: true
     openingKills?: true
+    openingAttempts?: true
     tradeKills?: true
-    tradeKillPercentage?: true
+    tradeAttempts?: true
     tradedDeaths?: true
-    tradedDeathPercentage?: true
-    multiKillRounds?: true
-    multiKillPercentage?: true
+    tradedDeathAttempts?: true
+    twoKillRounds?: true
+    threeKillRounds?: true
+    fourKillRounds?: true
+    fiveKillRounds?: true
   }
 
   export type PlayerMatchStatsSumAggregateInputType = {
+    rank?: true
     teamNumber?: true
-    accuracy?: true
-    accuracySpotted?: true
-    hsAccuracy?: true
-    timeToDamage?: true
-    crosshairPlacement?: true
-    counterStrafing?: true
     totalKills?: true
     totalDeaths?: true
+    totalAssists?: true
+    totalDamage?: true
+    headshotPercentage?: true
+    accuracySpotted?: true
+    timeToDamage?: true
+    crosshairPlacement?: true
+    sprayAccuracy?: true
+    counterStrafeRatio?: true
+    headshotAccuracy?: true
     openingKills?: true
+    openingAttempts?: true
     tradeKills?: true
-    tradeKillPercentage?: true
+    tradeAttempts?: true
     tradedDeaths?: true
-    tradedDeathPercentage?: true
-    multiKillRounds?: true
-    multiKillPercentage?: true
+    tradedDeathAttempts?: true
+    twoKillRounds?: true
+    threeKillRounds?: true
+    fourKillRounds?: true
+    fiveKillRounds?: true
   }
 
   export type PlayerMatchStatsMinAggregateInputType = {
@@ -4623,22 +6990,29 @@ export namespace Prisma {
     matchId?: true
     steamId?: true
     username?: true
+    rank?: true
     teamNumber?: true
-    accuracy?: true
-    accuracySpotted?: true
-    hsAccuracy?: true
-    timeToDamage?: true
-    crosshairPlacement?: true
-    counterStrafing?: true
     totalKills?: true
     totalDeaths?: true
+    totalAssists?: true
+    totalDamage?: true
+    headshotPercentage?: true
+    accuracySpotted?: true
+    timeToDamage?: true
+    crosshairPlacement?: true
+    sprayAccuracy?: true
+    counterStrafeRatio?: true
+    headshotAccuracy?: true
     openingKills?: true
+    openingAttempts?: true
     tradeKills?: true
-    tradeKillPercentage?: true
+    tradeAttempts?: true
     tradedDeaths?: true
-    tradedDeathPercentage?: true
-    multiKillRounds?: true
-    multiKillPercentage?: true
+    tradedDeathAttempts?: true
+    twoKillRounds?: true
+    threeKillRounds?: true
+    fourKillRounds?: true
+    fiveKillRounds?: true
   }
 
   export type PlayerMatchStatsMaxAggregateInputType = {
@@ -4647,22 +7021,29 @@ export namespace Prisma {
     matchId?: true
     steamId?: true
     username?: true
+    rank?: true
     teamNumber?: true
-    accuracy?: true
-    accuracySpotted?: true
-    hsAccuracy?: true
-    timeToDamage?: true
-    crosshairPlacement?: true
-    counterStrafing?: true
     totalKills?: true
     totalDeaths?: true
+    totalAssists?: true
+    totalDamage?: true
+    headshotPercentage?: true
+    accuracySpotted?: true
+    timeToDamage?: true
+    crosshairPlacement?: true
+    sprayAccuracy?: true
+    counterStrafeRatio?: true
+    headshotAccuracy?: true
     openingKills?: true
+    openingAttempts?: true
     tradeKills?: true
-    tradeKillPercentage?: true
+    tradeAttempts?: true
     tradedDeaths?: true
-    tradedDeathPercentage?: true
-    multiKillRounds?: true
-    multiKillPercentage?: true
+    tradedDeathAttempts?: true
+    twoKillRounds?: true
+    threeKillRounds?: true
+    fourKillRounds?: true
+    fiveKillRounds?: true
   }
 
   export type PlayerMatchStatsCountAggregateInputType = {
@@ -4671,22 +7052,29 @@ export namespace Prisma {
     matchId?: true
     steamId?: true
     username?: true
+    rank?: true
     teamNumber?: true
-    accuracy?: true
-    accuracySpotted?: true
-    hsAccuracy?: true
-    timeToDamage?: true
-    crosshairPlacement?: true
-    counterStrafing?: true
     totalKills?: true
     totalDeaths?: true
+    totalAssists?: true
+    totalDamage?: true
+    headshotPercentage?: true
+    accuracySpotted?: true
+    timeToDamage?: true
+    crosshairPlacement?: true
+    sprayAccuracy?: true
+    counterStrafeRatio?: true
+    headshotAccuracy?: true
     openingKills?: true
+    openingAttempts?: true
     tradeKills?: true
-    tradeKillPercentage?: true
+    tradeAttempts?: true
     tradedDeaths?: true
-    tradedDeathPercentage?: true
-    multiKillRounds?: true
-    multiKillPercentage?: true
+    tradedDeathAttempts?: true
+    twoKillRounds?: true
+    threeKillRounds?: true
+    fourKillRounds?: true
+    fiveKillRounds?: true
     _all?: true
   }
 
@@ -4782,22 +7170,29 @@ export namespace Prisma {
     matchId: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
     _count: PlayerMatchStatsCountAggregateOutputType | null
     _avg: PlayerMatchStatsAvgAggregateOutputType | null
     _sum: PlayerMatchStatsSumAggregateOutputType | null
@@ -4825,22 +7220,29 @@ export namespace Prisma {
     matchId?: boolean
     steamId?: boolean
     username?: boolean
+    rank?: boolean
     teamNumber?: boolean
-    accuracy?: boolean
-    accuracySpotted?: boolean
-    hsAccuracy?: boolean
-    timeToDamage?: boolean
-    crosshairPlacement?: boolean
-    counterStrafing?: boolean
     totalKills?: boolean
     totalDeaths?: boolean
+    totalAssists?: boolean
+    totalDamage?: boolean
+    headshotPercentage?: boolean
+    accuracySpotted?: boolean
+    timeToDamage?: boolean
+    crosshairPlacement?: boolean
+    sprayAccuracy?: boolean
+    counterStrafeRatio?: boolean
+    headshotAccuracy?: boolean
     openingKills?: boolean
+    openingAttempts?: boolean
     tradeKills?: boolean
-    tradeKillPercentage?: boolean
+    tradeAttempts?: boolean
     tradedDeaths?: boolean
-    tradedDeathPercentage?: boolean
-    multiKillRounds?: boolean
-    multiKillPercentage?: boolean
+    tradedDeathAttempts?: boolean
+    twoKillRounds?: boolean
+    threeKillRounds?: boolean
+    fourKillRounds?: boolean
+    fiveKillRounds?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     match?: boolean | MatchDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["playerMatchStats"]>
@@ -4851,22 +7253,29 @@ export namespace Prisma {
     matchId?: boolean
     steamId?: boolean
     username?: boolean
+    rank?: boolean
     teamNumber?: boolean
-    accuracy?: boolean
-    accuracySpotted?: boolean
-    hsAccuracy?: boolean
-    timeToDamage?: boolean
-    crosshairPlacement?: boolean
-    counterStrafing?: boolean
     totalKills?: boolean
     totalDeaths?: boolean
+    totalAssists?: boolean
+    totalDamage?: boolean
+    headshotPercentage?: boolean
+    accuracySpotted?: boolean
+    timeToDamage?: boolean
+    crosshairPlacement?: boolean
+    sprayAccuracy?: boolean
+    counterStrafeRatio?: boolean
+    headshotAccuracy?: boolean
     openingKills?: boolean
+    openingAttempts?: boolean
     tradeKills?: boolean
-    tradeKillPercentage?: boolean
+    tradeAttempts?: boolean
     tradedDeaths?: boolean
-    tradedDeathPercentage?: boolean
-    multiKillRounds?: boolean
-    multiKillPercentage?: boolean
+    tradedDeathAttempts?: boolean
+    twoKillRounds?: boolean
+    threeKillRounds?: boolean
+    fourKillRounds?: boolean
+    fiveKillRounds?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     match?: boolean | MatchDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["playerMatchStats"]>
@@ -4877,22 +7286,29 @@ export namespace Prisma {
     matchId?: boolean
     steamId?: boolean
     username?: boolean
+    rank?: boolean
     teamNumber?: boolean
-    accuracy?: boolean
-    accuracySpotted?: boolean
-    hsAccuracy?: boolean
-    timeToDamage?: boolean
-    crosshairPlacement?: boolean
-    counterStrafing?: boolean
     totalKills?: boolean
     totalDeaths?: boolean
+    totalAssists?: boolean
+    totalDamage?: boolean
+    headshotPercentage?: boolean
+    accuracySpotted?: boolean
+    timeToDamage?: boolean
+    crosshairPlacement?: boolean
+    sprayAccuracy?: boolean
+    counterStrafeRatio?: boolean
+    headshotAccuracy?: boolean
     openingKills?: boolean
+    openingAttempts?: boolean
     tradeKills?: boolean
-    tradeKillPercentage?: boolean
+    tradeAttempts?: boolean
     tradedDeaths?: boolean
-    tradedDeathPercentage?: boolean
-    multiKillRounds?: boolean
-    multiKillPercentage?: boolean
+    tradedDeathAttempts?: boolean
+    twoKillRounds?: boolean
+    threeKillRounds?: boolean
+    fourKillRounds?: boolean
+    fiveKillRounds?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     match?: boolean | MatchDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["playerMatchStats"]>
@@ -4903,25 +7319,32 @@ export namespace Prisma {
     matchId?: boolean
     steamId?: boolean
     username?: boolean
+    rank?: boolean
     teamNumber?: boolean
-    accuracy?: boolean
-    accuracySpotted?: boolean
-    hsAccuracy?: boolean
-    timeToDamage?: boolean
-    crosshairPlacement?: boolean
-    counterStrafing?: boolean
     totalKills?: boolean
     totalDeaths?: boolean
+    totalAssists?: boolean
+    totalDamage?: boolean
+    headshotPercentage?: boolean
+    accuracySpotted?: boolean
+    timeToDamage?: boolean
+    crosshairPlacement?: boolean
+    sprayAccuracy?: boolean
+    counterStrafeRatio?: boolean
+    headshotAccuracy?: boolean
     openingKills?: boolean
+    openingAttempts?: boolean
     tradeKills?: boolean
-    tradeKillPercentage?: boolean
+    tradeAttempts?: boolean
     tradedDeaths?: boolean
-    tradedDeathPercentage?: boolean
-    multiKillRounds?: boolean
-    multiKillPercentage?: boolean
+    tradedDeathAttempts?: boolean
+    twoKillRounds?: boolean
+    threeKillRounds?: boolean
+    fourKillRounds?: boolean
+    fiveKillRounds?: boolean
   }
 
-  export type PlayerMatchStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "matchId" | "steamId" | "username" | "teamNumber" | "accuracy" | "accuracySpotted" | "hsAccuracy" | "timeToDamage" | "crosshairPlacement" | "counterStrafing" | "totalKills" | "totalDeaths" | "openingKills" | "tradeKills" | "tradeKillPercentage" | "tradedDeaths" | "tradedDeathPercentage" | "multiKillRounds" | "multiKillPercentage", ExtArgs["result"]["playerMatchStats"]>
+  export type PlayerMatchStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "matchId" | "steamId" | "username" | "rank" | "teamNumber" | "totalKills" | "totalDeaths" | "totalAssists" | "totalDamage" | "headshotPercentage" | "accuracySpotted" | "timeToDamage" | "crosshairPlacement" | "sprayAccuracy" | "counterStrafeRatio" | "headshotAccuracy" | "openingKills" | "openingAttempts" | "tradeKills" | "tradeAttempts" | "tradedDeaths" | "tradedDeathAttempts" | "twoKillRounds" | "threeKillRounds" | "fourKillRounds" | "fiveKillRounds", ExtArgs["result"]["playerMatchStats"]>
   export type PlayerMatchStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     match?: boolean | MatchDefaultArgs<ExtArgs>
@@ -4947,22 +7370,29 @@ export namespace Prisma {
       matchId: string
       steamId: string
       username: string
+      rank: number
       teamNumber: number
-      accuracy: number
-      accuracySpotted: number
-      hsAccuracy: number
-      timeToDamage: number
-      crosshairPlacement: number
-      counterStrafing: number
       totalKills: number
       totalDeaths: number
+      totalAssists: number
+      totalDamage: number
+      headshotPercentage: number
+      accuracySpotted: number
+      timeToDamage: number
+      crosshairPlacement: number
+      sprayAccuracy: number
+      counterStrafeRatio: number
+      headshotAccuracy: number
       openingKills: number
+      openingAttempts: number
       tradeKills: number
-      tradeKillPercentage: number
+      tradeAttempts: number
       tradedDeaths: number
-      tradedDeathPercentage: number
-      multiKillRounds: number
-      multiKillPercentage: number
+      tradedDeathAttempts: number
+      twoKillRounds: number
+      threeKillRounds: number
+      fourKillRounds: number
+      fiveKillRounds: number
     }, ExtArgs["result"]["playerMatchStats"]>
     composites: {}
   }
@@ -5393,22 +7823,29 @@ export namespace Prisma {
     readonly matchId: FieldRef<"PlayerMatchStats", 'String'>
     readonly steamId: FieldRef<"PlayerMatchStats", 'String'>
     readonly username: FieldRef<"PlayerMatchStats", 'String'>
+    readonly rank: FieldRef<"PlayerMatchStats", 'Int'>
     readonly teamNumber: FieldRef<"PlayerMatchStats", 'Int'>
-    readonly accuracy: FieldRef<"PlayerMatchStats", 'Float'>
-    readonly accuracySpotted: FieldRef<"PlayerMatchStats", 'Float'>
-    readonly hsAccuracy: FieldRef<"PlayerMatchStats", 'Float'>
-    readonly timeToDamage: FieldRef<"PlayerMatchStats", 'Float'>
-    readonly crosshairPlacement: FieldRef<"PlayerMatchStats", 'Float'>
-    readonly counterStrafing: FieldRef<"PlayerMatchStats", 'Float'>
     readonly totalKills: FieldRef<"PlayerMatchStats", 'Int'>
     readonly totalDeaths: FieldRef<"PlayerMatchStats", 'Int'>
+    readonly totalAssists: FieldRef<"PlayerMatchStats", 'Int'>
+    readonly totalDamage: FieldRef<"PlayerMatchStats", 'Int'>
+    readonly headshotPercentage: FieldRef<"PlayerMatchStats", 'Float'>
+    readonly accuracySpotted: FieldRef<"PlayerMatchStats", 'Float'>
+    readonly timeToDamage: FieldRef<"PlayerMatchStats", 'Float'>
+    readonly crosshairPlacement: FieldRef<"PlayerMatchStats", 'Float'>
+    readonly sprayAccuracy: FieldRef<"PlayerMatchStats", 'Float'>
+    readonly counterStrafeRatio: FieldRef<"PlayerMatchStats", 'Float'>
+    readonly headshotAccuracy: FieldRef<"PlayerMatchStats", 'Float'>
     readonly openingKills: FieldRef<"PlayerMatchStats", 'Int'>
+    readonly openingAttempts: FieldRef<"PlayerMatchStats", 'Int'>
     readonly tradeKills: FieldRef<"PlayerMatchStats", 'Int'>
-    readonly tradeKillPercentage: FieldRef<"PlayerMatchStats", 'Float'>
+    readonly tradeAttempts: FieldRef<"PlayerMatchStats", 'Int'>
     readonly tradedDeaths: FieldRef<"PlayerMatchStats", 'Int'>
-    readonly tradedDeathPercentage: FieldRef<"PlayerMatchStats", 'Float'>
-    readonly multiKillRounds: FieldRef<"PlayerMatchStats", 'Int'>
-    readonly multiKillPercentage: FieldRef<"PlayerMatchStats", 'Float'>
+    readonly tradedDeathAttempts: FieldRef<"PlayerMatchStats", 'Int'>
+    readonly twoKillRounds: FieldRef<"PlayerMatchStats", 'Int'>
+    readonly threeKillRounds: FieldRef<"PlayerMatchStats", 'Int'>
+    readonly fourKillRounds: FieldRef<"PlayerMatchStats", 'Int'>
+    readonly fiveKillRounds: FieldRef<"PlayerMatchStats", 'Int'>
   }
     
 
@@ -5840,6 +8277,8 @@ export namespace Prisma {
   export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
+    displayName: 'displayName',
+    isVerified: 'isVerified',
     gameAuthCode: 'gameAuthCode',
     lastMatchCode: 'lastMatchCode',
     playerId: 'playerId',
@@ -5860,6 +8299,7 @@ export namespace Prisma {
   export const MatchScalarFieldEnum: {
     id: 'id',
     matchId: 'matchId',
+    mapName: 'mapName',
     team1Score: 'team1Score',
     team2Score: 'team2Score',
     playedAt: 'playedAt'
@@ -5868,28 +8308,52 @@ export namespace Prisma {
   export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
 
 
+  export const SteamMatchScalarFieldEnum: {
+    id: 'id',
+    mapUrl: 'mapUrl',
+    reservationId: 'reservationId'
+  };
+
+  export type SteamMatchScalarFieldEnum = (typeof SteamMatchScalarFieldEnum)[keyof typeof SteamMatchScalarFieldEnum]
+
+
+  export const UploadedMatchScalarFieldEnum: {
+    id: 'id',
+    uploadedAt: 'uploadedAt'
+  };
+
+  export type UploadedMatchScalarFieldEnum = (typeof UploadedMatchScalarFieldEnum)[keyof typeof UploadedMatchScalarFieldEnum]
+
+
   export const PlayerMatchStatsScalarFieldEnum: {
     id: 'id',
     playerId: 'playerId',
     matchId: 'matchId',
     steamId: 'steamId',
     username: 'username',
+    rank: 'rank',
     teamNumber: 'teamNumber',
-    accuracy: 'accuracy',
-    accuracySpotted: 'accuracySpotted',
-    hsAccuracy: 'hsAccuracy',
-    timeToDamage: 'timeToDamage',
-    crosshairPlacement: 'crosshairPlacement',
-    counterStrafing: 'counterStrafing',
     totalKills: 'totalKills',
     totalDeaths: 'totalDeaths',
+    totalAssists: 'totalAssists',
+    totalDamage: 'totalDamage',
+    headshotPercentage: 'headshotPercentage',
+    accuracySpotted: 'accuracySpotted',
+    timeToDamage: 'timeToDamage',
+    crosshairPlacement: 'crosshairPlacement',
+    sprayAccuracy: 'sprayAccuracy',
+    counterStrafeRatio: 'counterStrafeRatio',
+    headshotAccuracy: 'headshotAccuracy',
     openingKills: 'openingKills',
+    openingAttempts: 'openingAttempts',
     tradeKills: 'tradeKills',
-    tradeKillPercentage: 'tradeKillPercentage',
+    tradeAttempts: 'tradeAttempts',
     tradedDeaths: 'tradedDeaths',
-    tradedDeathPercentage: 'tradedDeathPercentage',
-    multiKillRounds: 'multiKillRounds',
-    multiKillPercentage: 'multiKillPercentage'
+    tradedDeathAttempts: 'tradedDeathAttempts',
+    twoKillRounds: 'twoKillRounds',
+    threeKillRounds: 'threeKillRounds',
+    fourKillRounds: 'fourKillRounds',
+    fiveKillRounds: 'fiveKillRounds'
   };
 
   export type PlayerMatchStatsScalarFieldEnum = (typeof PlayerMatchStatsScalarFieldEnum)[keyof typeof PlayerMatchStatsScalarFieldEnum]
@@ -5935,6 +8399,13 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -5988,7 +8459,9 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
+    displayName?: StringNullableFilter<"User"> | string | null
+    isVerified?: BoolFilter<"User"> | boolean
     gameAuthCode?: StringNullableFilter<"User"> | string | null
     lastMatchCode?: StringNullableFilter<"User"> | string | null
     playerId?: StringNullableFilter<"User"> | string | null
@@ -5998,7 +8471,9 @@ export namespace Prisma {
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
+    displayName?: SortOrderInput | SortOrder
+    isVerified?: SortOrder
     gameAuthCode?: SortOrderInput | SortOrder
     lastMatchCode?: SortOrderInput | SortOrder
     playerId?: SortOrderInput | SortOrder
@@ -6009,19 +8484,23 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    displayName?: string
     playerId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
+    isVerified?: BoolFilter<"User"> | boolean
     gameAuthCode?: StringNullableFilter<"User"> | string | null
     lastMatchCode?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     player?: XOR<PlayerNullableScalarRelationFilter, PlayerWhereInput> | null
-  }, "id" | "email" | "playerId">
+  }, "id" | "email" | "displayName" | "playerId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
+    displayName?: SortOrderInput | SortOrder
+    isVerified?: SortOrder
     gameAuthCode?: SortOrderInput | SortOrder
     lastMatchCode?: SortOrderInput | SortOrder
     playerId?: SortOrderInput | SortOrder
@@ -6036,7 +8515,9 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
+    email?: StringNullableWithAggregatesFilter<"User"> | string | null
+    displayName?: StringNullableWithAggregatesFilter<"User"> | string | null
+    isVerified?: BoolWithAggregatesFilter<"User"> | boolean
     gameAuthCode?: StringNullableWithAggregatesFilter<"User"> | string | null
     lastMatchCode?: StringNullableWithAggregatesFilter<"User"> | string | null
     playerId?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -6092,19 +8573,25 @@ export namespace Prisma {
     NOT?: MatchWhereInput | MatchWhereInput[]
     id?: StringFilter<"Match"> | string
     matchId?: StringFilter<"Match"> | string
+    mapName?: StringFilter<"Match"> | string
     team1Score?: IntFilter<"Match"> | number
     team2Score?: IntFilter<"Match"> | number
     playedAt?: DateTimeFilter<"Match"> | Date | string
     stats?: PlayerMatchStatsListRelationFilter
+    steamMatch?: XOR<SteamMatchNullableScalarRelationFilter, SteamMatchWhereInput> | null
+    uploadedMatch?: XOR<UploadedMatchNullableScalarRelationFilter, UploadedMatchWhereInput> | null
   }
 
   export type MatchOrderByWithRelationInput = {
     id?: SortOrder
     matchId?: SortOrder
+    mapName?: SortOrder
     team1Score?: SortOrder
     team2Score?: SortOrder
     playedAt?: SortOrder
     stats?: PlayerMatchStatsOrderByRelationAggregateInput
+    steamMatch?: SteamMatchOrderByWithRelationInput
+    uploadedMatch?: UploadedMatchOrderByWithRelationInput
   }
 
   export type MatchWhereUniqueInput = Prisma.AtLeast<{
@@ -6113,15 +8600,19 @@ export namespace Prisma {
     AND?: MatchWhereInput | MatchWhereInput[]
     OR?: MatchWhereInput[]
     NOT?: MatchWhereInput | MatchWhereInput[]
+    mapName?: StringFilter<"Match"> | string
     team1Score?: IntFilter<"Match"> | number
     team2Score?: IntFilter<"Match"> | number
     playedAt?: DateTimeFilter<"Match"> | Date | string
     stats?: PlayerMatchStatsListRelationFilter
+    steamMatch?: XOR<SteamMatchNullableScalarRelationFilter, SteamMatchWhereInput> | null
+    uploadedMatch?: XOR<UploadedMatchNullableScalarRelationFilter, UploadedMatchWhereInput> | null
   }, "id" | "matchId">
 
   export type MatchOrderByWithAggregationInput = {
     id?: SortOrder
     matchId?: SortOrder
+    mapName?: SortOrder
     team1Score?: SortOrder
     team2Score?: SortOrder
     playedAt?: SortOrder
@@ -6138,9 +8629,95 @@ export namespace Prisma {
     NOT?: MatchScalarWhereWithAggregatesInput | MatchScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Match"> | string
     matchId?: StringWithAggregatesFilter<"Match"> | string
+    mapName?: StringWithAggregatesFilter<"Match"> | string
     team1Score?: IntWithAggregatesFilter<"Match"> | number
     team2Score?: IntWithAggregatesFilter<"Match"> | number
     playedAt?: DateTimeWithAggregatesFilter<"Match"> | Date | string
+  }
+
+  export type SteamMatchWhereInput = {
+    AND?: SteamMatchWhereInput | SteamMatchWhereInput[]
+    OR?: SteamMatchWhereInput[]
+    NOT?: SteamMatchWhereInput | SteamMatchWhereInput[]
+    id?: StringFilter<"SteamMatch"> | string
+    mapUrl?: StringFilter<"SteamMatch"> | string
+    reservationId?: StringNullableFilter<"SteamMatch"> | string | null
+    match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
+  }
+
+  export type SteamMatchOrderByWithRelationInput = {
+    id?: SortOrder
+    mapUrl?: SortOrder
+    reservationId?: SortOrderInput | SortOrder
+    match?: MatchOrderByWithRelationInput
+  }
+
+  export type SteamMatchWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SteamMatchWhereInput | SteamMatchWhereInput[]
+    OR?: SteamMatchWhereInput[]
+    NOT?: SteamMatchWhereInput | SteamMatchWhereInput[]
+    mapUrl?: StringFilter<"SteamMatch"> | string
+    reservationId?: StringNullableFilter<"SteamMatch"> | string | null
+    match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
+  }, "id">
+
+  export type SteamMatchOrderByWithAggregationInput = {
+    id?: SortOrder
+    mapUrl?: SortOrder
+    reservationId?: SortOrderInput | SortOrder
+    _count?: SteamMatchCountOrderByAggregateInput
+    _max?: SteamMatchMaxOrderByAggregateInput
+    _min?: SteamMatchMinOrderByAggregateInput
+  }
+
+  export type SteamMatchScalarWhereWithAggregatesInput = {
+    AND?: SteamMatchScalarWhereWithAggregatesInput | SteamMatchScalarWhereWithAggregatesInput[]
+    OR?: SteamMatchScalarWhereWithAggregatesInput[]
+    NOT?: SteamMatchScalarWhereWithAggregatesInput | SteamMatchScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SteamMatch"> | string
+    mapUrl?: StringWithAggregatesFilter<"SteamMatch"> | string
+    reservationId?: StringNullableWithAggregatesFilter<"SteamMatch"> | string | null
+  }
+
+  export type UploadedMatchWhereInput = {
+    AND?: UploadedMatchWhereInput | UploadedMatchWhereInput[]
+    OR?: UploadedMatchWhereInput[]
+    NOT?: UploadedMatchWhereInput | UploadedMatchWhereInput[]
+    id?: StringFilter<"UploadedMatch"> | string
+    uploadedAt?: DateTimeFilter<"UploadedMatch"> | Date | string
+    match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
+  }
+
+  export type UploadedMatchOrderByWithRelationInput = {
+    id?: SortOrder
+    uploadedAt?: SortOrder
+    match?: MatchOrderByWithRelationInput
+  }
+
+  export type UploadedMatchWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UploadedMatchWhereInput | UploadedMatchWhereInput[]
+    OR?: UploadedMatchWhereInput[]
+    NOT?: UploadedMatchWhereInput | UploadedMatchWhereInput[]
+    uploadedAt?: DateTimeFilter<"UploadedMatch"> | Date | string
+    match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
+  }, "id">
+
+  export type UploadedMatchOrderByWithAggregationInput = {
+    id?: SortOrder
+    uploadedAt?: SortOrder
+    _count?: UploadedMatchCountOrderByAggregateInput
+    _max?: UploadedMatchMaxOrderByAggregateInput
+    _min?: UploadedMatchMinOrderByAggregateInput
+  }
+
+  export type UploadedMatchScalarWhereWithAggregatesInput = {
+    AND?: UploadedMatchScalarWhereWithAggregatesInput | UploadedMatchScalarWhereWithAggregatesInput[]
+    OR?: UploadedMatchScalarWhereWithAggregatesInput[]
+    NOT?: UploadedMatchScalarWhereWithAggregatesInput | UploadedMatchScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UploadedMatch"> | string
+    uploadedAt?: DateTimeWithAggregatesFilter<"UploadedMatch"> | Date | string
   }
 
   export type PlayerMatchStatsWhereInput = {
@@ -6152,22 +8729,29 @@ export namespace Prisma {
     matchId?: StringFilter<"PlayerMatchStats"> | string
     steamId?: StringFilter<"PlayerMatchStats"> | string
     username?: StringFilter<"PlayerMatchStats"> | string
+    rank?: IntFilter<"PlayerMatchStats"> | number
     teamNumber?: IntFilter<"PlayerMatchStats"> | number
-    accuracy?: FloatFilter<"PlayerMatchStats"> | number
-    accuracySpotted?: FloatFilter<"PlayerMatchStats"> | number
-    hsAccuracy?: FloatFilter<"PlayerMatchStats"> | number
-    timeToDamage?: FloatFilter<"PlayerMatchStats"> | number
-    crosshairPlacement?: FloatFilter<"PlayerMatchStats"> | number
-    counterStrafing?: FloatFilter<"PlayerMatchStats"> | number
     totalKills?: IntFilter<"PlayerMatchStats"> | number
     totalDeaths?: IntFilter<"PlayerMatchStats"> | number
+    totalAssists?: IntFilter<"PlayerMatchStats"> | number
+    totalDamage?: IntFilter<"PlayerMatchStats"> | number
+    headshotPercentage?: FloatFilter<"PlayerMatchStats"> | number
+    accuracySpotted?: FloatFilter<"PlayerMatchStats"> | number
+    timeToDamage?: FloatFilter<"PlayerMatchStats"> | number
+    crosshairPlacement?: FloatFilter<"PlayerMatchStats"> | number
+    sprayAccuracy?: FloatFilter<"PlayerMatchStats"> | number
+    counterStrafeRatio?: FloatFilter<"PlayerMatchStats"> | number
+    headshotAccuracy?: FloatFilter<"PlayerMatchStats"> | number
     openingKills?: IntFilter<"PlayerMatchStats"> | number
+    openingAttempts?: IntFilter<"PlayerMatchStats"> | number
     tradeKills?: IntFilter<"PlayerMatchStats"> | number
-    tradeKillPercentage?: FloatFilter<"PlayerMatchStats"> | number
+    tradeAttempts?: IntFilter<"PlayerMatchStats"> | number
     tradedDeaths?: IntFilter<"PlayerMatchStats"> | number
-    tradedDeathPercentage?: FloatFilter<"PlayerMatchStats"> | number
-    multiKillRounds?: IntFilter<"PlayerMatchStats"> | number
-    multiKillPercentage?: FloatFilter<"PlayerMatchStats"> | number
+    tradedDeathAttempts?: IntFilter<"PlayerMatchStats"> | number
+    twoKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    threeKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    fourKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    fiveKillRounds?: IntFilter<"PlayerMatchStats"> | number
     player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
     match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
   }
@@ -6178,22 +8762,29 @@ export namespace Prisma {
     matchId?: SortOrder
     steamId?: SortOrder
     username?: SortOrder
+    rank?: SortOrder
     teamNumber?: SortOrder
-    accuracy?: SortOrder
-    accuracySpotted?: SortOrder
-    hsAccuracy?: SortOrder
-    timeToDamage?: SortOrder
-    crosshairPlacement?: SortOrder
-    counterStrafing?: SortOrder
     totalKills?: SortOrder
     totalDeaths?: SortOrder
+    totalAssists?: SortOrder
+    totalDamage?: SortOrder
+    headshotPercentage?: SortOrder
+    accuracySpotted?: SortOrder
+    timeToDamage?: SortOrder
+    crosshairPlacement?: SortOrder
+    sprayAccuracy?: SortOrder
+    counterStrafeRatio?: SortOrder
+    headshotAccuracy?: SortOrder
     openingKills?: SortOrder
+    openingAttempts?: SortOrder
     tradeKills?: SortOrder
-    tradeKillPercentage?: SortOrder
+    tradeAttempts?: SortOrder
     tradedDeaths?: SortOrder
-    tradedDeathPercentage?: SortOrder
-    multiKillRounds?: SortOrder
-    multiKillPercentage?: SortOrder
+    tradedDeathAttempts?: SortOrder
+    twoKillRounds?: SortOrder
+    threeKillRounds?: SortOrder
+    fourKillRounds?: SortOrder
+    fiveKillRounds?: SortOrder
     player?: PlayerOrderByWithRelationInput
     match?: MatchOrderByWithRelationInput
   }
@@ -6207,22 +8798,29 @@ export namespace Prisma {
     matchId?: StringFilter<"PlayerMatchStats"> | string
     steamId?: StringFilter<"PlayerMatchStats"> | string
     username?: StringFilter<"PlayerMatchStats"> | string
+    rank?: IntFilter<"PlayerMatchStats"> | number
     teamNumber?: IntFilter<"PlayerMatchStats"> | number
-    accuracy?: FloatFilter<"PlayerMatchStats"> | number
-    accuracySpotted?: FloatFilter<"PlayerMatchStats"> | number
-    hsAccuracy?: FloatFilter<"PlayerMatchStats"> | number
-    timeToDamage?: FloatFilter<"PlayerMatchStats"> | number
-    crosshairPlacement?: FloatFilter<"PlayerMatchStats"> | number
-    counterStrafing?: FloatFilter<"PlayerMatchStats"> | number
     totalKills?: IntFilter<"PlayerMatchStats"> | number
     totalDeaths?: IntFilter<"PlayerMatchStats"> | number
+    totalAssists?: IntFilter<"PlayerMatchStats"> | number
+    totalDamage?: IntFilter<"PlayerMatchStats"> | number
+    headshotPercentage?: FloatFilter<"PlayerMatchStats"> | number
+    accuracySpotted?: FloatFilter<"PlayerMatchStats"> | number
+    timeToDamage?: FloatFilter<"PlayerMatchStats"> | number
+    crosshairPlacement?: FloatFilter<"PlayerMatchStats"> | number
+    sprayAccuracy?: FloatFilter<"PlayerMatchStats"> | number
+    counterStrafeRatio?: FloatFilter<"PlayerMatchStats"> | number
+    headshotAccuracy?: FloatFilter<"PlayerMatchStats"> | number
     openingKills?: IntFilter<"PlayerMatchStats"> | number
+    openingAttempts?: IntFilter<"PlayerMatchStats"> | number
     tradeKills?: IntFilter<"PlayerMatchStats"> | number
-    tradeKillPercentage?: FloatFilter<"PlayerMatchStats"> | number
+    tradeAttempts?: IntFilter<"PlayerMatchStats"> | number
     tradedDeaths?: IntFilter<"PlayerMatchStats"> | number
-    tradedDeathPercentage?: FloatFilter<"PlayerMatchStats"> | number
-    multiKillRounds?: IntFilter<"PlayerMatchStats"> | number
-    multiKillPercentage?: FloatFilter<"PlayerMatchStats"> | number
+    tradedDeathAttempts?: IntFilter<"PlayerMatchStats"> | number
+    twoKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    threeKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    fourKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    fiveKillRounds?: IntFilter<"PlayerMatchStats"> | number
     player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
     match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
   }, "id">
@@ -6233,22 +8831,29 @@ export namespace Prisma {
     matchId?: SortOrder
     steamId?: SortOrder
     username?: SortOrder
+    rank?: SortOrder
     teamNumber?: SortOrder
-    accuracy?: SortOrder
-    accuracySpotted?: SortOrder
-    hsAccuracy?: SortOrder
-    timeToDamage?: SortOrder
-    crosshairPlacement?: SortOrder
-    counterStrafing?: SortOrder
     totalKills?: SortOrder
     totalDeaths?: SortOrder
+    totalAssists?: SortOrder
+    totalDamage?: SortOrder
+    headshotPercentage?: SortOrder
+    accuracySpotted?: SortOrder
+    timeToDamage?: SortOrder
+    crosshairPlacement?: SortOrder
+    sprayAccuracy?: SortOrder
+    counterStrafeRatio?: SortOrder
+    headshotAccuracy?: SortOrder
     openingKills?: SortOrder
+    openingAttempts?: SortOrder
     tradeKills?: SortOrder
-    tradeKillPercentage?: SortOrder
+    tradeAttempts?: SortOrder
     tradedDeaths?: SortOrder
-    tradedDeathPercentage?: SortOrder
-    multiKillRounds?: SortOrder
-    multiKillPercentage?: SortOrder
+    tradedDeathAttempts?: SortOrder
+    twoKillRounds?: SortOrder
+    threeKillRounds?: SortOrder
+    fourKillRounds?: SortOrder
+    fiveKillRounds?: SortOrder
     _count?: PlayerMatchStatsCountOrderByAggregateInput
     _avg?: PlayerMatchStatsAvgOrderByAggregateInput
     _max?: PlayerMatchStatsMaxOrderByAggregateInput
@@ -6265,27 +8870,36 @@ export namespace Prisma {
     matchId?: StringWithAggregatesFilter<"PlayerMatchStats"> | string
     steamId?: StringWithAggregatesFilter<"PlayerMatchStats"> | string
     username?: StringWithAggregatesFilter<"PlayerMatchStats"> | string
+    rank?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
     teamNumber?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
-    accuracy?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
-    accuracySpotted?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
-    hsAccuracy?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
-    timeToDamage?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
-    crosshairPlacement?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
-    counterStrafing?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
     totalKills?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
     totalDeaths?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
+    totalAssists?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
+    totalDamage?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
+    headshotPercentage?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
+    accuracySpotted?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
+    timeToDamage?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
+    crosshairPlacement?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
+    sprayAccuracy?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
+    counterStrafeRatio?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
+    headshotAccuracy?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
     openingKills?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
+    openingAttempts?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
     tradeKills?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
-    tradeKillPercentage?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
+    tradeAttempts?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
     tradedDeaths?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
-    tradedDeathPercentage?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
-    multiKillRounds?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
-    multiKillPercentage?: FloatWithAggregatesFilter<"PlayerMatchStats"> | number
+    tradedDeathAttempts?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
+    twoKillRounds?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
+    threeKillRounds?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
+    fourKillRounds?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
+    fiveKillRounds?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
   }
 
   export type UserCreateInput = {
     id?: string
-    email: string
+    email?: string | null
+    displayName?: string | null
+    isVerified?: boolean
     gameAuthCode?: string | null
     lastMatchCode?: string | null
     createdAt?: Date | string
@@ -6294,7 +8908,9 @@ export namespace Prisma {
 
   export type UserUncheckedCreateInput = {
     id?: string
-    email: string
+    email?: string | null
+    displayName?: string | null
+    isVerified?: boolean
     gameAuthCode?: string | null
     lastMatchCode?: string | null
     playerId?: string | null
@@ -6303,7 +8919,9 @@ export namespace Prisma {
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     gameAuthCode?: NullableStringFieldUpdateOperationsInput | string | null
     lastMatchCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6312,7 +8930,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     gameAuthCode?: NullableStringFieldUpdateOperationsInput | string | null
     lastMatchCode?: NullableStringFieldUpdateOperationsInput | string | null
     playerId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6321,7 +8941,9 @@ export namespace Prisma {
 
   export type UserCreateManyInput = {
     id?: string
-    email: string
+    email?: string | null
+    displayName?: string | null
+    isVerified?: boolean
     gameAuthCode?: string | null
     lastMatchCode?: string | null
     playerId?: string | null
@@ -6330,7 +8952,9 @@ export namespace Prisma {
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     gameAuthCode?: NullableStringFieldUpdateOperationsInput | string | null
     lastMatchCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6338,7 +8962,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     gameAuthCode?: NullableStringFieldUpdateOperationsInput | string | null
     lastMatchCode?: NullableStringFieldUpdateOperationsInput | string | null
     playerId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6391,50 +9017,64 @@ export namespace Prisma {
   export type MatchCreateInput = {
     id?: string
     matchId: string
+    mapName: string
     team1Score: number
     team2Score: number
-    playedAt?: Date | string
+    playedAt: Date | string
     stats?: PlayerMatchStatsCreateNestedManyWithoutMatchInput
+    steamMatch?: SteamMatchCreateNestedOneWithoutMatchInput
+    uploadedMatch?: UploadedMatchCreateNestedOneWithoutMatchInput
   }
 
   export type MatchUncheckedCreateInput = {
     id?: string
     matchId: string
+    mapName: string
     team1Score: number
     team2Score: number
-    playedAt?: Date | string
+    playedAt: Date | string
     stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutMatchInput
+    steamMatch?: SteamMatchUncheckedCreateNestedOneWithoutMatchInput
+    uploadedMatch?: UploadedMatchUncheckedCreateNestedOneWithoutMatchInput
   }
 
   export type MatchUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
     team1Score?: IntFieldUpdateOperationsInput | number
     team2Score?: IntFieldUpdateOperationsInput | number
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stats?: PlayerMatchStatsUpdateManyWithoutMatchNestedInput
+    steamMatch?: SteamMatchUpdateOneWithoutMatchNestedInput
+    uploadedMatch?: UploadedMatchUpdateOneWithoutMatchNestedInput
   }
 
   export type MatchUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
     team1Score?: IntFieldUpdateOperationsInput | number
     team2Score?: IntFieldUpdateOperationsInput | number
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stats?: PlayerMatchStatsUncheckedUpdateManyWithoutMatchNestedInput
+    steamMatch?: SteamMatchUncheckedUpdateOneWithoutMatchNestedInput
+    uploadedMatch?: UploadedMatchUncheckedUpdateOneWithoutMatchNestedInput
   }
 
   export type MatchCreateManyInput = {
     id?: string
     matchId: string
+    mapName: string
     team1Score: number
     team2Score: number
-    playedAt?: Date | string
+    playedAt: Date | string
   }
 
   export type MatchUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
     team1Score?: IntFieldUpdateOperationsInput | number
     team2Score?: IntFieldUpdateOperationsInput | number
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6443,31 +9083,114 @@ export namespace Prisma {
   export type MatchUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
     team1Score?: IntFieldUpdateOperationsInput | number
     team2Score?: IntFieldUpdateOperationsInput | number
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SteamMatchCreateInput = {
+    mapUrl: string
+    reservationId?: string | null
+    match: MatchCreateNestedOneWithoutSteamMatchInput
+  }
+
+  export type SteamMatchUncheckedCreateInput = {
+    id: string
+    mapUrl: string
+    reservationId?: string | null
+  }
+
+  export type SteamMatchUpdateInput = {
+    mapUrl?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    match?: MatchUpdateOneRequiredWithoutSteamMatchNestedInput
+  }
+
+  export type SteamMatchUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mapUrl?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SteamMatchCreateManyInput = {
+    id: string
+    mapUrl: string
+    reservationId?: string | null
+  }
+
+  export type SteamMatchUpdateManyMutationInput = {
+    mapUrl?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SteamMatchUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    mapUrl?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UploadedMatchCreateInput = {
+    uploadedAt?: Date | string
+    match: MatchCreateNestedOneWithoutUploadedMatchInput
+  }
+
+  export type UploadedMatchUncheckedCreateInput = {
+    id: string
+    uploadedAt?: Date | string
+  }
+
+  export type UploadedMatchUpdateInput = {
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    match?: MatchUpdateOneRequiredWithoutUploadedMatchNestedInput
+  }
+
+  export type UploadedMatchUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UploadedMatchCreateManyInput = {
+    id: string
+    uploadedAt?: Date | string
+  }
+
+  export type UploadedMatchUpdateManyMutationInput = {
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UploadedMatchUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PlayerMatchStatsCreateInput = {
     id?: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
     player: PlayerCreateNestedOneWithoutStatsInput
     match: MatchCreateNestedOneWithoutStatsInput
   }
@@ -6478,44 +9201,58 @@ export namespace Prisma {
     matchId: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
   }
 
   export type PlayerMatchStatsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
     player?: PlayerUpdateOneRequiredWithoutStatsNestedInput
     match?: MatchUpdateOneRequiredWithoutStatsNestedInput
   }
@@ -6526,22 +9263,29 @@ export namespace Prisma {
     matchId?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
   }
 
   export type PlayerMatchStatsCreateManyInput = {
@@ -6550,44 +9294,58 @@ export namespace Prisma {
     matchId: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
   }
 
   export type PlayerMatchStatsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
   }
 
   export type PlayerMatchStatsUncheckedUpdateManyInput = {
@@ -6596,22 +9354,29 @@ export namespace Prisma {
     matchId?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6644,6 +9409,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -6668,6 +9438,8 @@ export namespace Prisma {
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    displayName?: SortOrder
+    isVerified?: SortOrder
     gameAuthCode?: SortOrder
     lastMatchCode?: SortOrder
     playerId?: SortOrder
@@ -6677,6 +9449,8 @@ export namespace Prisma {
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    displayName?: SortOrder
+    isVerified?: SortOrder
     gameAuthCode?: SortOrder
     lastMatchCode?: SortOrder
     playerId?: SortOrder
@@ -6686,6 +9460,8 @@ export namespace Prisma {
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    displayName?: SortOrder
+    isVerified?: SortOrder
     gameAuthCode?: SortOrder
     lastMatchCode?: SortOrder
     playerId?: SortOrder
@@ -6726,6 +9502,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -6783,9 +9567,20 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type SteamMatchNullableScalarRelationFilter = {
+    is?: SteamMatchWhereInput | null
+    isNot?: SteamMatchWhereInput | null
+  }
+
+  export type UploadedMatchNullableScalarRelationFilter = {
+    is?: UploadedMatchWhereInput | null
+    isNot?: UploadedMatchWhereInput | null
+  }
+
   export type MatchCountOrderByAggregateInput = {
     id?: SortOrder
     matchId?: SortOrder
+    mapName?: SortOrder
     team1Score?: SortOrder
     team2Score?: SortOrder
     playedAt?: SortOrder
@@ -6799,6 +9594,7 @@ export namespace Prisma {
   export type MatchMaxOrderByAggregateInput = {
     id?: SortOrder
     matchId?: SortOrder
+    mapName?: SortOrder
     team1Score?: SortOrder
     team2Score?: SortOrder
     playedAt?: SortOrder
@@ -6807,6 +9603,7 @@ export namespace Prisma {
   export type MatchMinOrderByAggregateInput = {
     id?: SortOrder
     matchId?: SortOrder
+    mapName?: SortOrder
     team1Score?: SortOrder
     team2Score?: SortOrder
     playedAt?: SortOrder
@@ -6833,6 +9630,44 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type MatchScalarRelationFilter = {
+    is?: MatchWhereInput
+    isNot?: MatchWhereInput
+  }
+
+  export type SteamMatchCountOrderByAggregateInput = {
+    id?: SortOrder
+    mapUrl?: SortOrder
+    reservationId?: SortOrder
+  }
+
+  export type SteamMatchMaxOrderByAggregateInput = {
+    id?: SortOrder
+    mapUrl?: SortOrder
+    reservationId?: SortOrder
+  }
+
+  export type SteamMatchMinOrderByAggregateInput = {
+    id?: SortOrder
+    mapUrl?: SortOrder
+    reservationId?: SortOrder
+  }
+
+  export type UploadedMatchCountOrderByAggregateInput = {
+    id?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type UploadedMatchMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
+  export type UploadedMatchMinOrderByAggregateInput = {
+    id?: SortOrder
+    uploadedAt?: SortOrder
+  }
+
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -6849,52 +9684,61 @@ export namespace Prisma {
     isNot?: PlayerWhereInput
   }
 
-  export type MatchScalarRelationFilter = {
-    is?: MatchWhereInput
-    isNot?: MatchWhereInput
-  }
-
   export type PlayerMatchStatsCountOrderByAggregateInput = {
     id?: SortOrder
     playerId?: SortOrder
     matchId?: SortOrder
     steamId?: SortOrder
     username?: SortOrder
+    rank?: SortOrder
     teamNumber?: SortOrder
-    accuracy?: SortOrder
-    accuracySpotted?: SortOrder
-    hsAccuracy?: SortOrder
-    timeToDamage?: SortOrder
-    crosshairPlacement?: SortOrder
-    counterStrafing?: SortOrder
     totalKills?: SortOrder
     totalDeaths?: SortOrder
+    totalAssists?: SortOrder
+    totalDamage?: SortOrder
+    headshotPercentage?: SortOrder
+    accuracySpotted?: SortOrder
+    timeToDamage?: SortOrder
+    crosshairPlacement?: SortOrder
+    sprayAccuracy?: SortOrder
+    counterStrafeRatio?: SortOrder
+    headshotAccuracy?: SortOrder
     openingKills?: SortOrder
+    openingAttempts?: SortOrder
     tradeKills?: SortOrder
-    tradeKillPercentage?: SortOrder
+    tradeAttempts?: SortOrder
     tradedDeaths?: SortOrder
-    tradedDeathPercentage?: SortOrder
-    multiKillRounds?: SortOrder
-    multiKillPercentage?: SortOrder
+    tradedDeathAttempts?: SortOrder
+    twoKillRounds?: SortOrder
+    threeKillRounds?: SortOrder
+    fourKillRounds?: SortOrder
+    fiveKillRounds?: SortOrder
   }
 
   export type PlayerMatchStatsAvgOrderByAggregateInput = {
+    rank?: SortOrder
     teamNumber?: SortOrder
-    accuracy?: SortOrder
-    accuracySpotted?: SortOrder
-    hsAccuracy?: SortOrder
-    timeToDamage?: SortOrder
-    crosshairPlacement?: SortOrder
-    counterStrafing?: SortOrder
     totalKills?: SortOrder
     totalDeaths?: SortOrder
+    totalAssists?: SortOrder
+    totalDamage?: SortOrder
+    headshotPercentage?: SortOrder
+    accuracySpotted?: SortOrder
+    timeToDamage?: SortOrder
+    crosshairPlacement?: SortOrder
+    sprayAccuracy?: SortOrder
+    counterStrafeRatio?: SortOrder
+    headshotAccuracy?: SortOrder
     openingKills?: SortOrder
+    openingAttempts?: SortOrder
     tradeKills?: SortOrder
-    tradeKillPercentage?: SortOrder
+    tradeAttempts?: SortOrder
     tradedDeaths?: SortOrder
-    tradedDeathPercentage?: SortOrder
-    multiKillRounds?: SortOrder
-    multiKillPercentage?: SortOrder
+    tradedDeathAttempts?: SortOrder
+    twoKillRounds?: SortOrder
+    threeKillRounds?: SortOrder
+    fourKillRounds?: SortOrder
+    fiveKillRounds?: SortOrder
   }
 
   export type PlayerMatchStatsMaxOrderByAggregateInput = {
@@ -6903,22 +9747,29 @@ export namespace Prisma {
     matchId?: SortOrder
     steamId?: SortOrder
     username?: SortOrder
+    rank?: SortOrder
     teamNumber?: SortOrder
-    accuracy?: SortOrder
-    accuracySpotted?: SortOrder
-    hsAccuracy?: SortOrder
-    timeToDamage?: SortOrder
-    crosshairPlacement?: SortOrder
-    counterStrafing?: SortOrder
     totalKills?: SortOrder
     totalDeaths?: SortOrder
+    totalAssists?: SortOrder
+    totalDamage?: SortOrder
+    headshotPercentage?: SortOrder
+    accuracySpotted?: SortOrder
+    timeToDamage?: SortOrder
+    crosshairPlacement?: SortOrder
+    sprayAccuracy?: SortOrder
+    counterStrafeRatio?: SortOrder
+    headshotAccuracy?: SortOrder
     openingKills?: SortOrder
+    openingAttempts?: SortOrder
     tradeKills?: SortOrder
-    tradeKillPercentage?: SortOrder
+    tradeAttempts?: SortOrder
     tradedDeaths?: SortOrder
-    tradedDeathPercentage?: SortOrder
-    multiKillRounds?: SortOrder
-    multiKillPercentage?: SortOrder
+    tradedDeathAttempts?: SortOrder
+    twoKillRounds?: SortOrder
+    threeKillRounds?: SortOrder
+    fourKillRounds?: SortOrder
+    fiveKillRounds?: SortOrder
   }
 
   export type PlayerMatchStatsMinOrderByAggregateInput = {
@@ -6927,41 +9778,55 @@ export namespace Prisma {
     matchId?: SortOrder
     steamId?: SortOrder
     username?: SortOrder
+    rank?: SortOrder
     teamNumber?: SortOrder
-    accuracy?: SortOrder
-    accuracySpotted?: SortOrder
-    hsAccuracy?: SortOrder
-    timeToDamage?: SortOrder
-    crosshairPlacement?: SortOrder
-    counterStrafing?: SortOrder
     totalKills?: SortOrder
     totalDeaths?: SortOrder
+    totalAssists?: SortOrder
+    totalDamage?: SortOrder
+    headshotPercentage?: SortOrder
+    accuracySpotted?: SortOrder
+    timeToDamage?: SortOrder
+    crosshairPlacement?: SortOrder
+    sprayAccuracy?: SortOrder
+    counterStrafeRatio?: SortOrder
+    headshotAccuracy?: SortOrder
     openingKills?: SortOrder
+    openingAttempts?: SortOrder
     tradeKills?: SortOrder
-    tradeKillPercentage?: SortOrder
+    tradeAttempts?: SortOrder
     tradedDeaths?: SortOrder
-    tradedDeathPercentage?: SortOrder
-    multiKillRounds?: SortOrder
-    multiKillPercentage?: SortOrder
+    tradedDeathAttempts?: SortOrder
+    twoKillRounds?: SortOrder
+    threeKillRounds?: SortOrder
+    fourKillRounds?: SortOrder
+    fiveKillRounds?: SortOrder
   }
 
   export type PlayerMatchStatsSumOrderByAggregateInput = {
+    rank?: SortOrder
     teamNumber?: SortOrder
-    accuracy?: SortOrder
-    accuracySpotted?: SortOrder
-    hsAccuracy?: SortOrder
-    timeToDamage?: SortOrder
-    crosshairPlacement?: SortOrder
-    counterStrafing?: SortOrder
     totalKills?: SortOrder
     totalDeaths?: SortOrder
+    totalAssists?: SortOrder
+    totalDamage?: SortOrder
+    headshotPercentage?: SortOrder
+    accuracySpotted?: SortOrder
+    timeToDamage?: SortOrder
+    crosshairPlacement?: SortOrder
+    sprayAccuracy?: SortOrder
+    counterStrafeRatio?: SortOrder
+    headshotAccuracy?: SortOrder
     openingKills?: SortOrder
+    openingAttempts?: SortOrder
     tradeKills?: SortOrder
-    tradeKillPercentage?: SortOrder
+    tradeAttempts?: SortOrder
     tradedDeaths?: SortOrder
-    tradedDeathPercentage?: SortOrder
-    multiKillRounds?: SortOrder
-    multiKillPercentage?: SortOrder
+    tradedDeathAttempts?: SortOrder
+    twoKillRounds?: SortOrder
+    threeKillRounds?: SortOrder
+    fourKillRounds?: SortOrder
+    fiveKillRounds?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -6992,6 +9857,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -7089,11 +9958,35 @@ export namespace Prisma {
     connect?: PlayerMatchStatsWhereUniqueInput | PlayerMatchStatsWhereUniqueInput[]
   }
 
+  export type SteamMatchCreateNestedOneWithoutMatchInput = {
+    create?: XOR<SteamMatchCreateWithoutMatchInput, SteamMatchUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: SteamMatchCreateOrConnectWithoutMatchInput
+    connect?: SteamMatchWhereUniqueInput
+  }
+
+  export type UploadedMatchCreateNestedOneWithoutMatchInput = {
+    create?: XOR<UploadedMatchCreateWithoutMatchInput, UploadedMatchUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: UploadedMatchCreateOrConnectWithoutMatchInput
+    connect?: UploadedMatchWhereUniqueInput
+  }
+
   export type PlayerMatchStatsUncheckedCreateNestedManyWithoutMatchInput = {
     create?: XOR<PlayerMatchStatsCreateWithoutMatchInput, PlayerMatchStatsUncheckedCreateWithoutMatchInput> | PlayerMatchStatsCreateWithoutMatchInput[] | PlayerMatchStatsUncheckedCreateWithoutMatchInput[]
     connectOrCreate?: PlayerMatchStatsCreateOrConnectWithoutMatchInput | PlayerMatchStatsCreateOrConnectWithoutMatchInput[]
     createMany?: PlayerMatchStatsCreateManyMatchInputEnvelope
     connect?: PlayerMatchStatsWhereUniqueInput | PlayerMatchStatsWhereUniqueInput[]
+  }
+
+  export type SteamMatchUncheckedCreateNestedOneWithoutMatchInput = {
+    create?: XOR<SteamMatchCreateWithoutMatchInput, SteamMatchUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: SteamMatchCreateOrConnectWithoutMatchInput
+    connect?: SteamMatchWhereUniqueInput
+  }
+
+  export type UploadedMatchUncheckedCreateNestedOneWithoutMatchInput = {
+    create?: XOR<UploadedMatchCreateWithoutMatchInput, UploadedMatchUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: UploadedMatchCreateOrConnectWithoutMatchInput
+    connect?: UploadedMatchWhereUniqueInput
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -7118,6 +10011,26 @@ export namespace Prisma {
     deleteMany?: PlayerMatchStatsScalarWhereInput | PlayerMatchStatsScalarWhereInput[]
   }
 
+  export type SteamMatchUpdateOneWithoutMatchNestedInput = {
+    create?: XOR<SteamMatchCreateWithoutMatchInput, SteamMatchUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: SteamMatchCreateOrConnectWithoutMatchInput
+    upsert?: SteamMatchUpsertWithoutMatchInput
+    disconnect?: SteamMatchWhereInput | boolean
+    delete?: SteamMatchWhereInput | boolean
+    connect?: SteamMatchWhereUniqueInput
+    update?: XOR<XOR<SteamMatchUpdateToOneWithWhereWithoutMatchInput, SteamMatchUpdateWithoutMatchInput>, SteamMatchUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type UploadedMatchUpdateOneWithoutMatchNestedInput = {
+    create?: XOR<UploadedMatchCreateWithoutMatchInput, UploadedMatchUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: UploadedMatchCreateOrConnectWithoutMatchInput
+    upsert?: UploadedMatchUpsertWithoutMatchInput
+    disconnect?: UploadedMatchWhereInput | boolean
+    delete?: UploadedMatchWhereInput | boolean
+    connect?: UploadedMatchWhereUniqueInput
+    update?: XOR<XOR<UploadedMatchUpdateToOneWithWhereWithoutMatchInput, UploadedMatchUpdateWithoutMatchInput>, UploadedMatchUncheckedUpdateWithoutMatchInput>
+  }
+
   export type PlayerMatchStatsUncheckedUpdateManyWithoutMatchNestedInput = {
     create?: XOR<PlayerMatchStatsCreateWithoutMatchInput, PlayerMatchStatsUncheckedCreateWithoutMatchInput> | PlayerMatchStatsCreateWithoutMatchInput[] | PlayerMatchStatsUncheckedCreateWithoutMatchInput[]
     connectOrCreate?: PlayerMatchStatsCreateOrConnectWithoutMatchInput | PlayerMatchStatsCreateOrConnectWithoutMatchInput[]
@@ -7130,6 +10043,54 @@ export namespace Prisma {
     update?: PlayerMatchStatsUpdateWithWhereUniqueWithoutMatchInput | PlayerMatchStatsUpdateWithWhereUniqueWithoutMatchInput[]
     updateMany?: PlayerMatchStatsUpdateManyWithWhereWithoutMatchInput | PlayerMatchStatsUpdateManyWithWhereWithoutMatchInput[]
     deleteMany?: PlayerMatchStatsScalarWhereInput | PlayerMatchStatsScalarWhereInput[]
+  }
+
+  export type SteamMatchUncheckedUpdateOneWithoutMatchNestedInput = {
+    create?: XOR<SteamMatchCreateWithoutMatchInput, SteamMatchUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: SteamMatchCreateOrConnectWithoutMatchInput
+    upsert?: SteamMatchUpsertWithoutMatchInput
+    disconnect?: SteamMatchWhereInput | boolean
+    delete?: SteamMatchWhereInput | boolean
+    connect?: SteamMatchWhereUniqueInput
+    update?: XOR<XOR<SteamMatchUpdateToOneWithWhereWithoutMatchInput, SteamMatchUpdateWithoutMatchInput>, SteamMatchUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type UploadedMatchUncheckedUpdateOneWithoutMatchNestedInput = {
+    create?: XOR<UploadedMatchCreateWithoutMatchInput, UploadedMatchUncheckedCreateWithoutMatchInput>
+    connectOrCreate?: UploadedMatchCreateOrConnectWithoutMatchInput
+    upsert?: UploadedMatchUpsertWithoutMatchInput
+    disconnect?: UploadedMatchWhereInput | boolean
+    delete?: UploadedMatchWhereInput | boolean
+    connect?: UploadedMatchWhereUniqueInput
+    update?: XOR<XOR<UploadedMatchUpdateToOneWithWhereWithoutMatchInput, UploadedMatchUpdateWithoutMatchInput>, UploadedMatchUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type MatchCreateNestedOneWithoutSteamMatchInput = {
+    create?: XOR<MatchCreateWithoutSteamMatchInput, MatchUncheckedCreateWithoutSteamMatchInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutSteamMatchInput
+    connect?: MatchWhereUniqueInput
+  }
+
+  export type MatchUpdateOneRequiredWithoutSteamMatchNestedInput = {
+    create?: XOR<MatchCreateWithoutSteamMatchInput, MatchUncheckedCreateWithoutSteamMatchInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutSteamMatchInput
+    upsert?: MatchUpsertWithoutSteamMatchInput
+    connect?: MatchWhereUniqueInput
+    update?: XOR<XOR<MatchUpdateToOneWithWhereWithoutSteamMatchInput, MatchUpdateWithoutSteamMatchInput>, MatchUncheckedUpdateWithoutSteamMatchInput>
+  }
+
+  export type MatchCreateNestedOneWithoutUploadedMatchInput = {
+    create?: XOR<MatchCreateWithoutUploadedMatchInput, MatchUncheckedCreateWithoutUploadedMatchInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutUploadedMatchInput
+    connect?: MatchWhereUniqueInput
+  }
+
+  export type MatchUpdateOneRequiredWithoutUploadedMatchNestedInput = {
+    create?: XOR<MatchCreateWithoutUploadedMatchInput, MatchUncheckedCreateWithoutUploadedMatchInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutUploadedMatchInput
+    upsert?: MatchUpsertWithoutUploadedMatchInput
+    connect?: MatchWhereUniqueInput
+    update?: XOR<XOR<MatchUpdateToOneWithWhereWithoutUploadedMatchInput, MatchUpdateWithoutUploadedMatchInput>, MatchUncheckedUpdateWithoutUploadedMatchInput>
   }
 
   export type PlayerCreateNestedOneWithoutStatsInput = {
@@ -7194,6 +10155,11 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -7261,6 +10227,14 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -7362,7 +10336,9 @@ export namespace Prisma {
 
   export type UserCreateWithoutPlayerInput = {
     id?: string
-    email: string
+    email?: string | null
+    displayName?: string | null
+    isVerified?: boolean
     gameAuthCode?: string | null
     lastMatchCode?: string | null
     createdAt?: Date | string
@@ -7370,7 +10346,9 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutPlayerInput = {
     id?: string
-    email: string
+    email?: string | null
+    displayName?: string | null
+    isVerified?: boolean
     gameAuthCode?: string | null
     lastMatchCode?: string | null
     createdAt?: Date | string
@@ -7385,22 +10363,29 @@ export namespace Prisma {
     id?: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
     match: MatchCreateNestedOneWithoutStatsInput
   }
 
@@ -7409,22 +10394,29 @@ export namespace Prisma {
     matchId: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
   }
 
   export type PlayerMatchStatsCreateOrConnectWithoutPlayerInput = {
@@ -7450,7 +10442,9 @@ export namespace Prisma {
 
   export type UserUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     gameAuthCode?: NullableStringFieldUpdateOperationsInput | string | null
     lastMatchCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7458,7 +10452,9 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     gameAuthCode?: NullableStringFieldUpdateOperationsInput | string | null
     lastMatchCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7489,44 +10485,58 @@ export namespace Prisma {
     matchId?: StringFilter<"PlayerMatchStats"> | string
     steamId?: StringFilter<"PlayerMatchStats"> | string
     username?: StringFilter<"PlayerMatchStats"> | string
+    rank?: IntFilter<"PlayerMatchStats"> | number
     teamNumber?: IntFilter<"PlayerMatchStats"> | number
-    accuracy?: FloatFilter<"PlayerMatchStats"> | number
-    accuracySpotted?: FloatFilter<"PlayerMatchStats"> | number
-    hsAccuracy?: FloatFilter<"PlayerMatchStats"> | number
-    timeToDamage?: FloatFilter<"PlayerMatchStats"> | number
-    crosshairPlacement?: FloatFilter<"PlayerMatchStats"> | number
-    counterStrafing?: FloatFilter<"PlayerMatchStats"> | number
     totalKills?: IntFilter<"PlayerMatchStats"> | number
     totalDeaths?: IntFilter<"PlayerMatchStats"> | number
+    totalAssists?: IntFilter<"PlayerMatchStats"> | number
+    totalDamage?: IntFilter<"PlayerMatchStats"> | number
+    headshotPercentage?: FloatFilter<"PlayerMatchStats"> | number
+    accuracySpotted?: FloatFilter<"PlayerMatchStats"> | number
+    timeToDamage?: FloatFilter<"PlayerMatchStats"> | number
+    crosshairPlacement?: FloatFilter<"PlayerMatchStats"> | number
+    sprayAccuracy?: FloatFilter<"PlayerMatchStats"> | number
+    counterStrafeRatio?: FloatFilter<"PlayerMatchStats"> | number
+    headshotAccuracy?: FloatFilter<"PlayerMatchStats"> | number
     openingKills?: IntFilter<"PlayerMatchStats"> | number
+    openingAttempts?: IntFilter<"PlayerMatchStats"> | number
     tradeKills?: IntFilter<"PlayerMatchStats"> | number
-    tradeKillPercentage?: FloatFilter<"PlayerMatchStats"> | number
+    tradeAttempts?: IntFilter<"PlayerMatchStats"> | number
     tradedDeaths?: IntFilter<"PlayerMatchStats"> | number
-    tradedDeathPercentage?: FloatFilter<"PlayerMatchStats"> | number
-    multiKillRounds?: IntFilter<"PlayerMatchStats"> | number
-    multiKillPercentage?: FloatFilter<"PlayerMatchStats"> | number
+    tradedDeathAttempts?: IntFilter<"PlayerMatchStats"> | number
+    twoKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    threeKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    fourKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    fiveKillRounds?: IntFilter<"PlayerMatchStats"> | number
   }
 
   export type PlayerMatchStatsCreateWithoutMatchInput = {
     id?: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
     player: PlayerCreateNestedOneWithoutStatsInput
   }
 
@@ -7535,22 +10545,29 @@ export namespace Prisma {
     playerId: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
   }
 
   export type PlayerMatchStatsCreateOrConnectWithoutMatchInput = {
@@ -7561,6 +10578,34 @@ export namespace Prisma {
   export type PlayerMatchStatsCreateManyMatchInputEnvelope = {
     data: PlayerMatchStatsCreateManyMatchInput | PlayerMatchStatsCreateManyMatchInput[]
     skipDuplicates?: boolean
+  }
+
+  export type SteamMatchCreateWithoutMatchInput = {
+    mapUrl: string
+    reservationId?: string | null
+  }
+
+  export type SteamMatchUncheckedCreateWithoutMatchInput = {
+    mapUrl: string
+    reservationId?: string | null
+  }
+
+  export type SteamMatchCreateOrConnectWithoutMatchInput = {
+    where: SteamMatchWhereUniqueInput
+    create: XOR<SteamMatchCreateWithoutMatchInput, SteamMatchUncheckedCreateWithoutMatchInput>
+  }
+
+  export type UploadedMatchCreateWithoutMatchInput = {
+    uploadedAt?: Date | string
+  }
+
+  export type UploadedMatchUncheckedCreateWithoutMatchInput = {
+    uploadedAt?: Date | string
+  }
+
+  export type UploadedMatchCreateOrConnectWithoutMatchInput = {
+    where: UploadedMatchWhereUniqueInput
+    create: XOR<UploadedMatchCreateWithoutMatchInput, UploadedMatchUncheckedCreateWithoutMatchInput>
   }
 
   export type PlayerMatchStatsUpsertWithWhereUniqueWithoutMatchInput = {
@@ -7577,6 +10622,166 @@ export namespace Prisma {
   export type PlayerMatchStatsUpdateManyWithWhereWithoutMatchInput = {
     where: PlayerMatchStatsScalarWhereInput
     data: XOR<PlayerMatchStatsUpdateManyMutationInput, PlayerMatchStatsUncheckedUpdateManyWithoutMatchInput>
+  }
+
+  export type SteamMatchUpsertWithoutMatchInput = {
+    update: XOR<SteamMatchUpdateWithoutMatchInput, SteamMatchUncheckedUpdateWithoutMatchInput>
+    create: XOR<SteamMatchCreateWithoutMatchInput, SteamMatchUncheckedCreateWithoutMatchInput>
+    where?: SteamMatchWhereInput
+  }
+
+  export type SteamMatchUpdateToOneWithWhereWithoutMatchInput = {
+    where?: SteamMatchWhereInput
+    data: XOR<SteamMatchUpdateWithoutMatchInput, SteamMatchUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type SteamMatchUpdateWithoutMatchInput = {
+    mapUrl?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SteamMatchUncheckedUpdateWithoutMatchInput = {
+    mapUrl?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UploadedMatchUpsertWithoutMatchInput = {
+    update: XOR<UploadedMatchUpdateWithoutMatchInput, UploadedMatchUncheckedUpdateWithoutMatchInput>
+    create: XOR<UploadedMatchCreateWithoutMatchInput, UploadedMatchUncheckedCreateWithoutMatchInput>
+    where?: UploadedMatchWhereInput
+  }
+
+  export type UploadedMatchUpdateToOneWithWhereWithoutMatchInput = {
+    where?: UploadedMatchWhereInput
+    data: XOR<UploadedMatchUpdateWithoutMatchInput, UploadedMatchUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type UploadedMatchUpdateWithoutMatchInput = {
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UploadedMatchUncheckedUpdateWithoutMatchInput = {
+    uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MatchCreateWithoutSteamMatchInput = {
+    id?: string
+    matchId: string
+    mapName: string
+    team1Score: number
+    team2Score: number
+    playedAt: Date | string
+    stats?: PlayerMatchStatsCreateNestedManyWithoutMatchInput
+    uploadedMatch?: UploadedMatchCreateNestedOneWithoutMatchInput
+  }
+
+  export type MatchUncheckedCreateWithoutSteamMatchInput = {
+    id?: string
+    matchId: string
+    mapName: string
+    team1Score: number
+    team2Score: number
+    playedAt: Date | string
+    stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutMatchInput
+    uploadedMatch?: UploadedMatchUncheckedCreateNestedOneWithoutMatchInput
+  }
+
+  export type MatchCreateOrConnectWithoutSteamMatchInput = {
+    where: MatchWhereUniqueInput
+    create: XOR<MatchCreateWithoutSteamMatchInput, MatchUncheckedCreateWithoutSteamMatchInput>
+  }
+
+  export type MatchUpsertWithoutSteamMatchInput = {
+    update: XOR<MatchUpdateWithoutSteamMatchInput, MatchUncheckedUpdateWithoutSteamMatchInput>
+    create: XOR<MatchCreateWithoutSteamMatchInput, MatchUncheckedCreateWithoutSteamMatchInput>
+    where?: MatchWhereInput
+  }
+
+  export type MatchUpdateToOneWithWhereWithoutSteamMatchInput = {
+    where?: MatchWhereInput
+    data: XOR<MatchUpdateWithoutSteamMatchInput, MatchUncheckedUpdateWithoutSteamMatchInput>
+  }
+
+  export type MatchUpdateWithoutSteamMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
+    team1Score?: IntFieldUpdateOperationsInput | number
+    team2Score?: IntFieldUpdateOperationsInput | number
+    playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stats?: PlayerMatchStatsUpdateManyWithoutMatchNestedInput
+    uploadedMatch?: UploadedMatchUpdateOneWithoutMatchNestedInput
+  }
+
+  export type MatchUncheckedUpdateWithoutSteamMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
+    team1Score?: IntFieldUpdateOperationsInput | number
+    team2Score?: IntFieldUpdateOperationsInput | number
+    playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stats?: PlayerMatchStatsUncheckedUpdateManyWithoutMatchNestedInput
+    uploadedMatch?: UploadedMatchUncheckedUpdateOneWithoutMatchNestedInput
+  }
+
+  export type MatchCreateWithoutUploadedMatchInput = {
+    id?: string
+    matchId: string
+    mapName: string
+    team1Score: number
+    team2Score: number
+    playedAt: Date | string
+    stats?: PlayerMatchStatsCreateNestedManyWithoutMatchInput
+    steamMatch?: SteamMatchCreateNestedOneWithoutMatchInput
+  }
+
+  export type MatchUncheckedCreateWithoutUploadedMatchInput = {
+    id?: string
+    matchId: string
+    mapName: string
+    team1Score: number
+    team2Score: number
+    playedAt: Date | string
+    stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutMatchInput
+    steamMatch?: SteamMatchUncheckedCreateNestedOneWithoutMatchInput
+  }
+
+  export type MatchCreateOrConnectWithoutUploadedMatchInput = {
+    where: MatchWhereUniqueInput
+    create: XOR<MatchCreateWithoutUploadedMatchInput, MatchUncheckedCreateWithoutUploadedMatchInput>
+  }
+
+  export type MatchUpsertWithoutUploadedMatchInput = {
+    update: XOR<MatchUpdateWithoutUploadedMatchInput, MatchUncheckedUpdateWithoutUploadedMatchInput>
+    create: XOR<MatchCreateWithoutUploadedMatchInput, MatchUncheckedCreateWithoutUploadedMatchInput>
+    where?: MatchWhereInput
+  }
+
+  export type MatchUpdateToOneWithWhereWithoutUploadedMatchInput = {
+    where?: MatchWhereInput
+    data: XOR<MatchUpdateWithoutUploadedMatchInput, MatchUncheckedUpdateWithoutUploadedMatchInput>
+  }
+
+  export type MatchUpdateWithoutUploadedMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
+    team1Score?: IntFieldUpdateOperationsInput | number
+    team2Score?: IntFieldUpdateOperationsInput | number
+    playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stats?: PlayerMatchStatsUpdateManyWithoutMatchNestedInput
+    steamMatch?: SteamMatchUpdateOneWithoutMatchNestedInput
+  }
+
+  export type MatchUncheckedUpdateWithoutUploadedMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
+    team1Score?: IntFieldUpdateOperationsInput | number
+    team2Score?: IntFieldUpdateOperationsInput | number
+    playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stats?: PlayerMatchStatsUncheckedUpdateManyWithoutMatchNestedInput
+    steamMatch?: SteamMatchUncheckedUpdateOneWithoutMatchNestedInput
   }
 
   export type PlayerCreateWithoutStatsInput = {
@@ -7599,17 +10804,23 @@ export namespace Prisma {
   export type MatchCreateWithoutStatsInput = {
     id?: string
     matchId: string
+    mapName: string
     team1Score: number
     team2Score: number
-    playedAt?: Date | string
+    playedAt: Date | string
+    steamMatch?: SteamMatchCreateNestedOneWithoutMatchInput
+    uploadedMatch?: UploadedMatchCreateNestedOneWithoutMatchInput
   }
 
   export type MatchUncheckedCreateWithoutStatsInput = {
     id?: string
     matchId: string
+    mapName: string
     team1Score: number
     team2Score: number
-    playedAt?: Date | string
+    playedAt: Date | string
+    steamMatch?: SteamMatchUncheckedCreateNestedOneWithoutMatchInput
+    uploadedMatch?: UploadedMatchUncheckedCreateNestedOneWithoutMatchInput
   }
 
   export type MatchCreateOrConnectWithoutStatsInput = {
@@ -7654,17 +10865,23 @@ export namespace Prisma {
   export type MatchUpdateWithoutStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
     team1Score?: IntFieldUpdateOperationsInput | number
     team2Score?: IntFieldUpdateOperationsInput | number
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steamMatch?: SteamMatchUpdateOneWithoutMatchNestedInput
+    uploadedMatch?: UploadedMatchUpdateOneWithoutMatchNestedInput
   }
 
   export type MatchUncheckedUpdateWithoutStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
     team1Score?: IntFieldUpdateOperationsInput | number
     team2Score?: IntFieldUpdateOperationsInput | number
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steamMatch?: SteamMatchUncheckedUpdateOneWithoutMatchNestedInput
+    uploadedMatch?: UploadedMatchUncheckedUpdateOneWithoutMatchNestedInput
   }
 
   export type PlayerMatchStatsCreateManyPlayerInput = {
@@ -7672,44 +10889,58 @@ export namespace Prisma {
     matchId: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
   }
 
   export type PlayerMatchStatsUpdateWithoutPlayerInput = {
     id?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
     match?: MatchUpdateOneRequiredWithoutStatsNestedInput
   }
 
@@ -7718,22 +10949,29 @@ export namespace Prisma {
     matchId?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
   }
 
   export type PlayerMatchStatsUncheckedUpdateManyWithoutPlayerInput = {
@@ -7741,22 +10979,29 @@ export namespace Prisma {
     matchId?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
   }
 
   export type PlayerMatchStatsCreateManyMatchInput = {
@@ -7764,44 +11009,58 @@ export namespace Prisma {
     playerId: string
     steamId: string
     username: string
+    rank: number
     teamNumber: number
-    accuracy: number
-    accuracySpotted: number
-    hsAccuracy: number
-    timeToDamage: number
-    crosshairPlacement: number
-    counterStrafing: number
     totalKills: number
     totalDeaths: number
+    totalAssists: number
+    totalDamage: number
+    headshotPercentage: number
+    accuracySpotted: number
+    timeToDamage: number
+    crosshairPlacement: number
+    sprayAccuracy: number
+    counterStrafeRatio: number
+    headshotAccuracy: number
     openingKills: number
+    openingAttempts: number
     tradeKills: number
-    tradeKillPercentage: number
+    tradeAttempts: number
     tradedDeaths: number
-    tradedDeathPercentage: number
-    multiKillRounds: number
-    multiKillPercentage: number
+    tradedDeathAttempts: number
+    twoKillRounds: number
+    threeKillRounds: number
+    fourKillRounds: number
+    fiveKillRounds: number
   }
 
   export type PlayerMatchStatsUpdateWithoutMatchInput = {
     id?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
     player?: PlayerUpdateOneRequiredWithoutStatsNestedInput
   }
 
@@ -7810,22 +11069,29 @@ export namespace Prisma {
     playerId?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
   }
 
   export type PlayerMatchStatsUncheckedUpdateManyWithoutMatchInput = {
@@ -7833,22 +11099,29 @@ export namespace Prisma {
     playerId?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
+    rank?: IntFieldUpdateOperationsInput | number
     teamNumber?: IntFieldUpdateOperationsInput | number
-    accuracy?: FloatFieldUpdateOperationsInput | number
-    accuracySpotted?: FloatFieldUpdateOperationsInput | number
-    hsAccuracy?: FloatFieldUpdateOperationsInput | number
-    timeToDamage?: FloatFieldUpdateOperationsInput | number
-    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
-    counterStrafing?: FloatFieldUpdateOperationsInput | number
     totalKills?: IntFieldUpdateOperationsInput | number
     totalDeaths?: IntFieldUpdateOperationsInput | number
+    totalAssists?: IntFieldUpdateOperationsInput | number
+    totalDamage?: IntFieldUpdateOperationsInput | number
+    headshotPercentage?: FloatFieldUpdateOperationsInput | number
+    accuracySpotted?: FloatFieldUpdateOperationsInput | number
+    timeToDamage?: FloatFieldUpdateOperationsInput | number
+    crosshairPlacement?: FloatFieldUpdateOperationsInput | number
+    sprayAccuracy?: FloatFieldUpdateOperationsInput | number
+    counterStrafeRatio?: FloatFieldUpdateOperationsInput | number
+    headshotAccuracy?: FloatFieldUpdateOperationsInput | number
     openingKills?: IntFieldUpdateOperationsInput | number
+    openingAttempts?: IntFieldUpdateOperationsInput | number
     tradeKills?: IntFieldUpdateOperationsInput | number
-    tradeKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradeAttempts?: IntFieldUpdateOperationsInput | number
     tradedDeaths?: IntFieldUpdateOperationsInput | number
-    tradedDeathPercentage?: FloatFieldUpdateOperationsInput | number
-    multiKillRounds?: IntFieldUpdateOperationsInput | number
-    multiKillPercentage?: FloatFieldUpdateOperationsInput | number
+    tradedDeathAttempts?: IntFieldUpdateOperationsInput | number
+    twoKillRounds?: IntFieldUpdateOperationsInput | number
+    threeKillRounds?: IntFieldUpdateOperationsInput | number
+    fourKillRounds?: IntFieldUpdateOperationsInput | number
+    fiveKillRounds?: IntFieldUpdateOperationsInput | number
   }
 
 
