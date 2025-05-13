@@ -154,8 +154,8 @@ export default function MatchCard({ match, currentUserId }: MatchCardProps) {
         const { teamNumber } = currentPlayerStats;
         const { team1Score, team2Score } = match;
         if (team1Score === team2Score) return { text: 'Tie', color: 'text-neutral-400' };
-        if (teamNumber === 2) return team1Score > team2Score ? { text: 'Win', color: 'text-green-400' } : { text: 'Loss', color: 'text-red-400' };
-        if (teamNumber === 3) return team2Score > team1Score ? { text: 'Win', color: 'text-green-400' } : { text: 'Loss', color: 'text-red-400' };
+        if (teamNumber === 3) return team1Score > team2Score ? { text: 'Win', color: 'text-green-400' } : { text: 'Loss', color: 'text-red-400' };
+        if (teamNumber === 2) return team2Score > team1Score ? { text: 'Win', color: 'text-green-400' } : { text: 'Loss', color: 'text-red-400' };
         return { text: 'Unknown', color: 'text-neutral-500' };
     };
 
@@ -203,7 +203,7 @@ export default function MatchCard({ match, currentUserId }: MatchCardProps) {
                         </div>
                         <div className="text-right flex-shrink-0">
                             <p className={`text-xl font-bold ${result.color}`}>
-                                {match.team1Score} : {match.team2Score}
+                                {match.team2Score} : {match.team1Score}
                             </p>
                             <span className={`block text-xs font-normal text-center ${result.color}`}>
                                 {result.text}

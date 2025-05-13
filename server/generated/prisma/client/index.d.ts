@@ -43,6 +43,11 @@ export type UploadedMatch = $Result.DefaultSelection<Prisma.$UploadedMatchPayloa
  * 
  */
 export type PlayerMatchStats = $Result.DefaultSelection<Prisma.$PlayerMatchStatsPayload>
+/**
+ * Model PlayerScore
+ * 
+ */
+export type PlayerScore = $Result.DefaultSelection<Prisma.$PlayerScorePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -228,6 +233,16 @@ export class PrismaClient<
     * ```
     */
   get playerMatchStats(): Prisma.PlayerMatchStatsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.playerScore`: Exposes CRUD operations for the **PlayerScore** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PlayerScores
+    * const playerScores = await prisma.playerScore.findMany()
+    * ```
+    */
+  get playerScore(): Prisma.PlayerScoreDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -673,7 +688,8 @@ export namespace Prisma {
     Match: 'Match',
     SteamMatch: 'SteamMatch',
     UploadedMatch: 'UploadedMatch',
-    PlayerMatchStats: 'PlayerMatchStats'
+    PlayerMatchStats: 'PlayerMatchStats',
+    PlayerScore: 'PlayerScore'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -692,7 +708,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "player" | "match" | "steamMatch" | "uploadedMatch" | "playerMatchStats"
+      modelProps: "user" | "player" | "match" | "steamMatch" | "uploadedMatch" | "playerMatchStats" | "playerScore"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1140,6 +1156,80 @@ export namespace Prisma {
           }
         }
       }
+      PlayerScore: {
+        payload: Prisma.$PlayerScorePayload<ExtArgs>
+        fields: Prisma.PlayerScoreFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlayerScoreFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlayerScoreFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload>
+          }
+          findFirst: {
+            args: Prisma.PlayerScoreFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlayerScoreFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload>
+          }
+          findMany: {
+            args: Prisma.PlayerScoreFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload>[]
+          }
+          create: {
+            args: Prisma.PlayerScoreCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload>
+          }
+          createMany: {
+            args: Prisma.PlayerScoreCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PlayerScoreCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload>[]
+          }
+          delete: {
+            args: Prisma.PlayerScoreDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload>
+          }
+          update: {
+            args: Prisma.PlayerScoreUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload>
+          }
+          deleteMany: {
+            args: Prisma.PlayerScoreDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlayerScoreUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PlayerScoreUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload>[]
+          }
+          upsert: {
+            args: Prisma.PlayerScoreUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerScorePayload>
+          }
+          aggregate: {
+            args: Prisma.PlayerScoreAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlayerScore>
+          }
+          groupBy: {
+            args: Prisma.PlayerScoreGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlayerScoreGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlayerScoreCountArgs<ExtArgs>
+            result: $Utils.Optional<PlayerScoreCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1230,6 +1320,7 @@ export namespace Prisma {
     steamMatch?: SteamMatchOmit
     uploadedMatch?: UploadedMatchOmit
     playerMatchStats?: PlayerMatchStatsOmit
+    playerScore?: PlayerScoreOmit
   }
 
   /* Types for Logging */
@@ -1325,10 +1416,12 @@ export namespace Prisma {
 
   export type PlayerCountOutputType = {
     stats: number
+    playerScores: number
   }
 
   export type PlayerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     stats?: boolean | PlayerCountOutputTypeCountStatsArgs
+    playerScores?: boolean | PlayerCountOutputTypeCountPlayerScoresArgs
   }
 
   // Custom InputTypes
@@ -1349,6 +1442,13 @@ export namespace Prisma {
     where?: PlayerMatchStatsWhereInput
   }
 
+  /**
+   * PlayerCountOutputType without action
+   */
+  export type PlayerCountOutputTypeCountPlayerScoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerScoreWhereInput
+  }
+
 
   /**
    * Count Type MatchCountOutputType
@@ -1356,10 +1456,12 @@ export namespace Prisma {
 
   export type MatchCountOutputType = {
     stats: number
+    playerScores: number
   }
 
   export type MatchCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     stats?: boolean | MatchCountOutputTypeCountStatsArgs
+    playerScores?: boolean | MatchCountOutputTypeCountPlayerScoresArgs
   }
 
   // Custom InputTypes
@@ -1378,6 +1480,13 @@ export namespace Prisma {
    */
   export type MatchCountOutputTypeCountStatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PlayerMatchStatsWhereInput
+  }
+
+  /**
+   * MatchCountOutputType without action
+   */
+  export type MatchCountOutputTypeCountPlayerScoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerScoreWhereInput
   }
 
 
@@ -2643,6 +2752,7 @@ export namespace Prisma {
     steamId?: boolean
     user?: boolean | Player$userArgs<ExtArgs>
     stats?: boolean | Player$statsArgs<ExtArgs>
+    playerScores?: boolean | Player$playerScoresArgs<ExtArgs>
     _count?: boolean | PlayerCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["player"]>
 
@@ -2665,6 +2775,7 @@ export namespace Prisma {
   export type PlayerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Player$userArgs<ExtArgs>
     stats?: boolean | Player$statsArgs<ExtArgs>
+    playerScores?: boolean | Player$playerScoresArgs<ExtArgs>
     _count?: boolean | PlayerCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PlayerIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2675,6 +2786,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null
       stats: Prisma.$PlayerMatchStatsPayload<ExtArgs>[]
+      playerScores: Prisma.$PlayerScorePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3075,6 +3187,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends Player$userArgs<ExtArgs> = {}>(args?: Subset<T, Player$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     stats<T extends Player$statsArgs<ExtArgs> = {}>(args?: Subset<T, Player$statsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerMatchStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    playerScores<T extends Player$playerScoresArgs<ExtArgs> = {}>(args?: Subset<T, Player$playerScoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3537,6 +3650,30 @@ export namespace Prisma {
   }
 
   /**
+   * Player.playerScores
+   */
+  export type Player$playerScoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    where?: PlayerScoreWhereInput
+    orderBy?: PlayerScoreOrderByWithRelationInput | PlayerScoreOrderByWithRelationInput[]
+    cursor?: PlayerScoreWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PlayerScoreScalarFieldEnum | PlayerScoreScalarFieldEnum[]
+  }
+
+  /**
    * Player without action
    */
   export type PlayerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3768,6 +3905,7 @@ export namespace Prisma {
     stats?: boolean | Match$statsArgs<ExtArgs>
     steamMatch?: boolean | Match$steamMatchArgs<ExtArgs>
     uploadedMatch?: boolean | Match$uploadedMatchArgs<ExtArgs>
+    playerScores?: boolean | Match$playerScoresArgs<ExtArgs>
     _count?: boolean | MatchCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["match"]>
 
@@ -3803,6 +3941,7 @@ export namespace Prisma {
     stats?: boolean | Match$statsArgs<ExtArgs>
     steamMatch?: boolean | Match$steamMatchArgs<ExtArgs>
     uploadedMatch?: boolean | Match$uploadedMatchArgs<ExtArgs>
+    playerScores?: boolean | Match$playerScoresArgs<ExtArgs>
     _count?: boolean | MatchCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MatchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3814,6 +3953,7 @@ export namespace Prisma {
       stats: Prisma.$PlayerMatchStatsPayload<ExtArgs>[]
       steamMatch: Prisma.$SteamMatchPayload<ExtArgs> | null
       uploadedMatch: Prisma.$UploadedMatchPayload<ExtArgs> | null
+      playerScores: Prisma.$PlayerScorePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4219,6 +4359,7 @@ export namespace Prisma {
     stats<T extends Match$statsArgs<ExtArgs> = {}>(args?: Subset<T, Match$statsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerMatchStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     steamMatch<T extends Match$steamMatchArgs<ExtArgs> = {}>(args?: Subset<T, Match$steamMatchArgs<ExtArgs>>): Prisma__SteamMatchClient<$Result.GetResult<Prisma.$SteamMatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     uploadedMatch<T extends Match$uploadedMatchArgs<ExtArgs> = {}>(args?: Subset<T, Match$uploadedMatchArgs<ExtArgs>>): Prisma__UploadedMatchClient<$Result.GetResult<Prisma.$UploadedMatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    playerScores<T extends Match$playerScoresArgs<ExtArgs> = {}>(args?: Subset<T, Match$playerScoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4701,6 +4842,30 @@ export namespace Prisma {
      */
     include?: UploadedMatchInclude<ExtArgs> | null
     where?: UploadedMatchWhereInput
+  }
+
+  /**
+   * Match.playerScores
+   */
+  export type Match$playerScoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    where?: PlayerScoreWhereInput
+    orderBy?: PlayerScoreOrderByWithRelationInput | PlayerScoreOrderByWithRelationInput[]
+    cursor?: PlayerScoreWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PlayerScoreScalarFieldEnum | PlayerScoreScalarFieldEnum[]
   }
 
   /**
@@ -6928,6 +7093,8 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: number
+    clutchSuccesses: number
     _all: number
   }
 
@@ -7075,6 +7242,8 @@ export namespace Prisma {
     threeKillRounds?: true
     fourKillRounds?: true
     fiveKillRounds?: true
+    clutchAttempts?: true
+    clutchSuccesses?: true
     _all?: true
   }
 
@@ -7193,6 +7362,8 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonValue
+    clutchSuccesses: JsonValue
     _count: PlayerMatchStatsCountAggregateOutputType | null
     _avg: PlayerMatchStatsAvgAggregateOutputType | null
     _sum: PlayerMatchStatsSumAggregateOutputType | null
@@ -7243,6 +7414,8 @@ export namespace Prisma {
     threeKillRounds?: boolean
     fourKillRounds?: boolean
     fiveKillRounds?: boolean
+    clutchAttempts?: boolean
+    clutchSuccesses?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     match?: boolean | MatchDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["playerMatchStats"]>
@@ -7276,6 +7449,8 @@ export namespace Prisma {
     threeKillRounds?: boolean
     fourKillRounds?: boolean
     fiveKillRounds?: boolean
+    clutchAttempts?: boolean
+    clutchSuccesses?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     match?: boolean | MatchDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["playerMatchStats"]>
@@ -7309,6 +7484,8 @@ export namespace Prisma {
     threeKillRounds?: boolean
     fourKillRounds?: boolean
     fiveKillRounds?: boolean
+    clutchAttempts?: boolean
+    clutchSuccesses?: boolean
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     match?: boolean | MatchDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["playerMatchStats"]>
@@ -7342,9 +7519,11 @@ export namespace Prisma {
     threeKillRounds?: boolean
     fourKillRounds?: boolean
     fiveKillRounds?: boolean
+    clutchAttempts?: boolean
+    clutchSuccesses?: boolean
   }
 
-  export type PlayerMatchStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "matchId" | "steamId" | "username" | "rank" | "teamNumber" | "totalKills" | "totalDeaths" | "totalAssists" | "totalDamage" | "headshotPercentage" | "accuracySpotted" | "timeToDamage" | "crosshairPlacement" | "sprayAccuracy" | "counterStrafeRatio" | "headshotAccuracy" | "openingKills" | "openingAttempts" | "tradeKills" | "tradeAttempts" | "tradedDeaths" | "tradedDeathAttempts" | "twoKillRounds" | "threeKillRounds" | "fourKillRounds" | "fiveKillRounds", ExtArgs["result"]["playerMatchStats"]>
+  export type PlayerMatchStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "matchId" | "steamId" | "username" | "rank" | "teamNumber" | "totalKills" | "totalDeaths" | "totalAssists" | "totalDamage" | "headshotPercentage" | "accuracySpotted" | "timeToDamage" | "crosshairPlacement" | "sprayAccuracy" | "counterStrafeRatio" | "headshotAccuracy" | "openingKills" | "openingAttempts" | "tradeKills" | "tradeAttempts" | "tradedDeaths" | "tradedDeathAttempts" | "twoKillRounds" | "threeKillRounds" | "fourKillRounds" | "fiveKillRounds" | "clutchAttempts" | "clutchSuccesses", ExtArgs["result"]["playerMatchStats"]>
   export type PlayerMatchStatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     player?: boolean | PlayerDefaultArgs<ExtArgs>
     match?: boolean | MatchDefaultArgs<ExtArgs>
@@ -7393,6 +7572,8 @@ export namespace Prisma {
       threeKillRounds: number
       fourKillRounds: number
       fiveKillRounds: number
+      clutchAttempts: Prisma.JsonValue
+      clutchSuccesses: Prisma.JsonValue
     }, ExtArgs["result"]["playerMatchStats"]>
     composites: {}
   }
@@ -7846,6 +8027,8 @@ export namespace Prisma {
     readonly threeKillRounds: FieldRef<"PlayerMatchStats", 'Int'>
     readonly fourKillRounds: FieldRef<"PlayerMatchStats", 'Int'>
     readonly fiveKillRounds: FieldRef<"PlayerMatchStats", 'Int'>
+    readonly clutchAttempts: FieldRef<"PlayerMatchStats", 'Json'>
+    readonly clutchSuccesses: FieldRef<"PlayerMatchStats", 'Json'>
   }
     
 
@@ -8261,6 +8444,1196 @@ export namespace Prisma {
 
 
   /**
+   * Model PlayerScore
+   */
+
+  export type AggregatePlayerScore = {
+    _count: PlayerScoreCountAggregateOutputType | null
+    _avg: PlayerScoreAvgAggregateOutputType | null
+    _sum: PlayerScoreSumAggregateOutputType | null
+    _min: PlayerScoreMinAggregateOutputType | null
+    _max: PlayerScoreMaxAggregateOutputType | null
+  }
+
+  export type PlayerScoreAvgAggregateOutputType = {
+    matchScore: number | null
+    firepower: number | null
+    accuracy: number | null
+    entryTrading: number | null
+    clutch: number | null
+  }
+
+  export type PlayerScoreSumAggregateOutputType = {
+    matchScore: number | null
+    firepower: number | null
+    accuracy: number | null
+    entryTrading: number | null
+    clutch: number | null
+  }
+
+  export type PlayerScoreMinAggregateOutputType = {
+    id: string | null
+    playerId: string | null
+    matchId: string | null
+    matchScore: number | null
+    bucket: string | null
+    firepower: number | null
+    accuracy: number | null
+    entryTrading: number | null
+    clutch: number | null
+    createdAt: Date | null
+  }
+
+  export type PlayerScoreMaxAggregateOutputType = {
+    id: string | null
+    playerId: string | null
+    matchId: string | null
+    matchScore: number | null
+    bucket: string | null
+    firepower: number | null
+    accuracy: number | null
+    entryTrading: number | null
+    clutch: number | null
+    createdAt: Date | null
+  }
+
+  export type PlayerScoreCountAggregateOutputType = {
+    id: number
+    playerId: number
+    matchId: number
+    matchScore: number
+    bucket: number
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PlayerScoreAvgAggregateInputType = {
+    matchScore?: true
+    firepower?: true
+    accuracy?: true
+    entryTrading?: true
+    clutch?: true
+  }
+
+  export type PlayerScoreSumAggregateInputType = {
+    matchScore?: true
+    firepower?: true
+    accuracy?: true
+    entryTrading?: true
+    clutch?: true
+  }
+
+  export type PlayerScoreMinAggregateInputType = {
+    id?: true
+    playerId?: true
+    matchId?: true
+    matchScore?: true
+    bucket?: true
+    firepower?: true
+    accuracy?: true
+    entryTrading?: true
+    clutch?: true
+    createdAt?: true
+  }
+
+  export type PlayerScoreMaxAggregateInputType = {
+    id?: true
+    playerId?: true
+    matchId?: true
+    matchScore?: true
+    bucket?: true
+    firepower?: true
+    accuracy?: true
+    entryTrading?: true
+    clutch?: true
+    createdAt?: true
+  }
+
+  export type PlayerScoreCountAggregateInputType = {
+    id?: true
+    playerId?: true
+    matchId?: true
+    matchScore?: true
+    bucket?: true
+    firepower?: true
+    accuracy?: true
+    entryTrading?: true
+    clutch?: true
+    diffs?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PlayerScoreAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerScore to aggregate.
+     */
+    where?: PlayerScoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerScores to fetch.
+     */
+    orderBy?: PlayerScoreOrderByWithRelationInput | PlayerScoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlayerScoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerScores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerScores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PlayerScores
+    **/
+    _count?: true | PlayerScoreCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PlayerScoreAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PlayerScoreSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlayerScoreMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlayerScoreMaxAggregateInputType
+  }
+
+  export type GetPlayerScoreAggregateType<T extends PlayerScoreAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlayerScore]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlayerScore[P]>
+      : GetScalarType<T[P], AggregatePlayerScore[P]>
+  }
+
+
+
+
+  export type PlayerScoreGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerScoreWhereInput
+    orderBy?: PlayerScoreOrderByWithAggregationInput | PlayerScoreOrderByWithAggregationInput[]
+    by: PlayerScoreScalarFieldEnum[] | PlayerScoreScalarFieldEnum
+    having?: PlayerScoreScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlayerScoreCountAggregateInputType | true
+    _avg?: PlayerScoreAvgAggregateInputType
+    _sum?: PlayerScoreSumAggregateInputType
+    _min?: PlayerScoreMinAggregateInputType
+    _max?: PlayerScoreMaxAggregateInputType
+  }
+
+  export type PlayerScoreGroupByOutputType = {
+    id: string
+    playerId: string
+    matchId: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonValue
+    createdAt: Date
+    _count: PlayerScoreCountAggregateOutputType | null
+    _avg: PlayerScoreAvgAggregateOutputType | null
+    _sum: PlayerScoreSumAggregateOutputType | null
+    _min: PlayerScoreMinAggregateOutputType | null
+    _max: PlayerScoreMaxAggregateOutputType | null
+  }
+
+  type GetPlayerScoreGroupByPayload<T extends PlayerScoreGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlayerScoreGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlayerScoreGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlayerScoreGroupByOutputType[P]>
+            : GetScalarType<T[P], PlayerScoreGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlayerScoreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    matchId?: boolean
+    matchScore?: boolean
+    bucket?: boolean
+    firepower?: boolean
+    accuracy?: boolean
+    entryTrading?: boolean
+    clutch?: boolean
+    diffs?: boolean
+    createdAt?: boolean
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["playerScore"]>
+
+  export type PlayerScoreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    matchId?: boolean
+    matchScore?: boolean
+    bucket?: boolean
+    firepower?: boolean
+    accuracy?: boolean
+    entryTrading?: boolean
+    clutch?: boolean
+    diffs?: boolean
+    createdAt?: boolean
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["playerScore"]>
+
+  export type PlayerScoreSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    matchId?: boolean
+    matchScore?: boolean
+    bucket?: boolean
+    firepower?: boolean
+    accuracy?: boolean
+    entryTrading?: boolean
+    clutch?: boolean
+    diffs?: boolean
+    createdAt?: boolean
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["playerScore"]>
+
+  export type PlayerScoreSelectScalar = {
+    id?: boolean
+    playerId?: boolean
+    matchId?: boolean
+    matchScore?: boolean
+    bucket?: boolean
+    firepower?: boolean
+    accuracy?: boolean
+    entryTrading?: boolean
+    clutch?: boolean
+    diffs?: boolean
+    createdAt?: boolean
+  }
+
+  export type PlayerScoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "matchId" | "matchScore" | "bucket" | "firepower" | "accuracy" | "entryTrading" | "clutch" | "diffs" | "createdAt", ExtArgs["result"]["playerScore"]>
+  export type PlayerScoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }
+  export type PlayerScoreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }
+  export type PlayerScoreIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    player?: boolean | PlayerDefaultArgs<ExtArgs>
+    match?: boolean | MatchDefaultArgs<ExtArgs>
+  }
+
+  export type $PlayerScorePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PlayerScore"
+    objects: {
+      player: Prisma.$PlayerPayload<ExtArgs>
+      match: Prisma.$MatchPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      playerId: string
+      matchId: string
+      matchScore: number
+      bucket: string
+      firepower: number
+      accuracy: number
+      entryTrading: number
+      clutch: number
+      diffs: Prisma.JsonValue
+      createdAt: Date
+    }, ExtArgs["result"]["playerScore"]>
+    composites: {}
+  }
+
+  type PlayerScoreGetPayload<S extends boolean | null | undefined | PlayerScoreDefaultArgs> = $Result.GetResult<Prisma.$PlayerScorePayload, S>
+
+  type PlayerScoreCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlayerScoreFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlayerScoreCountAggregateInputType | true
+    }
+
+  export interface PlayerScoreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PlayerScore'], meta: { name: 'PlayerScore' } }
+    /**
+     * Find zero or one PlayerScore that matches the filter.
+     * @param {PlayerScoreFindUniqueArgs} args - Arguments to find a PlayerScore
+     * @example
+     * // Get one PlayerScore
+     * const playerScore = await prisma.playerScore.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlayerScoreFindUniqueArgs>(args: SelectSubset<T, PlayerScoreFindUniqueArgs<ExtArgs>>): Prisma__PlayerScoreClient<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PlayerScore that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlayerScoreFindUniqueOrThrowArgs} args - Arguments to find a PlayerScore
+     * @example
+     * // Get one PlayerScore
+     * const playerScore = await prisma.playerScore.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlayerScoreFindUniqueOrThrowArgs>(args: SelectSubset<T, PlayerScoreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlayerScoreClient<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerScore that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerScoreFindFirstArgs} args - Arguments to find a PlayerScore
+     * @example
+     * // Get one PlayerScore
+     * const playerScore = await prisma.playerScore.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlayerScoreFindFirstArgs>(args?: SelectSubset<T, PlayerScoreFindFirstArgs<ExtArgs>>): Prisma__PlayerScoreClient<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerScore that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerScoreFindFirstOrThrowArgs} args - Arguments to find a PlayerScore
+     * @example
+     * // Get one PlayerScore
+     * const playerScore = await prisma.playerScore.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlayerScoreFindFirstOrThrowArgs>(args?: SelectSubset<T, PlayerScoreFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlayerScoreClient<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PlayerScores that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerScoreFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PlayerScores
+     * const playerScores = await prisma.playerScore.findMany()
+     * 
+     * // Get first 10 PlayerScores
+     * const playerScores = await prisma.playerScore.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const playerScoreWithIdOnly = await prisma.playerScore.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PlayerScoreFindManyArgs>(args?: SelectSubset<T, PlayerScoreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PlayerScore.
+     * @param {PlayerScoreCreateArgs} args - Arguments to create a PlayerScore.
+     * @example
+     * // Create one PlayerScore
+     * const PlayerScore = await prisma.playerScore.create({
+     *   data: {
+     *     // ... data to create a PlayerScore
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlayerScoreCreateArgs>(args: SelectSubset<T, PlayerScoreCreateArgs<ExtArgs>>): Prisma__PlayerScoreClient<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PlayerScores.
+     * @param {PlayerScoreCreateManyArgs} args - Arguments to create many PlayerScores.
+     * @example
+     * // Create many PlayerScores
+     * const playerScore = await prisma.playerScore.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlayerScoreCreateManyArgs>(args?: SelectSubset<T, PlayerScoreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PlayerScores and returns the data saved in the database.
+     * @param {PlayerScoreCreateManyAndReturnArgs} args - Arguments to create many PlayerScores.
+     * @example
+     * // Create many PlayerScores
+     * const playerScore = await prisma.playerScore.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PlayerScores and only return the `id`
+     * const playerScoreWithIdOnly = await prisma.playerScore.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PlayerScoreCreateManyAndReturnArgs>(args?: SelectSubset<T, PlayerScoreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PlayerScore.
+     * @param {PlayerScoreDeleteArgs} args - Arguments to delete one PlayerScore.
+     * @example
+     * // Delete one PlayerScore
+     * const PlayerScore = await prisma.playerScore.delete({
+     *   where: {
+     *     // ... filter to delete one PlayerScore
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlayerScoreDeleteArgs>(args: SelectSubset<T, PlayerScoreDeleteArgs<ExtArgs>>): Prisma__PlayerScoreClient<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PlayerScore.
+     * @param {PlayerScoreUpdateArgs} args - Arguments to update one PlayerScore.
+     * @example
+     * // Update one PlayerScore
+     * const playerScore = await prisma.playerScore.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlayerScoreUpdateArgs>(args: SelectSubset<T, PlayerScoreUpdateArgs<ExtArgs>>): Prisma__PlayerScoreClient<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PlayerScores.
+     * @param {PlayerScoreDeleteManyArgs} args - Arguments to filter PlayerScores to delete.
+     * @example
+     * // Delete a few PlayerScores
+     * const { count } = await prisma.playerScore.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlayerScoreDeleteManyArgs>(args?: SelectSubset<T, PlayerScoreDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerScores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerScoreUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PlayerScores
+     * const playerScore = await prisma.playerScore.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlayerScoreUpdateManyArgs>(args: SelectSubset<T, PlayerScoreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerScores and returns the data updated in the database.
+     * @param {PlayerScoreUpdateManyAndReturnArgs} args - Arguments to update many PlayerScores.
+     * @example
+     * // Update many PlayerScores
+     * const playerScore = await prisma.playerScore.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PlayerScores and only return the `id`
+     * const playerScoreWithIdOnly = await prisma.playerScore.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PlayerScoreUpdateManyAndReturnArgs>(args: SelectSubset<T, PlayerScoreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PlayerScore.
+     * @param {PlayerScoreUpsertArgs} args - Arguments to update or create a PlayerScore.
+     * @example
+     * // Update or create a PlayerScore
+     * const playerScore = await prisma.playerScore.upsert({
+     *   create: {
+     *     // ... data to create a PlayerScore
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PlayerScore we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlayerScoreUpsertArgs>(args: SelectSubset<T, PlayerScoreUpsertArgs<ExtArgs>>): Prisma__PlayerScoreClient<$Result.GetResult<Prisma.$PlayerScorePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PlayerScores.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerScoreCountArgs} args - Arguments to filter PlayerScores to count.
+     * @example
+     * // Count the number of PlayerScores
+     * const count = await prisma.playerScore.count({
+     *   where: {
+     *     // ... the filter for the PlayerScores we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlayerScoreCountArgs>(
+      args?: Subset<T, PlayerScoreCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlayerScoreCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PlayerScore.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerScoreAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlayerScoreAggregateArgs>(args: Subset<T, PlayerScoreAggregateArgs>): Prisma.PrismaPromise<GetPlayerScoreAggregateType<T>>
+
+    /**
+     * Group by PlayerScore.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerScoreGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlayerScoreGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlayerScoreGroupByArgs['orderBy'] }
+        : { orderBy?: PlayerScoreGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlayerScoreGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlayerScoreGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PlayerScore model
+   */
+  readonly fields: PlayerScoreFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PlayerScore.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlayerScoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    player<T extends PlayerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlayerDefaultArgs<ExtArgs>>): Prisma__PlayerClient<$Result.GetResult<Prisma.$PlayerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    match<T extends MatchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MatchDefaultArgs<ExtArgs>>): Prisma__MatchClient<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PlayerScore model
+   */
+  interface PlayerScoreFieldRefs {
+    readonly id: FieldRef<"PlayerScore", 'String'>
+    readonly playerId: FieldRef<"PlayerScore", 'String'>
+    readonly matchId: FieldRef<"PlayerScore", 'String'>
+    readonly matchScore: FieldRef<"PlayerScore", 'Float'>
+    readonly bucket: FieldRef<"PlayerScore", 'String'>
+    readonly firepower: FieldRef<"PlayerScore", 'Float'>
+    readonly accuracy: FieldRef<"PlayerScore", 'Float'>
+    readonly entryTrading: FieldRef<"PlayerScore", 'Float'>
+    readonly clutch: FieldRef<"PlayerScore", 'Float'>
+    readonly diffs: FieldRef<"PlayerScore", 'Json'>
+    readonly createdAt: FieldRef<"PlayerScore", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PlayerScore findUnique
+   */
+  export type PlayerScoreFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerScore to fetch.
+     */
+    where: PlayerScoreWhereUniqueInput
+  }
+
+  /**
+   * PlayerScore findUniqueOrThrow
+   */
+  export type PlayerScoreFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerScore to fetch.
+     */
+    where: PlayerScoreWhereUniqueInput
+  }
+
+  /**
+   * PlayerScore findFirst
+   */
+  export type PlayerScoreFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerScore to fetch.
+     */
+    where?: PlayerScoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerScores to fetch.
+     */
+    orderBy?: PlayerScoreOrderByWithRelationInput | PlayerScoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerScores.
+     */
+    cursor?: PlayerScoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerScores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerScores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerScores.
+     */
+    distinct?: PlayerScoreScalarFieldEnum | PlayerScoreScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerScore findFirstOrThrow
+   */
+  export type PlayerScoreFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerScore to fetch.
+     */
+    where?: PlayerScoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerScores to fetch.
+     */
+    orderBy?: PlayerScoreOrderByWithRelationInput | PlayerScoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerScores.
+     */
+    cursor?: PlayerScoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerScores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerScores.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerScores.
+     */
+    distinct?: PlayerScoreScalarFieldEnum | PlayerScoreScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerScore findMany
+   */
+  export type PlayerScoreFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    /**
+     * Filter, which PlayerScores to fetch.
+     */
+    where?: PlayerScoreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerScores to fetch.
+     */
+    orderBy?: PlayerScoreOrderByWithRelationInput | PlayerScoreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PlayerScores.
+     */
+    cursor?: PlayerScoreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerScores from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerScores.
+     */
+    skip?: number
+    distinct?: PlayerScoreScalarFieldEnum | PlayerScoreScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerScore create
+   */
+  export type PlayerScoreCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PlayerScore.
+     */
+    data: XOR<PlayerScoreCreateInput, PlayerScoreUncheckedCreateInput>
+  }
+
+  /**
+   * PlayerScore createMany
+   */
+  export type PlayerScoreCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PlayerScores.
+     */
+    data: PlayerScoreCreateManyInput | PlayerScoreCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PlayerScore createManyAndReturn
+   */
+  export type PlayerScoreCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * The data used to create many PlayerScores.
+     */
+    data: PlayerScoreCreateManyInput | PlayerScoreCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PlayerScore update
+   */
+  export type PlayerScoreUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PlayerScore.
+     */
+    data: XOR<PlayerScoreUpdateInput, PlayerScoreUncheckedUpdateInput>
+    /**
+     * Choose, which PlayerScore to update.
+     */
+    where: PlayerScoreWhereUniqueInput
+  }
+
+  /**
+   * PlayerScore updateMany
+   */
+  export type PlayerScoreUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PlayerScores.
+     */
+    data: XOR<PlayerScoreUpdateManyMutationInput, PlayerScoreUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerScores to update
+     */
+    where?: PlayerScoreWhereInput
+    /**
+     * Limit how many PlayerScores to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerScore updateManyAndReturn
+   */
+  export type PlayerScoreUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * The data used to update PlayerScores.
+     */
+    data: XOR<PlayerScoreUpdateManyMutationInput, PlayerScoreUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerScores to update
+     */
+    where?: PlayerScoreWhereInput
+    /**
+     * Limit how many PlayerScores to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PlayerScore upsert
+   */
+  export type PlayerScoreUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PlayerScore to update in case it exists.
+     */
+    where: PlayerScoreWhereUniqueInput
+    /**
+     * In case the PlayerScore found by the `where` argument doesn't exist, create a new PlayerScore with this data.
+     */
+    create: XOR<PlayerScoreCreateInput, PlayerScoreUncheckedCreateInput>
+    /**
+     * In case the PlayerScore was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlayerScoreUpdateInput, PlayerScoreUncheckedUpdateInput>
+  }
+
+  /**
+   * PlayerScore delete
+   */
+  export type PlayerScoreDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+    /**
+     * Filter which PlayerScore to delete.
+     */
+    where: PlayerScoreWhereUniqueInput
+  }
+
+  /**
+   * PlayerScore deleteMany
+   */
+  export type PlayerScoreDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerScores to delete
+     */
+    where?: PlayerScoreWhereInput
+    /**
+     * Limit how many PlayerScores to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerScore without action
+   */
+  export type PlayerScoreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerScore
+     */
+    select?: PlayerScoreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerScore
+     */
+    omit?: PlayerScoreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlayerScoreInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8353,10 +9726,29 @@ export namespace Prisma {
     twoKillRounds: 'twoKillRounds',
     threeKillRounds: 'threeKillRounds',
     fourKillRounds: 'fourKillRounds',
-    fiveKillRounds: 'fiveKillRounds'
+    fiveKillRounds: 'fiveKillRounds',
+    clutchAttempts: 'clutchAttempts',
+    clutchSuccesses: 'clutchSuccesses'
   };
 
   export type PlayerMatchStatsScalarFieldEnum = (typeof PlayerMatchStatsScalarFieldEnum)[keyof typeof PlayerMatchStatsScalarFieldEnum]
+
+
+  export const PlayerScoreScalarFieldEnum: {
+    id: 'id',
+    playerId: 'playerId',
+    matchId: 'matchId',
+    matchScore: 'matchScore',
+    bucket: 'bucket',
+    firepower: 'firepower',
+    accuracy: 'accuracy',
+    entryTrading: 'entryTrading',
+    clutch: 'clutch',
+    diffs: 'diffs',
+    createdAt: 'createdAt'
+  };
+
+  export type PlayerScoreScalarFieldEnum = (typeof PlayerScoreScalarFieldEnum)[keyof typeof PlayerScoreScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8365,6 +9757,13 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -8381,6 +9780,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -8448,6 +9856,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
   /**
    * Deep Input Types
@@ -8532,6 +9954,7 @@ export namespace Prisma {
     steamId?: StringFilter<"Player"> | string
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     stats?: PlayerMatchStatsListRelationFilter
+    playerScores?: PlayerScoreListRelationFilter
   }
 
   export type PlayerOrderByWithRelationInput = {
@@ -8539,6 +9962,7 @@ export namespace Prisma {
     steamId?: SortOrder
     user?: UserOrderByWithRelationInput
     stats?: PlayerMatchStatsOrderByRelationAggregateInput
+    playerScores?: PlayerScoreOrderByRelationAggregateInput
   }
 
   export type PlayerWhereUniqueInput = Prisma.AtLeast<{
@@ -8549,6 +9973,7 @@ export namespace Prisma {
     NOT?: PlayerWhereInput | PlayerWhereInput[]
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     stats?: PlayerMatchStatsListRelationFilter
+    playerScores?: PlayerScoreListRelationFilter
   }, "id" | "steamId">
 
   export type PlayerOrderByWithAggregationInput = {
@@ -8580,6 +10005,7 @@ export namespace Prisma {
     stats?: PlayerMatchStatsListRelationFilter
     steamMatch?: XOR<SteamMatchNullableScalarRelationFilter, SteamMatchWhereInput> | null
     uploadedMatch?: XOR<UploadedMatchNullableScalarRelationFilter, UploadedMatchWhereInput> | null
+    playerScores?: PlayerScoreListRelationFilter
   }
 
   export type MatchOrderByWithRelationInput = {
@@ -8592,6 +10018,7 @@ export namespace Prisma {
     stats?: PlayerMatchStatsOrderByRelationAggregateInput
     steamMatch?: SteamMatchOrderByWithRelationInput
     uploadedMatch?: UploadedMatchOrderByWithRelationInput
+    playerScores?: PlayerScoreOrderByRelationAggregateInput
   }
 
   export type MatchWhereUniqueInput = Prisma.AtLeast<{
@@ -8607,6 +10034,7 @@ export namespace Prisma {
     stats?: PlayerMatchStatsListRelationFilter
     steamMatch?: XOR<SteamMatchNullableScalarRelationFilter, SteamMatchWhereInput> | null
     uploadedMatch?: XOR<UploadedMatchNullableScalarRelationFilter, UploadedMatchWhereInput> | null
+    playerScores?: PlayerScoreListRelationFilter
   }, "id" | "matchId">
 
   export type MatchOrderByWithAggregationInput = {
@@ -8752,6 +10180,8 @@ export namespace Prisma {
     threeKillRounds?: IntFilter<"PlayerMatchStats"> | number
     fourKillRounds?: IntFilter<"PlayerMatchStats"> | number
     fiveKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    clutchAttempts?: JsonFilter<"PlayerMatchStats">
+    clutchSuccesses?: JsonFilter<"PlayerMatchStats">
     player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
     match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
   }
@@ -8785,6 +10215,8 @@ export namespace Prisma {
     threeKillRounds?: SortOrder
     fourKillRounds?: SortOrder
     fiveKillRounds?: SortOrder
+    clutchAttempts?: SortOrder
+    clutchSuccesses?: SortOrder
     player?: PlayerOrderByWithRelationInput
     match?: MatchOrderByWithRelationInput
   }
@@ -8821,6 +10253,8 @@ export namespace Prisma {
     threeKillRounds?: IntFilter<"PlayerMatchStats"> | number
     fourKillRounds?: IntFilter<"PlayerMatchStats"> | number
     fiveKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    clutchAttempts?: JsonFilter<"PlayerMatchStats">
+    clutchSuccesses?: JsonFilter<"PlayerMatchStats">
     player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
     match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
   }, "id">
@@ -8854,6 +10288,8 @@ export namespace Prisma {
     threeKillRounds?: SortOrder
     fourKillRounds?: SortOrder
     fiveKillRounds?: SortOrder
+    clutchAttempts?: SortOrder
+    clutchSuccesses?: SortOrder
     _count?: PlayerMatchStatsCountOrderByAggregateInput
     _avg?: PlayerMatchStatsAvgOrderByAggregateInput
     _max?: PlayerMatchStatsMaxOrderByAggregateInput
@@ -8893,6 +10329,98 @@ export namespace Prisma {
     threeKillRounds?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
     fourKillRounds?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
     fiveKillRounds?: IntWithAggregatesFilter<"PlayerMatchStats"> | number
+    clutchAttempts?: JsonWithAggregatesFilter<"PlayerMatchStats">
+    clutchSuccesses?: JsonWithAggregatesFilter<"PlayerMatchStats">
+  }
+
+  export type PlayerScoreWhereInput = {
+    AND?: PlayerScoreWhereInput | PlayerScoreWhereInput[]
+    OR?: PlayerScoreWhereInput[]
+    NOT?: PlayerScoreWhereInput | PlayerScoreWhereInput[]
+    id?: StringFilter<"PlayerScore"> | string
+    playerId?: StringFilter<"PlayerScore"> | string
+    matchId?: StringFilter<"PlayerScore"> | string
+    matchScore?: FloatFilter<"PlayerScore"> | number
+    bucket?: StringFilter<"PlayerScore"> | string
+    firepower?: FloatFilter<"PlayerScore"> | number
+    accuracy?: FloatFilter<"PlayerScore"> | number
+    entryTrading?: FloatFilter<"PlayerScore"> | number
+    clutch?: FloatFilter<"PlayerScore"> | number
+    diffs?: JsonFilter<"PlayerScore">
+    createdAt?: DateTimeFilter<"PlayerScore"> | Date | string
+    player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
+    match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
+  }
+
+  export type PlayerScoreOrderByWithRelationInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    matchId?: SortOrder
+    matchScore?: SortOrder
+    bucket?: SortOrder
+    firepower?: SortOrder
+    accuracy?: SortOrder
+    entryTrading?: SortOrder
+    clutch?: SortOrder
+    diffs?: SortOrder
+    createdAt?: SortOrder
+    player?: PlayerOrderByWithRelationInput
+    match?: MatchOrderByWithRelationInput
+  }
+
+  export type PlayerScoreWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PlayerScoreWhereInput | PlayerScoreWhereInput[]
+    OR?: PlayerScoreWhereInput[]
+    NOT?: PlayerScoreWhereInput | PlayerScoreWhereInput[]
+    playerId?: StringFilter<"PlayerScore"> | string
+    matchId?: StringFilter<"PlayerScore"> | string
+    matchScore?: FloatFilter<"PlayerScore"> | number
+    bucket?: StringFilter<"PlayerScore"> | string
+    firepower?: FloatFilter<"PlayerScore"> | number
+    accuracy?: FloatFilter<"PlayerScore"> | number
+    entryTrading?: FloatFilter<"PlayerScore"> | number
+    clutch?: FloatFilter<"PlayerScore"> | number
+    diffs?: JsonFilter<"PlayerScore">
+    createdAt?: DateTimeFilter<"PlayerScore"> | Date | string
+    player?: XOR<PlayerScalarRelationFilter, PlayerWhereInput>
+    match?: XOR<MatchScalarRelationFilter, MatchWhereInput>
+  }, "id">
+
+  export type PlayerScoreOrderByWithAggregationInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    matchId?: SortOrder
+    matchScore?: SortOrder
+    bucket?: SortOrder
+    firepower?: SortOrder
+    accuracy?: SortOrder
+    entryTrading?: SortOrder
+    clutch?: SortOrder
+    diffs?: SortOrder
+    createdAt?: SortOrder
+    _count?: PlayerScoreCountOrderByAggregateInput
+    _avg?: PlayerScoreAvgOrderByAggregateInput
+    _max?: PlayerScoreMaxOrderByAggregateInput
+    _min?: PlayerScoreMinOrderByAggregateInput
+    _sum?: PlayerScoreSumOrderByAggregateInput
+  }
+
+  export type PlayerScoreScalarWhereWithAggregatesInput = {
+    AND?: PlayerScoreScalarWhereWithAggregatesInput | PlayerScoreScalarWhereWithAggregatesInput[]
+    OR?: PlayerScoreScalarWhereWithAggregatesInput[]
+    NOT?: PlayerScoreScalarWhereWithAggregatesInput | PlayerScoreScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PlayerScore"> | string
+    playerId?: StringWithAggregatesFilter<"PlayerScore"> | string
+    matchId?: StringWithAggregatesFilter<"PlayerScore"> | string
+    matchScore?: FloatWithAggregatesFilter<"PlayerScore"> | number
+    bucket?: StringWithAggregatesFilter<"PlayerScore"> | string
+    firepower?: FloatWithAggregatesFilter<"PlayerScore"> | number
+    accuracy?: FloatWithAggregatesFilter<"PlayerScore"> | number
+    entryTrading?: FloatWithAggregatesFilter<"PlayerScore"> | number
+    clutch?: FloatWithAggregatesFilter<"PlayerScore"> | number
+    diffs?: JsonWithAggregatesFilter<"PlayerScore">
+    createdAt?: DateTimeWithAggregatesFilter<"PlayerScore"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -8976,6 +10504,7 @@ export namespace Prisma {
     steamId: string
     user?: UserCreateNestedOneWithoutPlayerInput
     stats?: PlayerMatchStatsCreateNestedManyWithoutPlayerInput
+    playerScores?: PlayerScoreCreateNestedManyWithoutPlayerInput
   }
 
   export type PlayerUncheckedCreateInput = {
@@ -8983,6 +10512,7 @@ export namespace Prisma {
     steamId: string
     user?: UserUncheckedCreateNestedOneWithoutPlayerInput
     stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutPlayerInput
+    playerScores?: PlayerScoreUncheckedCreateNestedManyWithoutPlayerInput
   }
 
   export type PlayerUpdateInput = {
@@ -8990,6 +10520,7 @@ export namespace Prisma {
     steamId?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneWithoutPlayerNestedInput
     stats?: PlayerMatchStatsUpdateManyWithoutPlayerNestedInput
+    playerScores?: PlayerScoreUpdateManyWithoutPlayerNestedInput
   }
 
   export type PlayerUncheckedUpdateInput = {
@@ -8997,6 +10528,7 @@ export namespace Prisma {
     steamId?: StringFieldUpdateOperationsInput | string
     user?: UserUncheckedUpdateOneWithoutPlayerNestedInput
     stats?: PlayerMatchStatsUncheckedUpdateManyWithoutPlayerNestedInput
+    playerScores?: PlayerScoreUncheckedUpdateManyWithoutPlayerNestedInput
   }
 
   export type PlayerCreateManyInput = {
@@ -9024,6 +10556,7 @@ export namespace Prisma {
     stats?: PlayerMatchStatsCreateNestedManyWithoutMatchInput
     steamMatch?: SteamMatchCreateNestedOneWithoutMatchInput
     uploadedMatch?: UploadedMatchCreateNestedOneWithoutMatchInput
+    playerScores?: PlayerScoreCreateNestedManyWithoutMatchInput
   }
 
   export type MatchUncheckedCreateInput = {
@@ -9036,6 +10569,7 @@ export namespace Prisma {
     stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutMatchInput
     steamMatch?: SteamMatchUncheckedCreateNestedOneWithoutMatchInput
     uploadedMatch?: UploadedMatchUncheckedCreateNestedOneWithoutMatchInput
+    playerScores?: PlayerScoreUncheckedCreateNestedManyWithoutMatchInput
   }
 
   export type MatchUpdateInput = {
@@ -9048,6 +10582,7 @@ export namespace Prisma {
     stats?: PlayerMatchStatsUpdateManyWithoutMatchNestedInput
     steamMatch?: SteamMatchUpdateOneWithoutMatchNestedInput
     uploadedMatch?: UploadedMatchUpdateOneWithoutMatchNestedInput
+    playerScores?: PlayerScoreUpdateManyWithoutMatchNestedInput
   }
 
   export type MatchUncheckedUpdateInput = {
@@ -9060,6 +10595,7 @@ export namespace Prisma {
     stats?: PlayerMatchStatsUncheckedUpdateManyWithoutMatchNestedInput
     steamMatch?: SteamMatchUncheckedUpdateOneWithoutMatchNestedInput
     uploadedMatch?: UploadedMatchUncheckedUpdateOneWithoutMatchNestedInput
+    playerScores?: PlayerScoreUncheckedUpdateManyWithoutMatchNestedInput
   }
 
   export type MatchCreateManyInput = {
@@ -9191,6 +10727,8 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonNullValueInput | InputJsonValue
+    clutchSuccesses: JsonNullValueInput | InputJsonValue
     player: PlayerCreateNestedOneWithoutStatsInput
     match: MatchCreateNestedOneWithoutStatsInput
   }
@@ -9224,6 +10762,8 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonNullValueInput | InputJsonValue
+    clutchSuccesses: JsonNullValueInput | InputJsonValue
   }
 
   export type PlayerMatchStatsUpdateInput = {
@@ -9253,6 +10793,8 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
     player?: PlayerUpdateOneRequiredWithoutStatsNestedInput
     match?: MatchUpdateOneRequiredWithoutStatsNestedInput
   }
@@ -9286,6 +10828,8 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
   }
 
   export type PlayerMatchStatsCreateManyInput = {
@@ -9317,6 +10861,8 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonNullValueInput | InputJsonValue
+    clutchSuccesses: JsonNullValueInput | InputJsonValue
   }
 
   export type PlayerMatchStatsUpdateManyMutationInput = {
@@ -9346,6 +10892,8 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
   }
 
   export type PlayerMatchStatsUncheckedUpdateManyInput = {
@@ -9377,6 +10925,104 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type PlayerScoreCreateInput = {
+    id?: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    player: PlayerCreateNestedOneWithoutPlayerScoresInput
+    match: MatchCreateNestedOneWithoutPlayerScoresInput
+  }
+
+  export type PlayerScoreUncheckedCreateInput = {
+    id?: string
+    playerId: string
+    matchId: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type PlayerScoreUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    player?: PlayerUpdateOneRequiredWithoutPlayerScoresNestedInput
+    match?: MatchUpdateOneRequiredWithoutPlayerScoresNestedInput
+  }
+
+  export type PlayerScoreUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlayerScoreCreateManyInput = {
+    id?: string
+    playerId: string
+    matchId: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type PlayerScoreUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlayerScoreUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -9537,7 +11183,17 @@ export namespace Prisma {
     none?: PlayerMatchStatsWhereInput
   }
 
+  export type PlayerScoreListRelationFilter = {
+    every?: PlayerScoreWhereInput
+    some?: PlayerScoreWhereInput
+    none?: PlayerScoreWhereInput
+  }
+
   export type PlayerMatchStatsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PlayerScoreOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9678,6 +11334,29 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type PlayerScalarRelationFilter = {
     is?: PlayerWhereInput
@@ -9713,6 +11392,8 @@ export namespace Prisma {
     threeKillRounds?: SortOrder
     fourKillRounds?: SortOrder
     fiveKillRounds?: SortOrder
+    clutchAttempts?: SortOrder
+    clutchSuccesses?: SortOrder
   }
 
   export type PlayerMatchStatsAvgOrderByAggregateInput = {
@@ -9844,6 +11525,88 @@ export namespace Prisma {
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
   }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type PlayerScoreCountOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    matchId?: SortOrder
+    matchScore?: SortOrder
+    bucket?: SortOrder
+    firepower?: SortOrder
+    accuracy?: SortOrder
+    entryTrading?: SortOrder
+    clutch?: SortOrder
+    diffs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PlayerScoreAvgOrderByAggregateInput = {
+    matchScore?: SortOrder
+    firepower?: SortOrder
+    accuracy?: SortOrder
+    entryTrading?: SortOrder
+    clutch?: SortOrder
+  }
+
+  export type PlayerScoreMaxOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    matchId?: SortOrder
+    matchScore?: SortOrder
+    bucket?: SortOrder
+    firepower?: SortOrder
+    accuracy?: SortOrder
+    entryTrading?: SortOrder
+    clutch?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PlayerScoreMinOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    matchId?: SortOrder
+    matchScore?: SortOrder
+    bucket?: SortOrder
+    firepower?: SortOrder
+    accuracy?: SortOrder
+    entryTrading?: SortOrder
+    clutch?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PlayerScoreSumOrderByAggregateInput = {
+    matchScore?: SortOrder
+    firepower?: SortOrder
+    accuracy?: SortOrder
+    entryTrading?: SortOrder
+    clutch?: SortOrder
+  }
 
   export type PlayerCreateNestedOneWithoutUserInput = {
     create?: XOR<PlayerCreateWithoutUserInput, PlayerUncheckedCreateWithoutUserInput>
@@ -9890,6 +11653,13 @@ export namespace Prisma {
     connect?: PlayerMatchStatsWhereUniqueInput | PlayerMatchStatsWhereUniqueInput[]
   }
 
+  export type PlayerScoreCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<PlayerScoreCreateWithoutPlayerInput, PlayerScoreUncheckedCreateWithoutPlayerInput> | PlayerScoreCreateWithoutPlayerInput[] | PlayerScoreUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: PlayerScoreCreateOrConnectWithoutPlayerInput | PlayerScoreCreateOrConnectWithoutPlayerInput[]
+    createMany?: PlayerScoreCreateManyPlayerInputEnvelope
+    connect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedOneWithoutPlayerInput = {
     create?: XOR<UserCreateWithoutPlayerInput, UserUncheckedCreateWithoutPlayerInput>
     connectOrCreate?: UserCreateOrConnectWithoutPlayerInput
@@ -9901,6 +11671,13 @@ export namespace Prisma {
     connectOrCreate?: PlayerMatchStatsCreateOrConnectWithoutPlayerInput | PlayerMatchStatsCreateOrConnectWithoutPlayerInput[]
     createMany?: PlayerMatchStatsCreateManyPlayerInputEnvelope
     connect?: PlayerMatchStatsWhereUniqueInput | PlayerMatchStatsWhereUniqueInput[]
+  }
+
+  export type PlayerScoreUncheckedCreateNestedManyWithoutPlayerInput = {
+    create?: XOR<PlayerScoreCreateWithoutPlayerInput, PlayerScoreUncheckedCreateWithoutPlayerInput> | PlayerScoreCreateWithoutPlayerInput[] | PlayerScoreUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: PlayerScoreCreateOrConnectWithoutPlayerInput | PlayerScoreCreateOrConnectWithoutPlayerInput[]
+    createMany?: PlayerScoreCreateManyPlayerInputEnvelope
+    connect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutPlayerNestedInput = {
@@ -9927,6 +11704,20 @@ export namespace Prisma {
     deleteMany?: PlayerMatchStatsScalarWhereInput | PlayerMatchStatsScalarWhereInput[]
   }
 
+  export type PlayerScoreUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<PlayerScoreCreateWithoutPlayerInput, PlayerScoreUncheckedCreateWithoutPlayerInput> | PlayerScoreCreateWithoutPlayerInput[] | PlayerScoreUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: PlayerScoreCreateOrConnectWithoutPlayerInput | PlayerScoreCreateOrConnectWithoutPlayerInput[]
+    upsert?: PlayerScoreUpsertWithWhereUniqueWithoutPlayerInput | PlayerScoreUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: PlayerScoreCreateManyPlayerInputEnvelope
+    set?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    disconnect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    delete?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    connect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    update?: PlayerScoreUpdateWithWhereUniqueWithoutPlayerInput | PlayerScoreUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: PlayerScoreUpdateManyWithWhereWithoutPlayerInput | PlayerScoreUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: PlayerScoreScalarWhereInput | PlayerScoreScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateOneWithoutPlayerNestedInput = {
     create?: XOR<UserCreateWithoutPlayerInput, UserUncheckedCreateWithoutPlayerInput>
     connectOrCreate?: UserCreateOrConnectWithoutPlayerInput
@@ -9951,6 +11742,20 @@ export namespace Prisma {
     deleteMany?: PlayerMatchStatsScalarWhereInput | PlayerMatchStatsScalarWhereInput[]
   }
 
+  export type PlayerScoreUncheckedUpdateManyWithoutPlayerNestedInput = {
+    create?: XOR<PlayerScoreCreateWithoutPlayerInput, PlayerScoreUncheckedCreateWithoutPlayerInput> | PlayerScoreCreateWithoutPlayerInput[] | PlayerScoreUncheckedCreateWithoutPlayerInput[]
+    connectOrCreate?: PlayerScoreCreateOrConnectWithoutPlayerInput | PlayerScoreCreateOrConnectWithoutPlayerInput[]
+    upsert?: PlayerScoreUpsertWithWhereUniqueWithoutPlayerInput | PlayerScoreUpsertWithWhereUniqueWithoutPlayerInput[]
+    createMany?: PlayerScoreCreateManyPlayerInputEnvelope
+    set?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    disconnect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    delete?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    connect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    update?: PlayerScoreUpdateWithWhereUniqueWithoutPlayerInput | PlayerScoreUpdateWithWhereUniqueWithoutPlayerInput[]
+    updateMany?: PlayerScoreUpdateManyWithWhereWithoutPlayerInput | PlayerScoreUpdateManyWithWhereWithoutPlayerInput[]
+    deleteMany?: PlayerScoreScalarWhereInput | PlayerScoreScalarWhereInput[]
+  }
+
   export type PlayerMatchStatsCreateNestedManyWithoutMatchInput = {
     create?: XOR<PlayerMatchStatsCreateWithoutMatchInput, PlayerMatchStatsUncheckedCreateWithoutMatchInput> | PlayerMatchStatsCreateWithoutMatchInput[] | PlayerMatchStatsUncheckedCreateWithoutMatchInput[]
     connectOrCreate?: PlayerMatchStatsCreateOrConnectWithoutMatchInput | PlayerMatchStatsCreateOrConnectWithoutMatchInput[]
@@ -9970,6 +11775,13 @@ export namespace Prisma {
     connect?: UploadedMatchWhereUniqueInput
   }
 
+  export type PlayerScoreCreateNestedManyWithoutMatchInput = {
+    create?: XOR<PlayerScoreCreateWithoutMatchInput, PlayerScoreUncheckedCreateWithoutMatchInput> | PlayerScoreCreateWithoutMatchInput[] | PlayerScoreUncheckedCreateWithoutMatchInput[]
+    connectOrCreate?: PlayerScoreCreateOrConnectWithoutMatchInput | PlayerScoreCreateOrConnectWithoutMatchInput[]
+    createMany?: PlayerScoreCreateManyMatchInputEnvelope
+    connect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+  }
+
   export type PlayerMatchStatsUncheckedCreateNestedManyWithoutMatchInput = {
     create?: XOR<PlayerMatchStatsCreateWithoutMatchInput, PlayerMatchStatsUncheckedCreateWithoutMatchInput> | PlayerMatchStatsCreateWithoutMatchInput[] | PlayerMatchStatsUncheckedCreateWithoutMatchInput[]
     connectOrCreate?: PlayerMatchStatsCreateOrConnectWithoutMatchInput | PlayerMatchStatsCreateOrConnectWithoutMatchInput[]
@@ -9987,6 +11799,13 @@ export namespace Prisma {
     create?: XOR<UploadedMatchCreateWithoutMatchInput, UploadedMatchUncheckedCreateWithoutMatchInput>
     connectOrCreate?: UploadedMatchCreateOrConnectWithoutMatchInput
     connect?: UploadedMatchWhereUniqueInput
+  }
+
+  export type PlayerScoreUncheckedCreateNestedManyWithoutMatchInput = {
+    create?: XOR<PlayerScoreCreateWithoutMatchInput, PlayerScoreUncheckedCreateWithoutMatchInput> | PlayerScoreCreateWithoutMatchInput[] | PlayerScoreUncheckedCreateWithoutMatchInput[]
+    connectOrCreate?: PlayerScoreCreateOrConnectWithoutMatchInput | PlayerScoreCreateOrConnectWithoutMatchInput[]
+    createMany?: PlayerScoreCreateManyMatchInputEnvelope
+    connect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -10031,6 +11850,20 @@ export namespace Prisma {
     update?: XOR<XOR<UploadedMatchUpdateToOneWithWhereWithoutMatchInput, UploadedMatchUpdateWithoutMatchInput>, UploadedMatchUncheckedUpdateWithoutMatchInput>
   }
 
+  export type PlayerScoreUpdateManyWithoutMatchNestedInput = {
+    create?: XOR<PlayerScoreCreateWithoutMatchInput, PlayerScoreUncheckedCreateWithoutMatchInput> | PlayerScoreCreateWithoutMatchInput[] | PlayerScoreUncheckedCreateWithoutMatchInput[]
+    connectOrCreate?: PlayerScoreCreateOrConnectWithoutMatchInput | PlayerScoreCreateOrConnectWithoutMatchInput[]
+    upsert?: PlayerScoreUpsertWithWhereUniqueWithoutMatchInput | PlayerScoreUpsertWithWhereUniqueWithoutMatchInput[]
+    createMany?: PlayerScoreCreateManyMatchInputEnvelope
+    set?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    disconnect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    delete?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    connect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    update?: PlayerScoreUpdateWithWhereUniqueWithoutMatchInput | PlayerScoreUpdateWithWhereUniqueWithoutMatchInput[]
+    updateMany?: PlayerScoreUpdateManyWithWhereWithoutMatchInput | PlayerScoreUpdateManyWithWhereWithoutMatchInput[]
+    deleteMany?: PlayerScoreScalarWhereInput | PlayerScoreScalarWhereInput[]
+  }
+
   export type PlayerMatchStatsUncheckedUpdateManyWithoutMatchNestedInput = {
     create?: XOR<PlayerMatchStatsCreateWithoutMatchInput, PlayerMatchStatsUncheckedCreateWithoutMatchInput> | PlayerMatchStatsCreateWithoutMatchInput[] | PlayerMatchStatsUncheckedCreateWithoutMatchInput[]
     connectOrCreate?: PlayerMatchStatsCreateOrConnectWithoutMatchInput | PlayerMatchStatsCreateOrConnectWithoutMatchInput[]
@@ -10063,6 +11896,20 @@ export namespace Prisma {
     delete?: UploadedMatchWhereInput | boolean
     connect?: UploadedMatchWhereUniqueInput
     update?: XOR<XOR<UploadedMatchUpdateToOneWithWhereWithoutMatchInput, UploadedMatchUpdateWithoutMatchInput>, UploadedMatchUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type PlayerScoreUncheckedUpdateManyWithoutMatchNestedInput = {
+    create?: XOR<PlayerScoreCreateWithoutMatchInput, PlayerScoreUncheckedCreateWithoutMatchInput> | PlayerScoreCreateWithoutMatchInput[] | PlayerScoreUncheckedCreateWithoutMatchInput[]
+    connectOrCreate?: PlayerScoreCreateOrConnectWithoutMatchInput | PlayerScoreCreateOrConnectWithoutMatchInput[]
+    upsert?: PlayerScoreUpsertWithWhereUniqueWithoutMatchInput | PlayerScoreUpsertWithWhereUniqueWithoutMatchInput[]
+    createMany?: PlayerScoreCreateManyMatchInputEnvelope
+    set?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    disconnect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    delete?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    connect?: PlayerScoreWhereUniqueInput | PlayerScoreWhereUniqueInput[]
+    update?: PlayerScoreUpdateWithWhereUniqueWithoutMatchInput | PlayerScoreUpdateWithWhereUniqueWithoutMatchInput[]
+    updateMany?: PlayerScoreUpdateManyWithWhereWithoutMatchInput | PlayerScoreUpdateManyWithWhereWithoutMatchInput[]
+    deleteMany?: PlayerScoreScalarWhereInput | PlayerScoreScalarWhereInput[]
   }
 
   export type MatchCreateNestedOneWithoutSteamMatchInput = {
@@ -10127,6 +11974,34 @@ export namespace Prisma {
     upsert?: MatchUpsertWithoutStatsInput
     connect?: MatchWhereUniqueInput
     update?: XOR<XOR<MatchUpdateToOneWithWhereWithoutStatsInput, MatchUpdateWithoutStatsInput>, MatchUncheckedUpdateWithoutStatsInput>
+  }
+
+  export type PlayerCreateNestedOneWithoutPlayerScoresInput = {
+    create?: XOR<PlayerCreateWithoutPlayerScoresInput, PlayerUncheckedCreateWithoutPlayerScoresInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutPlayerScoresInput
+    connect?: PlayerWhereUniqueInput
+  }
+
+  export type MatchCreateNestedOneWithoutPlayerScoresInput = {
+    create?: XOR<MatchCreateWithoutPlayerScoresInput, MatchUncheckedCreateWithoutPlayerScoresInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutPlayerScoresInput
+    connect?: MatchWhereUniqueInput
+  }
+
+  export type PlayerUpdateOneRequiredWithoutPlayerScoresNestedInput = {
+    create?: XOR<PlayerCreateWithoutPlayerScoresInput, PlayerUncheckedCreateWithoutPlayerScoresInput>
+    connectOrCreate?: PlayerCreateOrConnectWithoutPlayerScoresInput
+    upsert?: PlayerUpsertWithoutPlayerScoresInput
+    connect?: PlayerWhereUniqueInput
+    update?: XOR<XOR<PlayerUpdateToOneWithWhereWithoutPlayerScoresInput, PlayerUpdateWithoutPlayerScoresInput>, PlayerUncheckedUpdateWithoutPlayerScoresInput>
+  }
+
+  export type MatchUpdateOneRequiredWithoutPlayerScoresNestedInput = {
+    create?: XOR<MatchCreateWithoutPlayerScoresInput, MatchUncheckedCreateWithoutPlayerScoresInput>
+    connectOrCreate?: MatchCreateOrConnectWithoutPlayerScoresInput
+    upsert?: MatchUpsertWithoutPlayerScoresInput
+    connect?: MatchWhereUniqueInput
+    update?: XOR<XOR<MatchUpdateToOneWithWhereWithoutPlayerScoresInput, MatchUpdateWithoutPlayerScoresInput>, MatchUncheckedUpdateWithoutPlayerScoresInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -10293,17 +12168,42 @@ export namespace Prisma {
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type PlayerCreateWithoutUserInput = {
     id?: string
     steamId: string
     stats?: PlayerMatchStatsCreateNestedManyWithoutPlayerInput
+    playerScores?: PlayerScoreCreateNestedManyWithoutPlayerInput
   }
 
   export type PlayerUncheckedCreateWithoutUserInput = {
     id?: string
     steamId: string
     stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutPlayerInput
+    playerScores?: PlayerScoreUncheckedCreateNestedManyWithoutPlayerInput
   }
 
   export type PlayerCreateOrConnectWithoutUserInput = {
@@ -10326,12 +12226,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     stats?: PlayerMatchStatsUpdateManyWithoutPlayerNestedInput
+    playerScores?: PlayerScoreUpdateManyWithoutPlayerNestedInput
   }
 
   export type PlayerUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     stats?: PlayerMatchStatsUncheckedUpdateManyWithoutPlayerNestedInput
+    playerScores?: PlayerScoreUncheckedUpdateManyWithoutPlayerNestedInput
   }
 
   export type UserCreateWithoutPlayerInput = {
@@ -10386,6 +12288,8 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonNullValueInput | InputJsonValue
+    clutchSuccesses: JsonNullValueInput | InputJsonValue
     match: MatchCreateNestedOneWithoutStatsInput
   }
 
@@ -10417,6 +12321,8 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonNullValueInput | InputJsonValue
+    clutchSuccesses: JsonNullValueInput | InputJsonValue
   }
 
   export type PlayerMatchStatsCreateOrConnectWithoutPlayerInput = {
@@ -10426,6 +12332,42 @@ export namespace Prisma {
 
   export type PlayerMatchStatsCreateManyPlayerInputEnvelope = {
     data: PlayerMatchStatsCreateManyPlayerInput | PlayerMatchStatsCreateManyPlayerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PlayerScoreCreateWithoutPlayerInput = {
+    id?: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    match: MatchCreateNestedOneWithoutPlayerScoresInput
+  }
+
+  export type PlayerScoreUncheckedCreateWithoutPlayerInput = {
+    id?: string
+    matchId: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type PlayerScoreCreateOrConnectWithoutPlayerInput = {
+    where: PlayerScoreWhereUniqueInput
+    create: XOR<PlayerScoreCreateWithoutPlayerInput, PlayerScoreUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type PlayerScoreCreateManyPlayerInputEnvelope = {
+    data: PlayerScoreCreateManyPlayerInput | PlayerScoreCreateManyPlayerInput[]
     skipDuplicates?: boolean
   }
 
@@ -10508,6 +12450,41 @@ export namespace Prisma {
     threeKillRounds?: IntFilter<"PlayerMatchStats"> | number
     fourKillRounds?: IntFilter<"PlayerMatchStats"> | number
     fiveKillRounds?: IntFilter<"PlayerMatchStats"> | number
+    clutchAttempts?: JsonFilter<"PlayerMatchStats">
+    clutchSuccesses?: JsonFilter<"PlayerMatchStats">
+  }
+
+  export type PlayerScoreUpsertWithWhereUniqueWithoutPlayerInput = {
+    where: PlayerScoreWhereUniqueInput
+    update: XOR<PlayerScoreUpdateWithoutPlayerInput, PlayerScoreUncheckedUpdateWithoutPlayerInput>
+    create: XOR<PlayerScoreCreateWithoutPlayerInput, PlayerScoreUncheckedCreateWithoutPlayerInput>
+  }
+
+  export type PlayerScoreUpdateWithWhereUniqueWithoutPlayerInput = {
+    where: PlayerScoreWhereUniqueInput
+    data: XOR<PlayerScoreUpdateWithoutPlayerInput, PlayerScoreUncheckedUpdateWithoutPlayerInput>
+  }
+
+  export type PlayerScoreUpdateManyWithWhereWithoutPlayerInput = {
+    where: PlayerScoreScalarWhereInput
+    data: XOR<PlayerScoreUpdateManyMutationInput, PlayerScoreUncheckedUpdateManyWithoutPlayerInput>
+  }
+
+  export type PlayerScoreScalarWhereInput = {
+    AND?: PlayerScoreScalarWhereInput | PlayerScoreScalarWhereInput[]
+    OR?: PlayerScoreScalarWhereInput[]
+    NOT?: PlayerScoreScalarWhereInput | PlayerScoreScalarWhereInput[]
+    id?: StringFilter<"PlayerScore"> | string
+    playerId?: StringFilter<"PlayerScore"> | string
+    matchId?: StringFilter<"PlayerScore"> | string
+    matchScore?: FloatFilter<"PlayerScore"> | number
+    bucket?: StringFilter<"PlayerScore"> | string
+    firepower?: FloatFilter<"PlayerScore"> | number
+    accuracy?: FloatFilter<"PlayerScore"> | number
+    entryTrading?: FloatFilter<"PlayerScore"> | number
+    clutch?: FloatFilter<"PlayerScore"> | number
+    diffs?: JsonFilter<"PlayerScore">
+    createdAt?: DateTimeFilter<"PlayerScore"> | Date | string
   }
 
   export type PlayerMatchStatsCreateWithoutMatchInput = {
@@ -10537,6 +12514,8 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonNullValueInput | InputJsonValue
+    clutchSuccesses: JsonNullValueInput | InputJsonValue
     player: PlayerCreateNestedOneWithoutStatsInput
   }
 
@@ -10568,6 +12547,8 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonNullValueInput | InputJsonValue
+    clutchSuccesses: JsonNullValueInput | InputJsonValue
   }
 
   export type PlayerMatchStatsCreateOrConnectWithoutMatchInput = {
@@ -10606,6 +12587,42 @@ export namespace Prisma {
   export type UploadedMatchCreateOrConnectWithoutMatchInput = {
     where: UploadedMatchWhereUniqueInput
     create: XOR<UploadedMatchCreateWithoutMatchInput, UploadedMatchUncheckedCreateWithoutMatchInput>
+  }
+
+  export type PlayerScoreCreateWithoutMatchInput = {
+    id?: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    player: PlayerCreateNestedOneWithoutPlayerScoresInput
+  }
+
+  export type PlayerScoreUncheckedCreateWithoutMatchInput = {
+    id?: string
+    playerId: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type PlayerScoreCreateOrConnectWithoutMatchInput = {
+    where: PlayerScoreWhereUniqueInput
+    create: XOR<PlayerScoreCreateWithoutMatchInput, PlayerScoreUncheckedCreateWithoutMatchInput>
+  }
+
+  export type PlayerScoreCreateManyMatchInputEnvelope = {
+    data: PlayerScoreCreateManyMatchInput | PlayerScoreCreateManyMatchInput[]
+    skipDuplicates?: boolean
   }
 
   export type PlayerMatchStatsUpsertWithWhereUniqueWithoutMatchInput = {
@@ -10664,6 +12681,22 @@ export namespace Prisma {
     uploadedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PlayerScoreUpsertWithWhereUniqueWithoutMatchInput = {
+    where: PlayerScoreWhereUniqueInput
+    update: XOR<PlayerScoreUpdateWithoutMatchInput, PlayerScoreUncheckedUpdateWithoutMatchInput>
+    create: XOR<PlayerScoreCreateWithoutMatchInput, PlayerScoreUncheckedCreateWithoutMatchInput>
+  }
+
+  export type PlayerScoreUpdateWithWhereUniqueWithoutMatchInput = {
+    where: PlayerScoreWhereUniqueInput
+    data: XOR<PlayerScoreUpdateWithoutMatchInput, PlayerScoreUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type PlayerScoreUpdateManyWithWhereWithoutMatchInput = {
+    where: PlayerScoreScalarWhereInput
+    data: XOR<PlayerScoreUpdateManyMutationInput, PlayerScoreUncheckedUpdateManyWithoutMatchInput>
+  }
+
   export type MatchCreateWithoutSteamMatchInput = {
     id?: string
     matchId: string
@@ -10673,6 +12706,7 @@ export namespace Prisma {
     playedAt: Date | string
     stats?: PlayerMatchStatsCreateNestedManyWithoutMatchInput
     uploadedMatch?: UploadedMatchCreateNestedOneWithoutMatchInput
+    playerScores?: PlayerScoreCreateNestedManyWithoutMatchInput
   }
 
   export type MatchUncheckedCreateWithoutSteamMatchInput = {
@@ -10684,6 +12718,7 @@ export namespace Prisma {
     playedAt: Date | string
     stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutMatchInput
     uploadedMatch?: UploadedMatchUncheckedCreateNestedOneWithoutMatchInput
+    playerScores?: PlayerScoreUncheckedCreateNestedManyWithoutMatchInput
   }
 
   export type MatchCreateOrConnectWithoutSteamMatchInput = {
@@ -10711,6 +12746,7 @@ export namespace Prisma {
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stats?: PlayerMatchStatsUpdateManyWithoutMatchNestedInput
     uploadedMatch?: UploadedMatchUpdateOneWithoutMatchNestedInput
+    playerScores?: PlayerScoreUpdateManyWithoutMatchNestedInput
   }
 
   export type MatchUncheckedUpdateWithoutSteamMatchInput = {
@@ -10722,6 +12758,7 @@ export namespace Prisma {
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stats?: PlayerMatchStatsUncheckedUpdateManyWithoutMatchNestedInput
     uploadedMatch?: UploadedMatchUncheckedUpdateOneWithoutMatchNestedInput
+    playerScores?: PlayerScoreUncheckedUpdateManyWithoutMatchNestedInput
   }
 
   export type MatchCreateWithoutUploadedMatchInput = {
@@ -10733,6 +12770,7 @@ export namespace Prisma {
     playedAt: Date | string
     stats?: PlayerMatchStatsCreateNestedManyWithoutMatchInput
     steamMatch?: SteamMatchCreateNestedOneWithoutMatchInput
+    playerScores?: PlayerScoreCreateNestedManyWithoutMatchInput
   }
 
   export type MatchUncheckedCreateWithoutUploadedMatchInput = {
@@ -10744,6 +12782,7 @@ export namespace Prisma {
     playedAt: Date | string
     stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutMatchInput
     steamMatch?: SteamMatchUncheckedCreateNestedOneWithoutMatchInput
+    playerScores?: PlayerScoreUncheckedCreateNestedManyWithoutMatchInput
   }
 
   export type MatchCreateOrConnectWithoutUploadedMatchInput = {
@@ -10771,6 +12810,7 @@ export namespace Prisma {
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stats?: PlayerMatchStatsUpdateManyWithoutMatchNestedInput
     steamMatch?: SteamMatchUpdateOneWithoutMatchNestedInput
+    playerScores?: PlayerScoreUpdateManyWithoutMatchNestedInput
   }
 
   export type MatchUncheckedUpdateWithoutUploadedMatchInput = {
@@ -10782,18 +12822,21 @@ export namespace Prisma {
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stats?: PlayerMatchStatsUncheckedUpdateManyWithoutMatchNestedInput
     steamMatch?: SteamMatchUncheckedUpdateOneWithoutMatchNestedInput
+    playerScores?: PlayerScoreUncheckedUpdateManyWithoutMatchNestedInput
   }
 
   export type PlayerCreateWithoutStatsInput = {
     id?: string
     steamId: string
     user?: UserCreateNestedOneWithoutPlayerInput
+    playerScores?: PlayerScoreCreateNestedManyWithoutPlayerInput
   }
 
   export type PlayerUncheckedCreateWithoutStatsInput = {
     id?: string
     steamId: string
     user?: UserUncheckedCreateNestedOneWithoutPlayerInput
+    playerScores?: PlayerScoreUncheckedCreateNestedManyWithoutPlayerInput
   }
 
   export type PlayerCreateOrConnectWithoutStatsInput = {
@@ -10810,6 +12853,7 @@ export namespace Prisma {
     playedAt: Date | string
     steamMatch?: SteamMatchCreateNestedOneWithoutMatchInput
     uploadedMatch?: UploadedMatchCreateNestedOneWithoutMatchInput
+    playerScores?: PlayerScoreCreateNestedManyWithoutMatchInput
   }
 
   export type MatchUncheckedCreateWithoutStatsInput = {
@@ -10821,6 +12865,7 @@ export namespace Prisma {
     playedAt: Date | string
     steamMatch?: SteamMatchUncheckedCreateNestedOneWithoutMatchInput
     uploadedMatch?: UploadedMatchUncheckedCreateNestedOneWithoutMatchInput
+    playerScores?: PlayerScoreUncheckedCreateNestedManyWithoutMatchInput
   }
 
   export type MatchCreateOrConnectWithoutStatsInput = {
@@ -10843,12 +12888,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneWithoutPlayerNestedInput
+    playerScores?: PlayerScoreUpdateManyWithoutPlayerNestedInput
   }
 
   export type PlayerUncheckedUpdateWithoutStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     steamId?: StringFieldUpdateOperationsInput | string
     user?: UserUncheckedUpdateOneWithoutPlayerNestedInput
+    playerScores?: PlayerScoreUncheckedUpdateManyWithoutPlayerNestedInput
   }
 
   export type MatchUpsertWithoutStatsInput = {
@@ -10871,6 +12918,7 @@ export namespace Prisma {
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     steamMatch?: SteamMatchUpdateOneWithoutMatchNestedInput
     uploadedMatch?: UploadedMatchUpdateOneWithoutMatchNestedInput
+    playerScores?: PlayerScoreUpdateManyWithoutMatchNestedInput
   }
 
   export type MatchUncheckedUpdateWithoutStatsInput = {
@@ -10880,6 +12928,115 @@ export namespace Prisma {
     team1Score?: IntFieldUpdateOperationsInput | number
     team2Score?: IntFieldUpdateOperationsInput | number
     playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steamMatch?: SteamMatchUncheckedUpdateOneWithoutMatchNestedInput
+    uploadedMatch?: UploadedMatchUncheckedUpdateOneWithoutMatchNestedInput
+    playerScores?: PlayerScoreUncheckedUpdateManyWithoutMatchNestedInput
+  }
+
+  export type PlayerCreateWithoutPlayerScoresInput = {
+    id?: string
+    steamId: string
+    user?: UserCreateNestedOneWithoutPlayerInput
+    stats?: PlayerMatchStatsCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerUncheckedCreateWithoutPlayerScoresInput = {
+    id?: string
+    steamId: string
+    user?: UserUncheckedCreateNestedOneWithoutPlayerInput
+    stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutPlayerInput
+  }
+
+  export type PlayerCreateOrConnectWithoutPlayerScoresInput = {
+    where: PlayerWhereUniqueInput
+    create: XOR<PlayerCreateWithoutPlayerScoresInput, PlayerUncheckedCreateWithoutPlayerScoresInput>
+  }
+
+  export type MatchCreateWithoutPlayerScoresInput = {
+    id?: string
+    matchId: string
+    mapName: string
+    team1Score: number
+    team2Score: number
+    playedAt: Date | string
+    stats?: PlayerMatchStatsCreateNestedManyWithoutMatchInput
+    steamMatch?: SteamMatchCreateNestedOneWithoutMatchInput
+    uploadedMatch?: UploadedMatchCreateNestedOneWithoutMatchInput
+  }
+
+  export type MatchUncheckedCreateWithoutPlayerScoresInput = {
+    id?: string
+    matchId: string
+    mapName: string
+    team1Score: number
+    team2Score: number
+    playedAt: Date | string
+    stats?: PlayerMatchStatsUncheckedCreateNestedManyWithoutMatchInput
+    steamMatch?: SteamMatchUncheckedCreateNestedOneWithoutMatchInput
+    uploadedMatch?: UploadedMatchUncheckedCreateNestedOneWithoutMatchInput
+  }
+
+  export type MatchCreateOrConnectWithoutPlayerScoresInput = {
+    where: MatchWhereUniqueInput
+    create: XOR<MatchCreateWithoutPlayerScoresInput, MatchUncheckedCreateWithoutPlayerScoresInput>
+  }
+
+  export type PlayerUpsertWithoutPlayerScoresInput = {
+    update: XOR<PlayerUpdateWithoutPlayerScoresInput, PlayerUncheckedUpdateWithoutPlayerScoresInput>
+    create: XOR<PlayerCreateWithoutPlayerScoresInput, PlayerUncheckedCreateWithoutPlayerScoresInput>
+    where?: PlayerWhereInput
+  }
+
+  export type PlayerUpdateToOneWithWhereWithoutPlayerScoresInput = {
+    where?: PlayerWhereInput
+    data: XOR<PlayerUpdateWithoutPlayerScoresInput, PlayerUncheckedUpdateWithoutPlayerScoresInput>
+  }
+
+  export type PlayerUpdateWithoutPlayerScoresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    steamId?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneWithoutPlayerNestedInput
+    stats?: PlayerMatchStatsUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type PlayerUncheckedUpdateWithoutPlayerScoresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    steamId?: StringFieldUpdateOperationsInput | string
+    user?: UserUncheckedUpdateOneWithoutPlayerNestedInput
+    stats?: PlayerMatchStatsUncheckedUpdateManyWithoutPlayerNestedInput
+  }
+
+  export type MatchUpsertWithoutPlayerScoresInput = {
+    update: XOR<MatchUpdateWithoutPlayerScoresInput, MatchUncheckedUpdateWithoutPlayerScoresInput>
+    create: XOR<MatchCreateWithoutPlayerScoresInput, MatchUncheckedCreateWithoutPlayerScoresInput>
+    where?: MatchWhereInput
+  }
+
+  export type MatchUpdateToOneWithWhereWithoutPlayerScoresInput = {
+    where?: MatchWhereInput
+    data: XOR<MatchUpdateWithoutPlayerScoresInput, MatchUncheckedUpdateWithoutPlayerScoresInput>
+  }
+
+  export type MatchUpdateWithoutPlayerScoresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
+    team1Score?: IntFieldUpdateOperationsInput | number
+    team2Score?: IntFieldUpdateOperationsInput | number
+    playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stats?: PlayerMatchStatsUpdateManyWithoutMatchNestedInput
+    steamMatch?: SteamMatchUpdateOneWithoutMatchNestedInput
+    uploadedMatch?: UploadedMatchUpdateOneWithoutMatchNestedInput
+  }
+
+  export type MatchUncheckedUpdateWithoutPlayerScoresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    mapName?: StringFieldUpdateOperationsInput | string
+    team1Score?: IntFieldUpdateOperationsInput | number
+    team2Score?: IntFieldUpdateOperationsInput | number
+    playedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stats?: PlayerMatchStatsUncheckedUpdateManyWithoutMatchNestedInput
     steamMatch?: SteamMatchUncheckedUpdateOneWithoutMatchNestedInput
     uploadedMatch?: UploadedMatchUncheckedUpdateOneWithoutMatchNestedInput
   }
@@ -10912,6 +13069,21 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonNullValueInput | InputJsonValue
+    clutchSuccesses: JsonNullValueInput | InputJsonValue
+  }
+
+  export type PlayerScoreCreateManyPlayerInput = {
+    id?: string
+    matchId: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
   }
 
   export type PlayerMatchStatsUpdateWithoutPlayerInput = {
@@ -10941,6 +13113,8 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
     match?: MatchUpdateOneRequiredWithoutStatsNestedInput
   }
 
@@ -10972,6 +13146,8 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
   }
 
   export type PlayerMatchStatsUncheckedUpdateManyWithoutPlayerInput = {
@@ -11002,6 +13178,47 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type PlayerScoreUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    match?: MatchUpdateOneRequiredWithoutPlayerScoresNestedInput
+  }
+
+  export type PlayerScoreUncheckedUpdateWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlayerScoreUncheckedUpdateManyWithoutPlayerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchId?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PlayerMatchStatsCreateManyMatchInput = {
@@ -11032,6 +13249,21 @@ export namespace Prisma {
     threeKillRounds: number
     fourKillRounds: number
     fiveKillRounds: number
+    clutchAttempts: JsonNullValueInput | InputJsonValue
+    clutchSuccesses: JsonNullValueInput | InputJsonValue
+  }
+
+  export type PlayerScoreCreateManyMatchInput = {
+    id?: string
+    playerId: string
+    matchScore: number
+    bucket: string
+    firepower: number
+    accuracy: number
+    entryTrading: number
+    clutch: number
+    diffs: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
   }
 
   export type PlayerMatchStatsUpdateWithoutMatchInput = {
@@ -11061,6 +13293,8 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
     player?: PlayerUpdateOneRequiredWithoutStatsNestedInput
   }
 
@@ -11092,6 +13326,8 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
   }
 
   export type PlayerMatchStatsUncheckedUpdateManyWithoutMatchInput = {
@@ -11122,6 +13358,47 @@ export namespace Prisma {
     threeKillRounds?: IntFieldUpdateOperationsInput | number
     fourKillRounds?: IntFieldUpdateOperationsInput | number
     fiveKillRounds?: IntFieldUpdateOperationsInput | number
+    clutchAttempts?: JsonNullValueInput | InputJsonValue
+    clutchSuccesses?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type PlayerScoreUpdateWithoutMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    player?: PlayerUpdateOneRequiredWithoutPlayerScoresNestedInput
+  }
+
+  export type PlayerScoreUncheckedUpdateWithoutMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlayerScoreUncheckedUpdateManyWithoutMatchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: StringFieldUpdateOperationsInput | string
+    matchScore?: FloatFieldUpdateOperationsInput | number
+    bucket?: StringFieldUpdateOperationsInput | string
+    firepower?: FloatFieldUpdateOperationsInput | number
+    accuracy?: FloatFieldUpdateOperationsInput | number
+    entryTrading?: FloatFieldUpdateOperationsInput | number
+    clutch?: FloatFieldUpdateOperationsInput | number
+    diffs?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

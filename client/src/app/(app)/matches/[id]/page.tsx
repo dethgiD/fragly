@@ -10,51 +10,65 @@ import ScoreboardRow from "@/components/matches/ScoreboardRow";
 import { MatchDetailsResponse, PlayerStatEntry, SortConfig, RawMatchDetailsResponse } from '@/types/match';
 import { Tab } from '@headlessui/react';
 import { StatRanges } from '@/utils/colorUtils'; // Import StatRanges type
+import Link from "next/link";
 
 // Define which numeric stats should be color-coded
 const COLOR_CODED_STATS: Set<keyof PlayerStatEntry> = new Set([
-    'totalKills', 'totalDeaths', 'kdr', 'accuracy', 'accuracySpotted',
-    'hsAccuracy', 'timeToDamage', 'crosshairPlacement', 'counterStrafing',
-    'openingKills', 'tradeKills', 'tradeKillPercentage', 'tradedDeaths',
-    'tradedDeathPercentage', 'multiKillRounds', 'multiKillPercentage'
-]);
+    'accuracySpotted',
+    'headshotAccuracy',
+    'timeToDamage',
+    'crosshairPlacement',
+    'counterStrafeRatio',
+    'sprayAccuracy',
+    'headshotPercentage'
+  ]);
 
 
 const GENERAL_COLUMNS: { key: keyof PlayerStatEntry; label: string; sortable: boolean, numeric?: boolean }[] = [
     { key: 'username', label: 'Player', sortable: true },
     { key: 'totalKills', label: 'K', sortable: true, numeric: true },
     { key: 'totalDeaths', label: 'D', sortable: true, numeric: true },
+    { key: 'totalAssists', label: 'A', sortable: true, numeric: true },
+    { key: 'totalDamage', label: 'DMG', sortable: true, numeric: true },
+    { key: 'headshotPercentage', label: 'HS %', sortable: true, numeric: true },
     { key: 'kdr', label: 'KDR', sortable: true, numeric: true },
 ];
 
-const ACCURACY_COLUMNS: { key: keyof PlayerStatEntry; label: string; sortable: boolean, numeric?: boolean }[] = [
+const ACCURACY_COLUMNS: { key: keyof PlayerStatEntry; label: string; sortable: boolean; numeric?: boolean }[] = [
     { key: 'username', label: 'Player', sortable: true },
-    { key: 'accuracy', label: 'Acc %', sortable: true, numeric: true },
-    { key: 'accuracySpotted', label: 'Acc (Spot) %', sortable: true, numeric: true },
-    { key: 'hsAccuracy', label: 'HS %', sortable: true, numeric: true },
-    { key: 'timeToDamage', label: 'TTD (ms)', sortable: true, numeric: true },
-    { key: 'crosshairPlacement', label: 'CHP (°)', sortable: true, numeric: true },
-    { key: 'counterStrafing', label: 'CS %', sortable: true, numeric: true },
-];
+    { key: 'accuracySpotted', label: 'Accuracy (Spotted)', sortable: true, numeric: true },
+    { key: 'headshotAccuracy', label: 'HS Accuracy', sortable: true, numeric: true },
+    { key: 'timeToDamage', label: 'Time to Damage (ms)', sortable: true, numeric: true },
+    { key: 'crosshairPlacement', label: 'Crosshair Placement', sortable: true, numeric: true },
+    { key: 'counterStrafeRatio', label: 'Counter-Strafe Ratio', sortable: true, numeric: true },
+    { key: 'sprayAccuracy', label: 'Spray Accuracy', sortable: true, numeric: true }
+  ];
 
-const POSITIONING_COLUMNS: { key: keyof PlayerStatEntry; label: string; sortable: boolean, numeric?: boolean }[] = [
+  const POSITIONING_COLUMNS: { key: keyof PlayerStatEntry; label: string; sortable: boolean; numeric?: boolean }[] = [
     { key: 'username', label: 'Player', sortable: true },
-    { key: 'openingKills', label: 'Open Kills', sortable: true, numeric: true },
+    { key: 'openingKills', label: 'Opening Kills', sortable: true, numeric: true },
+    { key: 'openingAttempts', label: 'Opening Attempts', sortable: true, numeric: true },
     { key: 'tradeKills', label: 'Trade Kills', sortable: true, numeric: true },
-    { key: 'tradeKillPercentage', label: 'Trade K %', sortable: true, numeric: true },
+    { key: 'tradeAttempts', label: 'Trade Attempts', sortable: true, numeric: true },
     { key: 'tradedDeaths', label: 'Traded Deaths', sortable: true, numeric: true },
-    { key: 'tradedDeathPercentage', label: 'Traded D %', sortable: true, numeric: true },
-    { key: 'multiKillRounds', label: 'Multi-Kill Rnds', sortable: true, numeric: true },
-    { key: 'multiKillPercentage', label: 'Multi-Kill %', sortable: true, numeric: true },
-];
+    { key: 'tradedDeathAttempts', label: 'Traded Death Attempts', sortable: true, numeric: true }
+  ];
+  const MULTIKILL_COLUMNS: { key: keyof PlayerStatEntry; label: string; sortable: boolean; numeric?: boolean }[] = [
+    { key: 'username', label: 'Player', sortable: true },
+    { key: 'twoKillRounds', label: '2K Rounds', sortable: true, numeric: true },
+    { key: 'threeKillRounds', label: '3K Rounds', sortable: true, numeric: true },
+    { key: 'fourKillRounds', label: '4K Rounds', sortable: true, numeric: true },
+    { key: 'fiveKillRounds', label: '5K Rounds', sortable: true, numeric: true }
+  ];
 
 const TAB_COLUMNS = [
     GENERAL_COLUMNS,
     POSITIONING_COLUMNS,
-    ACCURACY_COLUMNS
+    ACCURACY_COLUMNS,
+    MULTIKILL_COLUMNS
 ];
 
-const TABS = ['General', 'Positioning', 'Accuracy'];
+const TABS = ['General', 'Positioning', 'Accuracy', 'Impact'];
 
 export default function MatchPage() {
     const params = useParams();
@@ -203,9 +217,15 @@ export default function MatchPage() {
                         Played on: {new Date(matchData.playedAt).toLocaleString()}
                     </p>
                     <div className="flex items-center justify-center md:justify-start gap-4 text-center">
-                         <span className="text-2xl md:text-3xl font-bold text-green-400">{matchData.team1Score}</span>
+                         <span className="text-2xl md:text-3xl font-bold text-green-400">{matchData.team2Score}</span>
                          <span className="text-xl md:text-2xl text-neutral-400">:</span>
-                         <span className="text-2xl md:text-3xl font-bold text-red-400">{matchData.team2Score}</span>
+                         <span className="text-2xl md:text-3xl font-bold text-red-400">{matchData.team1Score}</span>
+                         <Link
+                            href={`/matches/${matchId}/review`}
+                            className="ml-8 inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white text-sm font-medium py-2 px-4 rounded transition-colors"
+                            >
+                            Game Review
+                        </Link>
                     </div>
                 </div>
             </div>

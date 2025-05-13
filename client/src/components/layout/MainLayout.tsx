@@ -105,7 +105,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="flex min-h-screen text-neutral-200 bg-neutral-950">
-        <aside className={`hidden md:flex flex-col flex-shrink-0 bg-neutral-900 border-r border-neutral-800 transition-all duration-300 ease-in-out ${isCollapsed ? 'w-20' : 'w-64'}`}>
+        <aside
+            className={`sticky top-0 hidden md:flex flex-col flex-shrink-0
+              h-screen
+              bg-neutral-900 border-r border-neutral-800
+              transition-all duration-300 ease-in-out
+              ${isCollapsed ? 'w-20' : 'w-64'}`}
+          >
             <div className={`flex items-center h-16 flex-shrink-0 px-4 border-b border-neutral-800 ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
                 {!isCollapsed && (
                     <Link href="/" className="inline-block text-xl font-bold text-sky-400 hover:text-sky-300 transition-colors">

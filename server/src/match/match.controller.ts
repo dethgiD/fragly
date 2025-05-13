@@ -1,7 +1,8 @@
-import { Controller, DefaultValuePipe, Get, Param, Query, Req, UseGuards } from '@nestjs/common';
+import { Controller, DefaultValuePipe, Get, NotFoundException, Param, Query, Req, UseGuards } from '@nestjs/common';
 import { MatchService } from './match.service';
 import { AuthGuard } from '@nestjs/passport';
 import { ParseIntPipe } from '@nestjs/common';
+import { PlayerScoreDto } from 'src/analysis/review/review';
 
 @Controller('matches')
 @UseGuards(AuthGuard('jwt'))
@@ -40,5 +41,14 @@ export class MatchController {
     const actualLimit = Math.max(1, Math.min(limit, 50));
 
     return this.matchService.findUserProgress(steamId, actualLimit);
+  }
+
+  @Get(':id/scores')
+  async getMatchScores(@Param('id') matchId: string): Promise<PlayerScoreDto[]> {
+    const scores = await this.matchService.getMatchScores(matchId);
+    if (!scores) {
+      throw new NotFoundException(`No scores found for match ${matchId}`);
+    }
+    return scores;
   }
 }

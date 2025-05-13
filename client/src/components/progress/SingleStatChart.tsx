@@ -9,6 +9,7 @@ import { FormattedChartDataPoint, UserProgressStat } from '@/types/progress';
 import { formatStatValue } from '@/utils/formatting';
 import { formatMapName } from '@/utils/mapImages';
 import { RankTierKey, RankTierAverages, REFERENCE_LINE_COLORS, RANK_TIERS_FOR_SELECTION } from '@/data/rankAverages';
+import { PlayerStatEntry } from '@/types/match';
 
 
 const CustomTooltip = ({ active, payload, label }: any): JSX.Element | null => {
@@ -25,7 +26,7 @@ const CustomTooltip = ({ active, payload, label }: any): JSX.Element | null => {
                 <p className="text-xs text-neutral-400 mb-2">Map: {formatMapName(dataPoint.mapName)}</p>
                 <p style={{ color: payload[0].color }}>
                     {`${statName}: `}
-                    {formatStatValue(statKey, originalValue)}
+                    {formatStatValue(statKey as keyof PlayerStatEntry, originalValue)}
                 </p>
                 <p className="text-xs text-neutral-400 mt-2">{new Date(dataPoint.playedAt).toLocaleDateString()}</p>
             </div>
@@ -40,8 +41,6 @@ interface SingleStatChartProps {
     statLabel: string;
     chartData: FormattedChartDataPoint[];
     chartColor?: string;
-    averageRankData: Record<RankTierKey, RankTierAverages>;
-    selectedRankTiers: RankTierKey[];
 }
 
 export default function SingleStatChart({
@@ -49,32 +48,42 @@ export default function SingleStatChart({
     statLabel,
     chartData,
     chartColor = "#38bdf8",
-    averageRankData,
-    selectedRankTiers
 }: SingleStatChartProps) {
 
     const yAxisTickFormatter = (value: any): string => {
         if (typeof value !== 'number') return String(value);
-
+      
         switch (statKey) {
-            case 'accuracy':
-            case 'accuracySpotted':
-            case 'hsAccuracy':
-            case 'counterStrafing':
-            case 'tradeKillPercentage':
-            case 'tradedDeathPercentage':
-            case 'multiKillPercentage':
-                return `${value.toFixed(1)}%`;
-            case 'timeToDamage':
-                return `${Math.round(value * 1000)}ms`;
-            case 'crosshairPlacement':
-                return `${value.toFixed(1)}°`;
-            case 'kdr':
-                return value.toFixed(2);
-            default:
-                return value.toFixed(0);
+          // Percentage-based (0.xx → 34%)
+          case 'accuracySpotted':
+          case 'headshotAccuracy':
+          case 'sprayAccuracy':
+          case 'counterStrafeRatio':
+          case 'headshotAccuracy':
+          case 'headshotPercentage':
+          case 'multiKillRate':
+          case 'openingKillRate':
+          case 'tradeKillRate':
+          case 'tradedDeathRate':
+            return `${(value * 100).toFixed(1)}%`;
+      
+          // Degrees
+          case 'crosshairPlacement':
+            return `${value.toFixed(1)}°`;
+      
+          // Time (ms)
+          case 'timeToDamage':
+            return `${Math.round(value)}ms`;
+      
+          // Ratio
+          case 'kdr':
+            return value.toFixed(2);
+      
+          // Default: whole numbers
+          default:
+            return value.toFixed(0);
         }
-    };
+      };
 
     if (!chartData || chartData.length < 2) {
         return (
@@ -130,34 +139,6 @@ export default function SingleStatChart({
                         activeDot={{ r: 6, strokeWidth: 2, fill: chartColor }}
                         connectNulls
                     />
-
-                    {selectedRankTiers.map((tierKey, index) => {
-                        const avgValue = averageRankData[tierKey]?.[statKey];
-                        if (avgValue != null) {
-                             const tierInfo = RANK_TIERS_FOR_SELECTION.find(t => t.key === tierKey);
-                             const lineLabel = `Avg ${tierInfo?.label || tierKey}`;
-                             const lineColor = REFERENCE_LINE_COLORS[index % REFERENCE_LINE_COLORS.length];
-
-                            return (
-                                <ReferenceLine
-                                    key={`ref-${tierKey}-${statKey}`}
-                                    y={avgValue}
-                                    stroke={lineColor}
-                                    strokeDasharray="4 4"
-                                    strokeWidth={1.5}
-                                    label={{ // Use the label prop directly
-                                        value: lineLabel,
-                                        position: "right",
-                                        fill: lineColor,
-                                        fontSize: 10,
-                                        fontWeight: 500,
-                                        // dx: 5 // Optional horizontal offset if needed
-                                    }}
-                                />
-                            );
-                        }
-                        return null;
-                    })}
                 </LineChart>
             </ResponsiveContainer>
         </div>

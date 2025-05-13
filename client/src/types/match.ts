@@ -7,21 +7,32 @@ export type PlayerStatEntry = {
     rank: number;
     username: string;
     teamNumber: number;
-    accuracy: number;         // Already %
-    accuracySpotted: number;  // Already %
-    hsAccuracy: number;       // Already %
-    timeToDamage: number;     // Seconds (convert to ms)
-    crosshairPlacement: number;// Degrees
-    counterStrafing: number;  // Decimal % (convert to %)
+
+    accuracySpotted: number;
+    headshotAccuracy: number;       
+    timeToDamage: number;    
+    crosshairPlacement: number;
+    counterStrafeRatio: number; 
+    sprayAccuracy: number;
+
+    openingKills: number;
+    openingAttempts: number;
+    tradeKills: number;
+    tradeAttempts: number;
+    tradedDeaths: number;
+    tradedDeathAttempts: number;
+
     totalKills: number;
     totalDeaths: number;
-    openingKills: number;
-    tradeKills: number;
-    tradeKillPercentage: number; // Decimal % (convert to %)
-    tradedDeaths: number;
-    tradedDeathPercentage: number;// Decimal % (convert to %)
-    multiKillRounds: number;
-    multiKillPercentage: number;// Decimal % (convert to %)
+    totalAssists: number;
+    totalDamage: number;
+    headshotPercentage: number;
+
+    twoKillRounds: number;
+    threeKillRounds: number;
+    fourKillRounds: number;
+    fiveKillRounds: number;
+
     // Derived/Calculated fields
     kdr: number; // Kill/Death Ratio
 };

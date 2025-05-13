@@ -21,10 +21,11 @@ model User {
 }
 
 model Player {
-  id      String             @id @default(uuid())
-  steamId String             @unique
-  user    User?
-  stats   PlayerMatchStats[]
+  id           String             @id @default(uuid())
+  steamId      String             @unique
+  user         User?
+  stats        PlayerMatchStats[]
+  playerScores PlayerScore[]
 }
 
 model Match {
@@ -37,6 +38,7 @@ model Match {
   stats         PlayerMatchStats[]
   steamMatch    SteamMatch?
   uploadedMatch UploadedMatch?
+  playerScores  PlayerScore[]
 }
 
 model SteamMatch {
@@ -90,9 +92,33 @@ model PlayerMatchStats {
   fourKillRounds  Int
   fiveKillRounds  Int
 
+  clutchAttempts  Json
+  clutchSuccesses Json
+
   // Relations
   player Player @relation(fields: [playerId], references: [id])
   match  Match  @relation(fields: [matchId], references: [id])
+
+  @@index([playerId])
+  @@index([matchId])
+}
+
+model PlayerScore {
+  id           String   @id @default(uuid())
+  playerId     String
+  matchId      String
+  matchScore   Float
+  bucket       String
+  firepower    Float
+  accuracy     Float
+  entryTrading Float
+  clutch       Float
+  diffs        Json // the full z‑score map
+  createdAt    DateTime @default(now())
+
+  // relations
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  match  Match  @relation(fields: [matchId], references: [id], onDelete: Cascade)
 
   @@index([playerId])
   @@index([matchId])

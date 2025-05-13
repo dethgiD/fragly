@@ -181,12 +181,32 @@ exports.Prisma.PlayerMatchStatsScalarFieldEnum = {
   twoKillRounds: 'twoKillRounds',
   threeKillRounds: 'threeKillRounds',
   fourKillRounds: 'fourKillRounds',
-  fiveKillRounds: 'fiveKillRounds'
+  fiveKillRounds: 'fiveKillRounds',
+  clutchAttempts: 'clutchAttempts',
+  clutchSuccesses: 'clutchSuccesses'
+};
+
+exports.Prisma.PlayerScoreScalarFieldEnum = {
+  id: 'id',
+  playerId: 'playerId',
+  matchId: 'matchId',
+  matchScore: 'matchScore',
+  bucket: 'bucket',
+  firepower: 'firepower',
+  accuracy: 'accuracy',
+  entryTrading: 'entryTrading',
+  clutch: 'clutch',
+  diffs: 'diffs',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -199,6 +219,12 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -206,7 +232,8 @@ exports.Prisma.ModelName = {
   Match: 'Match',
   SteamMatch: 'SteamMatch',
   UploadedMatch: 'UploadedMatch',
-  PlayerMatchStats: 'PlayerMatchStats'
+  PlayerMatchStats: 'PlayerMatchStats',
+  PlayerScore: 'PlayerScore'
 };
 
 /**

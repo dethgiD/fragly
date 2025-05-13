@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as crypto from 'crypto';
+import { PlayerScoreDto, computeScores } from './review/review';
 
 @Injectable()
 export class AnalysisService {
@@ -18,8 +19,8 @@ export class AnalysisService {
   async analyzeDemo(filePath: string): Promise<any> {
     return new Promise((resolve, reject) => {
       const exe = process.platform === 'win32'
-        ? './analysis_exe/DemoAnalysis.exe'
-        : './analysis_exe/DemoAnalysis';
+        ? './demo_analysis/DemoAnalysis.exe'
+        : './demo_analysis/DemoAnalysis';
   
       const child = spawn(exe, [filePath]);
   
@@ -103,6 +104,8 @@ export class AnalysisService {
             threeKillRounds: player.threeKillRounds,
             fourKillRounds: player.fourKillRounds,
             fiveKillRounds: player.fiveKillRounds,
+            clutchAttempts: player.clutchAttempts,
+            clutchSuccesses: player.clutchSuccesses,
             player: {
               connectOrCreate: {
                 where: { steamId: player.steamId },
@@ -114,6 +117,30 @@ export class AnalysisService {
       },
       include: { stats: true },
     });
+
+     // 3) Now compute pillar scores and persist them
+     const totalRounds = match.team1Score + match.team2Score;
+     const scores: PlayerScoreDto[] = computeScores(match.stats, totalRounds);
+ 
+     // Prepare bulk‐insert payload
+     const scorePayload = scores.map(s => ({
+       playerId:     match.stats.find(ps => ps.steamId === s.steamId)!.playerId,
+       matchId:      match.id,
+       matchScore:   s.matchScore,
+       bucket:       s.bucket,
+       firepower:    s.pillars.firepower,
+       accuracy:     s.pillars.accuracy,
+       entryTrading: s.pillars.entryTrading,
+       clutch:       s.pillars.clutch,
+       diffs:        s.diffs,
+     }));
+ 
+     // Insert into the new PlayerScore table
+     await this.prisma.playerScore.createMany({
+       data:          scorePayload,
+       skipDuplicates: true,
+     });
+ 
   
     if (source === 'uploaded') {
       await this.prisma.uploadedMatch.create({
@@ -128,7 +155,7 @@ export class AnalysisService {
         },
       });
     }
-  
+
     return match;
   }
   

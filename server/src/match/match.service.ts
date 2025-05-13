@@ -8,6 +8,28 @@ import * as path from 'path';
 import bz2 from 'unbzip2-stream';
 import * as https from 'https';
 import { SteamService } from 'src/steam/steam.service';
+import { computeScores, PerformanceBucket, PillarScores, PlayerScoreDto } from 'src/analysis/review/review';
+import { PlayerScore } from 'generated/prisma/client';
+
+export interface ProgressEntry {
+  matchId:     string;
+  mapName:     string;
+  playedAt:    string;
+  team1Score:  number;
+  team2Score:  number;
+  userStats:   Record<string, number>;
+  score:       {
+    matchScore:  number;
+    bucket:      string;
+    pillars: {
+      firepower:    number;
+      accuracy:     number;
+      entryTrading: number;
+      clutch:       number;
+    };
+    diffs: Record<string, number>;
+  };
+}
 
 
 function calculateKDR(kills: number, deaths: number): number {
@@ -159,96 +181,179 @@ export class MatchService {
   }
   
 
-  async findUserProgress(steamId: string, limit: number): Promise<any[]> {
-    const userMatchStats = await this.prisma.playerMatchStats.findMany({
-      where: {
-        steamId: steamId,
-      },
-      orderBy: {
-        match: {
-          playedAt: 'desc',
-        },
-      },
-      take: limit,
-      select: {
-        accuracySpotted: true,
-        timeToDamage: true,
-        crosshairPlacement: true,
-        sprayAccuracy: true,
-        counterStrafeRatio: true,
-        headshotAccuracy: true,
+  async findUserProgress(
+    steamId: string,
+    limit: number
+  ): Promise<ProgressEntry[]> {
+    // 1) Lookup the Player record so we can filter playerScore by playerId
+    const player = await this.prisma.player.findUnique({
+      where: { steamId },
+    });
+    if (!player) {
+      throw new NotFoundException(`No player found with steamId ${steamId}`);
+    }
+
+    // 2) Fetch the recent PlayerMatchStats (with the internal match ID)
+    const stats = await this.prisma.playerMatchStats.findMany({
+      where: { steamId },
+      orderBy: { match: { playedAt: 'desc' } },
+      take:    limit,
+      select:  {
+        matchId:            true,                       // internal PK
+        steamId:            true,                       // user steamId
+        totalKills:         true,
+        totalDeaths:        true,
+        totalAssists:       true,
+        totalDamage:        true,
         headshotPercentage: true,
-  
-        totalKills: true,
-        totalDeaths: true,
-        totalAssists: true,
-        totalDamage: true,
-  
-        openingKills: true,
-        openingAttempts: true,
-  
-        tradeKills: true,
-        tradeAttempts: true,
-  
-        tradedDeaths: true,
-        tradedDeathAttempts: true,
-  
-        twoKillRounds: true,
-        threeKillRounds: true,
-        fourKillRounds: true,
-        fiveKillRounds: true,
-  
+        accuracySpotted:    true,
+        timeToDamage:       true,
+        crosshairPlacement: true,
+        sprayAccuracy:      true,
+        counterStrafeRatio: true,
+        headshotAccuracy:   true,
+        openingKills:       true,
+        openingAttempts:    true,
+        tradeKills:         true,
+        tradeAttempts:      true,
+        tradedDeaths:       true,
+        tradedDeathAttempts:true,
+        twoKillRounds:      true,
+        threeKillRounds:    true,
+        fourKillRounds:     true,
+        fiveKillRounds:     true,
         match: {
           select: {
-            matchId: true,
-            mapName: true,
-            playedAt: true,
-          },
-        },
-      },
+            matchId:    true,  // the external matchId
+            mapName:    true,
+            playedAt:   true,
+            team1Score: true,
+            team2Score: true,
+          }
+        }
+      }
     });
-  
-    const progressEntries = userMatchStats.map(stat => {
-      const kdr = calculateKDR(stat.totalKills, stat.totalDeaths);
-  
+
+    if (stats.length === 0) {
+      return [];
+    }
+
+    const matchInternalIds = stats.map(s => s.matchId);
+
+    // 3) Fetch the precomputed scores in one go
+    const preScores = await this.prisma.playerScore.findMany({
+      where: {
+        playerId: player.id,
+        matchId: { in: matchInternalIds },
+      }
+    });
+
+    // 4) Build a lookup by internal matchId
+    const scoreMap: Record<string, PlayerScore> = {};
+    for (const s of preScores) {
+      scoreMap[s.matchId] = s;
+    }
+
+    // 5) Merge raw stats + score into ProgressEntry
+    const entries: ProgressEntry[] = stats.map(s => {
+      const raw = s;
+      const score = scoreMap[raw.matchId];
+      if (!score) {
+        // In case you have a match without a saved score (unlikely)
+        throw new NotFoundException(`No precomputed score for match ${raw.matchId}`);
+      }
+
+      // Compute any derived raw stats
+      const kdr = calculateKDR(raw.totalKills, raw.totalDeaths);
+
       return {
-        matchId: stat.match.matchId,
-        mapName: stat.match.mapName,
-        playedAt: stat.match.playedAt.toISOString(),
+        matchId:    raw.match.matchId,
+        mapName:    raw.match.mapName,
+        playedAt:   raw.match.playedAt.toISOString(),
+        team1Score: raw.match.team1Score,
+        team2Score: raw.match.team2Score,
+
         userStats: {
-          accuracySpotted: stat.accuracySpotted,
-          timeToDamage: stat.timeToDamage,
-          crosshairPlacement: stat.crosshairPlacement,
-          sprayAccuracy: stat.sprayAccuracy,
-          counterStrafeRatio: stat.counterStrafeRatio,
-          headshotAccuracy: stat.headshotAccuracy,
-          headshotPercentage: stat.headshotPercentage,
-  
-          totalKills: stat.totalKills,
-          totalDeaths: stat.totalDeaths,
-          totalAssists: stat.totalAssists,
-          totalDamage: stat.totalDamage,
-  
-          openingKills: stat.openingKills,
-          openingAttempts: stat.openingAttempts,
-  
-          tradeKills: stat.tradeKills,
-          tradeAttempts: stat.tradeAttempts,
-  
-          tradedDeaths: stat.tradedDeaths,
-          tradedDeathAttempts: stat.tradedDeathAttempts,
-  
-          twoKillRounds: stat.twoKillRounds,
-          threeKillRounds: stat.threeKillRounds,
-          fourKillRounds: stat.fourKillRounds,
-          fiveKillRounds: stat.fiveKillRounds,
-  
-          kdr: kdr,
+          totalKills:         raw.totalKills,
+          totalDeaths:        raw.totalDeaths,
+          totalAssists:       raw.totalAssists,
+          totalDamage:        raw.totalDamage,
+          headshotPercentage: raw.headshotPercentage,
+          kdr,
+
+          accuracySpotted:    raw.accuracySpotted,
+          timeToDamage:       raw.timeToDamage,
+          crosshairPlacement: raw.crosshairPlacement,
+          sprayAccuracy:      raw.sprayAccuracy,
+          counterStrafeRatio: raw.counterStrafeRatio,
+          headshotAccuracy:   raw.headshotAccuracy,
+
+          openingKills:       raw.openingKills,
+          openingAttempts:    raw.openingAttempts,
+          tradeKills:         raw.tradeKills,
+          tradeAttempts:      raw.tradeAttempts,
+          tradedDeaths:       raw.tradedDeaths,
+          tradedDeathAttempts:raw.tradedDeathAttempts,
+
+          twoKillRounds:      raw.twoKillRounds,
+          threeKillRounds:    raw.threeKillRounds,
+          fourKillRounds:     raw.fourKillRounds,
+          fiveKillRounds:     raw.fiveKillRounds,
         },
+
+        score: {
+          matchScore:  score.matchScore,
+          bucket:      score.bucket,
+          pillars: {
+            firepower:    score.firepower,
+            accuracy:     score.accuracy,
+            entryTrading: score.entryTrading,
+            clutch:       score.clutch,
+          },
+          diffs: score.diffs as Record<string, number>,
+        }
       };
     });
-  
-    return progressEntries.reverse(); // so oldest comes first
+
+    // 6) Return oldest‑first so your charts flow L→R in chronological order
+    return entries.reverse();
+  }
+
+  async getMatchScores(matchId: string): Promise<PlayerScoreDto[]> {
+    // pull from the playerScore table
+    const rows = await this.prisma.playerScore.findMany({
+      where: { matchId },
+      orderBy: { matchScore: 'desc' },
+      include: {
+        player: {
+          select: { steamId: true, user: { select: { displayName: true } } }
+        }
+      }
+    });
+
+    if (rows.length === 0) {
+      return [];  // controller will turn this into a 404
+    }
+
+    // map to your PlayerScoreDto
+    return rows.map(r => {
+      const username = r.player.user?.displayName ?? r.player.steamId;
+      const pillars: PillarScores = {
+        firepower:    r.firepower,
+        accuracy:     r.accuracy,
+        entryTrading: r.entryTrading,
+        clutch:       r.clutch,
+      };
+
+      return {
+        steamId:    r.player.steamId,
+        username,
+        matchScore: r.matchScore,
+        bucket:     r.bucket as PerformanceBucket,
+        pillars,
+        diffs:      r.diffs as Record<string, number>,
+      };
+    });
   }
   
 }
